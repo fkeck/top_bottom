@@ -1,0 +1,279 @@
+---
+title: "Supplementary Information"
+output:
+  pdf_document:
+    fig_caption: false
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(magrittr)
+load("../data/Supp_mat.Rdata")
+fig_num <- 0
+tab_num <- 0
+ins_tab <- function(){
+  .GlobalEnv$tab_num <- .GlobalEnv$tab_num + 1
+  paste0("Table S", .GlobalEnv$tab_num, ".")
+}
+ins_fig <- function(){
+  .GlobalEnv$fig_num <- .GlobalEnv$fig_num + 1
+  paste0("Figure S", .GlobalEnv$fig_num, ".")
+}
+```
+
+
+## Supplementary Information Text
+Heading
+Subhead. Type or paste text here. You may break this section up into subheads as needed (e.g., one section on “Materials” and one on “Methods”).
+
+\pagebreak
+```{r, message = FALSE}
+library(sp)
+kml <- rgdal::readOGR("../data/TOP-BOTTOM_48_FK.kml", verbose = FALSE)
+kml$Name <- str_replace(kml$Name, pattern = "\n", "")
+kml <- kml[kml$Name %in% otu_merge_tbl$LAC, ]
+
+tibble(LAC = kml$Name, LON = coordinates(kml)[, 1], LAT = coordinates(kml)[, 2]) %>% 
+  left_join(select(lakes_bv, LAC, ALTITUDE, DEPTH_MAX)) %>% 
+  left_join(select(lakes_meta, LAC, LAC_CODE) %>% distinct()) %>% 
+  select(LAC_CODE, everything()) %>% 
+  arrange(LAC) %>% 
+  set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth (max)")) %>% 
+  knitr::kable(digits = 3)
+
+```
+
+
+**`r ins_tab()`** List of the lakes included in the study with their three-letter code, geographic coordinates (decimal degrees; WGS84), altitude (meters) and maximum depth (meters).
+
+
+\pagebreak
+```{r, fig.height = 6}
+data(countriesLow, package = "rworldmap")
+eu_shp <- countriesLow[!is.na(countriesLow$REGION), ]
+eu_shp <- eu_shp[eu_shp$REGION == "Europe", ]
+
+library(tmap)
+
+tm_shape(eu_shp, bbox = sf::st_bbox(c(xmin = -5, xmax = 10, ymax = 52, ymin = 41))) +
+  tm_fill() +
+  tm_borders() +
+  tm_scale_bar(breaks = c(0, 100, 200), text.size = 0.7, position = c(0.6, 0.02)) +
+  tm_layout(bg.color = "lightblue") +
+  tm_graticules(lines = FALSE) +
+  tm_shape(kml) +
+  tm_dots(size = 0.2, shape = 3)
+
+```
+
+
+**`r ins_fig()`** Map of the 48 lakes included in the study.
+
+
+\pagebreak
+
+![](../figures/supplementary_info/SI_FIG_bioinfo.pdf)
+
+**`r ins_fig()`** Tracking of the number of DNA reads and OTUs during the filtering and data pre-processing steps.
+
+
+
+\pagebreak
+```{r, fig.height = 8}
+t <- otu_tbl_replicates %>% 
+  mutate(ID_SAMPLE = str_c(LAC_CODE, POSITION, REPLICATE, sep = "_")) %>% 
+  spread_cdm(ID_SAMPLE, OTU_ID, OTU_COUNT) %>% 
+  vegdist(method = "bray") %>% 
+  hclust() %>% 
+  ape::as.phylo.hclust()
+t2 <- phytools::splitTree(t, list(node = 192, bp = 0))
+par(mfrow = c(1, 2))
+ape::plot.phylo(ape::drop.tip(t, t2[[1]]$tip.label), cex = 0.5, no.margin = TRUE)
+ape::plot.phylo(ape::drop.tip(t, t2[[2]]$tip.label), cex = 0.5, no.margin = TRUE)
+par(mfrow = c(1, 1))
+```
+
+**`r ins_fig()`** Hierarchical clustering of the OTU matrix (Bray Curtis dissimilarity) including the technical replicates. The code of each sample corresponds to the combination of the lake (three-letter code; see Supplementary Table S1), stratum (Top or Bottom) and replicate number (1 or 2 except for Bourget and Léman that have only one replicate). For better readability, the tree has been divided in two parts.
+
+
+\pagebreak
+```{r, fig.height = 6}
+
+prow <- plot_grid(frac_taxa_temp$plots[[1]] +
+            theme(legend.position = "none"),
+          frac_taxa_temp$plots[[2]] +
+            theme(legend.position = "none"),
+          labels = "AUTO")
+legend <- get_legend(
+  frac_taxa_temp$plots[[1]] +
+    guides(color = guide_legend(nrow = 1)) +
+    theme(legend.position = "bottom",
+          legend.title=element_blank())
+)
+plot_grid(prow, legend, ncol = 1, rel_heights = c(1, .1))
+```
+
+**`r ins_fig()`**  Proportion of OTUs (*A*) and taxonomic groups (*B*) specific to the bottom (Bottom only) and top (Top only) strata, or common to both strata (Intersection).
+
+\pagebreak
+```{r, fig.height = 8}
+tax_rich_dat <-
+  com_merged_raw_list %>% 
+  filter(INVENTORY == "OTU") %>% 
+  .$data %>% .[[1]] %>%
+  spread_cdm(LAC_POS, TAXON, COUNT) %>% 
+  rrarefy(sample = min(rowSums(.))) %>% 
+  tidy_cdm(row.name = "LAC_POS") %>% 
+  left_join(lakes_meta_nr)
+
+tax_rich_lakes <- tax_rich_dat %>% 
+  group_by(LAC, POSITION) %>% 
+  summarise(RICH_LAKE = sum(COUNT > 0))
+
+tax_rich_dat %>% 
+  left_join(otu_meta, by = c("TAXON" = "OTU_ID")) %>% 
+  group_by(ADL_RANK_2, POSITION) %>% 
+  nest() %>% 
+  mutate(RICH = map(data, function(data){
+    data %>% 
+      spread_cdm(LAC, TAXON, COUNT) %>% 
+      specnumber() %>% 
+      enframe("LAC", "RICHNESS")
+  })) %>% 
+  unnest(RICH) %>% 
+  left_join(tax_rich_lakes) %>% 
+  mutate(REL_RICHNESS = RICHNESS/RICH_LAKE) %>% 
+  group_by(ADL_RANK_2, POSITION) %>% 
+  summarise(REL_RICHNESS_MEAN = mean(REL_RICHNESS),
+            REL_RICHNESS_SD = sd(REL_RICHNESS)) %>% 
+  ggplot() +
+  geom_col(aes(fct_reorder(ADL_RANK_2, REL_RICHNESS_MEAN),
+               REL_RICHNESS_MEAN, fill = POSITION),
+           position = "dodge2") +
+  geom_linerange(aes(x = fct_reorder(ADL_RANK_2, REL_RICHNESS_MEAN),
+                         ymin = REL_RICHNESS_MEAN + REL_RICHNESS_SD,
+                         ymax = REL_RICHNESS_MEAN - REL_RICHNESS_SD),
+           position = position_dodge2(width = 1, padding = 0.5)) +
+  coord_flip() +
+  scale_y_continuous(labels = scales::percent) +
+  xlab("") + ylab("Relative richness") + labs(fill = "Position")
+  
+```
+
+**`r ins_fig()`**  Mean relative richness (number of distinct OTUs) for each taxa computed for the bottom and the top samples across all lakes. Horizontal lines show the standard error.
+
+
+\pagebreak
+```{r}
+com_merged_raw_list %>% 
+  filter(INVENTORY == "OTU") %>% 
+  .$data %>% .[[1]] %>%
+  spread_cdm(LAC_POS, TAXON, COUNT) %>% 
+  rrarefy(sample = min(rowSums(.))) %>% 
+  tidy_cdm(row.name = "LAC_POS") %>% 
+  left_join(lakes_meta_nr) %>% 
+  left_join(otu_meta, by = c("TAXON" = "OTU_ID")) %>% 
+  group_by(ADL_RANK_2, POSITION) %>% 
+  nest() %>% 
+  mutate(RICH = map_dbl(data, function(data){
+    data %>% 
+      spread_cdm(LAC, TAXON, COUNT) %>% 
+      specnumber() %>% 
+      enframe("LAC", "RICHNESS") %>% 
+      summarise(R = mean(RICHNESS)) %>% 
+      .$R %>% .[[1]]
+  })) %>% 
+  group_by(POSITION) %>% 
+  mutate(RICH_REL = RICH /sum(RICH)) %>% 
+  group_by(ADL_RANK_2) %>% 
+  summarise(DELTA_RICH_REL = (function(x) {x[2] - x[1]})(RICH_REL)) %>% 
+  ggplot() +
+  geom_col(aes(forcats::fct_reorder(ADL_RANK_2, DELTA_RICH_REL), DELTA_RICH_REL)) +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +
+  scale_y_continuous(labels = scales::percent) +
+  xlab("") + ylab("Difference in mean relative richness")
+```
+
+**`r ins_fig()`** Difference between 'top' and 'bottom' strata in mean relative richness for each taxonomic group. 
+
+
+\pagebreak
+```{r, fig.height = 6}
+SUPP_MAT$JACC
+```
+
+
+**`r ins_fig()`** Community analyses reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the ‘top’ (blue triangles) and ‘bottom’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘top’ and ‘bottom’ samples taken within the same lake. (*B*) Distribution of Jaccard index values computed for each lake between ‘top’ and ‘bottom’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘top’ (blue) and ‘bottom’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Jaccard index) between the ‘top’ and ‘bottom’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means.
+
+
+
+\pagebreak
+```{r, fig.height = 6}
+SUPP_MAT$TAXO
+```
+
+
+**`r ins_fig()`** Community analyses reproduced with the taxonomy table. (*A*) NMDS of community compositions of the ‘top’ (blue triangles) and ‘bottom’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘top’ and ‘bottom’ samples taken within the same lake. (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘top’ and ‘bottom’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘top’ (blue) and ‘bottom’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘top’ and ‘bottom’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means.
+
+
+
+
+\pagebreak
+```{r, fig.height = 6}
+deseq_TB_AOV1 %>% 
+  filter(INVENTORY == "Taxonomie Rank 2") %>% .$results %>% .[[1]] %>%
+  mutate(Taxa = str_replace(Taxa, "<NA>", "Undetermined (NA)")) %>% 
+  knitr::kable(digits = 3)
+```
+
+
+**`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated at the 2nd taxonomy rank of Adl et al. (2019). For each taxa, column *baseMean* indicates the average of the normalized count values, dividing by size factors, *lfcSE* is the standard error of the *log2FoldChange*, column *stat* is the Wald statistic, *pvalue* is the raw p-value and *padj* is the p-value corrected with the Benjamini & Hochberg method.
+
+
+\pagebreak
+```{r, fig.height = 6}
+deseq_TB_AOV1 %>% 
+  filter(INVENTORY == "Trophic Type") %>% .$results %>% .[[1]] %>%
+  mutate(Taxa = str_replace(Taxa, "<NA>", "Undetermined (NA)")) %>% 
+  knitr::kable(digits = 3)
+```
+
+
+**`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated by trophic groups. For each group, column *baseMean* indicates the average of the normalized count values, dividing by size factors, *lfcSE* is the standard error of the *log2FoldChange*, column *stat* is the Wald statistic, *pvalue* is the raw p-value and *padj* is the p-value corrected with the Benjamini & Hochberg method.
+
+
+<insert page break here>
+**`r ins_tab()`** Type or paste table title here. Paste table below the title.
+
+<insert page break here>
+
+**Dataset S1** (separate file).Type or paste legend here.  
+
+
+## References
+
+\pagebreak
+
+## EXTRA SUPPLEMENT: pour mémoire si besoin
+
+```{r, fig.height = 7.5}
+deseq_TB_AOV1 %>% 
+  filter(INVENTORY == "Taxonomie Rank 3") %>% .$barplots %>% .[[1]]
+```
+
+
+**`r ins_fig()`** Results of the DESeq2 analysis conducted on data aggregated at the third taxonomy rank of Adl et al. (2019).
+
+
+\pagebreak
+```{r, fig.height = 6}
+deseq_TB_AOV1 %>% 
+  filter(INVENTORY == "Taxonomie Rank 3") %>% .$results %>% .[[1]] %>%
+  mutate(Taxa = str_replace(Taxa, "<NA>", "Undetermined (NA)")) %>% 
+  knitr::kable(digits = 3)
+```
+
+
+**`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated at the 3rd taxonomy rank of Adl et al. (2019). For each taxa, column *baseMean* indicates the average of the normalized count values, dividing by size factors, *lfcSE* is the standard error of the *log2FoldChange*, column *stat* is the Wald statistic, *pvalue* is the raw p-value and *padj* is the p-value corrected with the Benjamini & Hochberg method.
+

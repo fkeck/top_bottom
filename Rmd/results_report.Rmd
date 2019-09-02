@@ -1,0 +1,218 @@
+---
+title: "Results manuscript"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+# General stats
+
+Total number of reads: `r general_stats$N_reads`
+
+Total number of OTUs: `r general_stats$N_OTU`
+
+Number of OTUs in Bottom: `r general_stats$N_OTU_BOT`
+
+Number of OTUs in Top: `r general_stats$N_OTU_TOP`
+
+Number of OTUs intersection Top-Bottom: `r general_stats$N_OTU_TOP_INTER_BOT`
+
+Number of OTUs in Bottom only: `r general_stats$N_OTU_BOT_ONLY`, `r ((general_stats$N_OTU_BOT_ONLY/general_stats$N_OTU)*100) %>% round(2)`%
+
+Number of OTUs in Top only: `r general_stats$N_OTU_TOP_ONLY`, `r ((general_stats$N_OTU_TOP_ONLY/general_stats$N_OTU)*100) %>% round(2)`%
+
+Number OTUs classified taxonomy: `r general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TAX`, `r (((general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TAX) / general_stats$N_OTU)*100) %>% round(2)`%
+
+Number OTUs classified trophic group: `r general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TROPH`, `r (((general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TROPH) / general_stats$N_OTU)*100) %>% round(2)`%
+
+
+# Richness
+
+### OTUs
+
+```{r}
+rar_richness %>% 
+  filter(INVENTORY == "OTU") %>% 
+  .$MEAN_RAR_RICHNESS
+rar_richness %>% 
+  filter(INVENTORY == "OTU") %>% 
+  .$TEST_RAR_RICHNESS
+```
+
+### Taxonomic group (rank 2)
+```{r}
+rar_richness %>% 
+  filter(INVENTORY == "Taxonomie Rank 2") %>% 
+  .$MEAN_RAR_RICHNESS
+rar_richness %>% 
+  filter(INVENTORY == "Taxonomie Rank 2") %>% 
+  .$TEST_RAR_RICHNESS
+```
+
+
+
+# NMDS Plot
+```{r, out.width="1000px", dpi=120}
+FIG_nmds_main <- nmds_rar_list %>% 
+  filter(INVENTORY == "OTU") %>% 
+  .$SITE_SCORES %>% 
+  .[[1]] %>% 
+  left_join(lakes_meta_nr, by = "LAC_POS") %>% 
+  left_join(lakes_bv, by = "LAC") %>% 
+  filter(!is.na(LAC)) %>% 
+  mutate(LABS_LAC_BOTTOM = ifelse(POSITION == "Bottom", LAC, "")) %>% 
+  ggplot() +
+  geom_line(aes(x = NMDS1, y = NMDS2, group = LAC), color = "lightgrey") +
+  #ggforce::geom_mark_ellipse(aes(x = NMDS1, y = NMDS2, fill = POSITION), ) +
+  stat_ellipse(aes(x = NMDS1, y = NMDS2, fill = POSITION), geom = "polygon", level = 0.95, alpha = 0.2) +
+  geom_point(aes(x = NMDS1, y = NMDS2, shape = POSITION, color = POSITION), size = 2) +
+  geom_text(aes(x = NMDS1, y = NMDS2, label = LABS_LAC_BOTTOM), size = 2, nudge_y = -0.03) +
+  labs(title = "") +
+  theme_bw() +
+  theme(axis.text.y.right = element_text(size = 6, angle = 45),
+        axis.text.x.top = element_text(size = 6, angle = 45, hjust = 0, vjust = 0),
+        legend.position = "none")
+
+FIG_nmds_bray <- TB_pw_BC_plots %>% 
+  filter(INVENTORY == "OTU") %>% .$hist_plots %>% .[[1]]
+
+FIG_nmds_intra <- beta_div_TB %>% 
+  filter(INVENTORY == "OTU") %>% .$TB_intra_plots %>% .[[1]]
+
+
+# ggsave("figures/print/FIG_nmds_main.pdf", FIG_nmds_main, device = "pdf", width = 13.1, height = 10, units = "cm", scale = 1)
+# ggsave("figures/print/FIG_nmds_bray.pdf", FIG_nmds_bray, device = "pdf", width = 4.7, height = 4.7, units = "cm", scale = 1)
+# ggsave("figures/print/FIG_nmds_intra.pdf", FIG_nmds_intra, device = "pdf", width = 4.7, height = 4.7, units = "cm", scale = 1)
+
+FIG_nmds_main
+FIG_nmds_bray
+FIG_nmds_intra
+```
+
+NMDS Stress: `r nmds_rar_list %>% filter(INVENTORY == "OTU") %>% .$NMDS %>% .[[1]] %>% .$stress`
+
+# PERMANOVA (change in location)
+```{r}
+dat <- com_rar_list %>% 
+  filter(INVENTORY == "OTU") %>% .$data %>%
+  .[[1]] %>% 
+  spread_cdm(LAC_POS, TAXON, COUNT)
+
+cond <- ifelse(str_detect(rownames(dat), "_Bottom$"), "Bottom", "Top")
+blocks <- gsub("_Top|_Bottom", "", rownames(dat))
+
+adonis_blocks(dat, cond, permutation = 1, method = "jaccard", blocks = blocks)
+
+```
+
+
+# Homogeneity of multivariate dispersions (change in dispersion)
+```{r, fig.height = 4, fig.width = 5}
+beta_div_TB %>% 
+  filter(INVENTORY == "OTU") %>% .$BETA_DISP %>% .[[1]]
+beta_div_TB %>% 
+  filter(INVENTORY == "OTU") %>% .$BETA_DISP_TEST %>% .[[1]]
+
+```
+
+# Effect of altitude on the magnitude of community changes
+
+### Decision tree model
+```{r}
+dat <- com_rar_list %>% 
+  filter(INVENTORY == "OTU") %>% .$BRAY_DIST %>%
+  .[[1]] %>% 
+  filter(LAC_POS_1 != LAC_POS_2, LAC_1 == LAC_2) %>% 
+  left_join(select(lakes_bv, LAC, ALTITUDE),
+            by = c("LAC_1" = "LAC"))
+
+tr_mod_alt <- rpart(BRAY_DIST ~ ALTITUDE, data = dat, model = TRUE)
+
+tr_mod_alt
+
+alt_split <- tr_mod_alt$splits[1, "index"]
+
+bray_split <- dat %>%
+  mutate(ALT_SPLIT = ifelse(ALTITUDE > alt_split, "High altitude", "Low altitude")) %>% 
+  group_by(ALT_SPLIT) %>% 
+  summarise(mean_BRAY = mean(BRAY_DIST),
+            sd_BRAY = sd(BRAY_DIST),
+            n_BRAY = n()) %>% 
+  mutate(CI_BRAY_SUP = mean_BRAY + 1.96 * sd_BRAY / sqrt(n_BRAY),
+         CI_BRAY_INF = mean_BRAY - 1.96 * sd_BRAY / sqrt(n_BRAY))
+
+wilcox.test(dat$BRAY_DIST[dat$ALTITUDE > alt_split], dat$BRAY_DIST[dat$ALTITUDE < alt_split])
+bartlett.test(dat$BRAY_DIST, ifelse(dat$ALTITUDE > alt_split, "High altitude", "Low altitude"))
+var.test(dat$BRAY_DIST[dat$ALTITUDE < alt_split], dat$BRAY_DIST[dat$ALTITUDE > alt_split])
+
+FIG_alt_tree_regression <- dat %>%
+  ggplot() +
+  geom_rect(aes(xmin = 0, xmax = alt_split,
+                ymin = bray_split$CI_BRAY_INF[2], ymax = bray_split$CI_BRAY_SUP[2]), fill = "grey") +
+  geom_rect(aes(xmin = alt_split, xmax = max(dat$ALTITUDE),
+                ymin = bray_split$CI_BRAY_INF[1], ymax = bray_split$CI_BRAY_SUP[1]), fill = "grey") +
+  geom_point(aes(ALTITUDE, BRAY_DIST)) +
+  geom_segment(aes(x = 0, y = bray_split[2, "mean_BRAY", drop = TRUE],
+                   xend = alt_split, yend = bray_split[2, "mean_BRAY", drop = TRUE]), size = 1) +
+  geom_segment(aes(x = alt_split, y = bray_split[1, "mean_BRAY", drop = TRUE],
+                   xend = max(dat$ALTITUDE), yend = bray_split[1, "mean_BRAY", drop = TRUE]), size = 1) +
+  xlab("Altitude (m)") + ylab("Top-Bottom Bray-Curtis dissimilarity")
+
+# ggsave("figures/print/FIG_alt_tree_regression.pdf", FIG_alt_tree_regression,
+#        device = "pdf", width = 8.7, height = 8.7, units = "cm", scale = 1)
+
+FIG_alt_tree_regression
+
+```
+
+
+
+# Differential abundance analyses
+# ANOVA
+```{r}
+deseq_TB_AOV1 %>% 
+  filter(INVENTORY == "Taxonomie Rank 1") %>% .$barplots %>% .[[1]]
+
+FIG_deseq_taxo2 <- deseq_TB_AOV1 %>% 
+  filter(INVENTORY == "Taxonomie Rank 2") %>% .$barplots %>% .[[1]]
+
+deseq_TB_AOV1 %>% 
+  filter(INVENTORY == "Taxonomie Rank 2") %>% .$results %>% .[[1]] %>%
+  knitr::kable()
+
+
+FIG_deseq_troph <- deseq_TB_AOV1 %>% 
+  filter(INVENTORY == "Trophic Type") %>% .$barplots %>% .[[1]]
+
+deseq_TB_AOV1 %>% 
+  filter(INVENTORY == "Trophic Type") %>% .$results %>% .[[1]] %>%
+  knitr::kable()
+
+# ggsave("figures/print/FIG_deseq_taxo2.pdf", FIG_deseq_taxo2,
+#        device = "pdf", width = 8.7, height = 13, units = "cm", scale = 1)
+# ggsave("figures/print/FIG_deseq_troph.pdf", FIG_deseq_troph,
+#        device = "pdf", width = 8.7, height = 4.5, units = "cm", scale = 1)
+
+FIG_deseq_taxo2
+FIG_deseq_troph
+```
+
+
+# Sediment Pigments
+```{r, fig.height = 5, fig.width = 5}
+
+sed_basics_plots$combined_plots <-
+  cowplot::plot_grid(sed_basics_plots$DNA,
+                   sed_basics_plots$COT,
+                   sed_basics_plots$PIG,
+                   labels = c("A", "B", "C"), ncol = 3, nrow = 1)
+
+# ggsave("figures/print/FIG_sediments.pdf", sed_basics_plots$combined_plots,
+#        device = "pdf", width = 8.7, height = 7, units = "cm", scale = 1)
+
+sed_basics_plots$combined_plots
+```
+
