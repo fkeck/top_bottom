@@ -131,7 +131,7 @@ tax_rich_lakes <- tax_rich_dat %>%
   group_by(LAC, POSITION) %>% 
   summarise(RICH_LAKE = sum(COUNT > 0))
 
-tax_rich_dat %>% 
+p <- tax_rich_dat %>% 
   left_join(otu_meta, by = c("TAXON" = "OTU_ID")) %>% 
   group_by(ADL_RANK_2, POSITION) %>% 
   nest() %>% 
@@ -147,18 +147,31 @@ tax_rich_dat %>%
   group_by(ADL_RANK_2, POSITION) %>% 
   summarise(REL_RICHNESS_MEAN = mean(REL_RICHNESS),
             REL_RICHNESS_SD = sd(REL_RICHNESS)) %>% 
+  left_join(read_csv("data/Ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
+  group_by(GRP2) %>% 
+  mutate(GRP2_REL_RICHNESS_MEAN = mean(REL_RICHNESS_MEAN)) %>% 
   ggplot() +
   geom_col(aes(fct_reorder(ADL_RANK_2, REL_RICHNESS_MEAN),
                REL_RICHNESS_MEAN, fill = POSITION),
            position = "dodge2") +
+  facet_wrap(~ fct_reorder(GRP2, GRP2_REL_RICHNESS_MEAN, .desc = TRUE),
+             scales = "free_y", ncol = 1, strip.position = "left") +
   geom_linerange(aes(x = fct_reorder(ADL_RANK_2, REL_RICHNESS_MEAN),
                          ymin = REL_RICHNESS_MEAN + REL_RICHNESS_SD,
                          ymax = REL_RICHNESS_MEAN - REL_RICHNESS_SD),
            position = position_dodge2(width = 1, padding = 0.5)) +
   coord_flip() +
   scale_y_continuous(labels = scales::percent) +
-  xlab("") + ylab("Relative richness") + labs(fill = "Position")
-  
+  xlab("") + ylab("Relative richness") + labs(fill = "Position") +
+  theme(strip.text.y = element_text(angle = 180),
+        strip.placement = "outside")
+
+gp <- ggplotGrob(p)
+f_row <- gp$layout$t[grepl("panel", gp$layout$name)]
+x_var <- sapply(ggplot_build(p)$layout$panel_scales_x,
+                function(l) length(l$range$range))
+gp$heights[f_row] <- gp$heights[f_row] * x_var
+grid::grid.draw(gp)
 ```
 
 **`r ins_fig()`**  Mean relative richness (number of distinct OTUs) for each taxa computed for the bottom and the top samples across all lakes. Horizontal lines show the standard error.

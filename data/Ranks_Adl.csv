@@ -1,0 +1,58 @@
+GRP0,GRP1,GRP2,RANK1,RANK2
+Amorphea,Amoebozoa,Discosea,Discosea,Centramoebia
+Amorphea,Amoebozoa,Discosea,Discosea,Flabellinia
+Amorphea,Amoebozoa,Discosea,Discosea,Stygamoebida
+Amorphea,Amoebozoa,Evosea,Evosea,Archamoebea
+Amorphea,Amoebozoa,Evosea,Evosea,Cutosea
+Amorphea,Amoebozoa,Evosea,Evosea,Eumycetozoa
+Amorphea,Amoebozoa,Evosea,Evosea,Variosea
+Amorphea,Amoebozoa,Tubulinea,Tubulinea,Corycida
+Amorphea,Amoebozoa,Tubulinea,Tubulinea,Echinamoebida
+Amorphea,Amoebozoa,Tubulinea,Tubulinea,Elardia
+Amorphea,Obazoa,Opisthokonta,Holozoa,Choanoflagellata
+Amorphea,Obazoa,Opisthokonta,Holozoa,Filasterea
+Amorphea,Obazoa,Opisthokonta,Holozoa,Ichthyosporea
+Amorphea,Obazoa,Opisthokonta,Holozoa,Incertae
+Amorphea,Obazoa,Opisthokonta,Holozoa,Metazoa
+Amorphea,Obazoa,Opisthokonta,Nucletmycea,Fungi
+Amorphea,Obazoa,Opisthokonta,Nucletmycea,Incertae
+Amorphea,Obazoa,Opisthokonta,Nucletmycea,Rotosphaerida
+Diaphoretickes,Archaeplastida,Chloroplastida,Chloroplastida,Chlorophyta
+Diaphoretickes,Archaeplastida,Chloroplastida,Chloroplastida,Streptophyta
+Diaphoretickes,Archaeplastida,Rhodophyceae,Rhodophyceae,Cyanidiales
+Diaphoretickes,Archaeplastida,Rhodophyceae,Rhodophyceae,Eurhodophytina
+Diaphoretickes,Archaeplastida,Rhodophyceae,Rhodophyceae,Proteorhodophytina
+Diaphoretickes,Cryptista,Cryptophyceae,Cryptista,Cryptophyceae
+Diaphoretickes,Cryptista,Palpitomonas,Cryptista,Palpitomonas
+Diaphoretickes,Haptista,Centroplasthelida,Haptista,Centroplasthelida
+Diaphoretickes,Haptista,Haptophyta,Haptista,Haptophyta
+Diaphoretickes,Sar,Alveolata,Alveolata,Apicomplexa
+Diaphoretickes,Sar,Alveolata,Alveolata,Ciliophora
+Didinium,Didinium,Didinium,Didinium,Didinium
+Diaphoretickes,Sar,Alveolata,Alveolata,Colpodellida
+Diaphoretickes,Sar,Alveolata,Alveolata,Colponemida
+Diaphoretickes,Sar,Alveolata,Alveolata,Dinoflagellata
+Diaphoretickes,Sar,Alveolata,Alveolata,Perkinsidae
+Diaphoretickes,Sar,Rhizaria,Rhizaria,Aquavolonida
+Diaphoretickes,Sar,Rhizaria,Rhizaria,Cercozoa
+Diaphoretickes,Sar,Rhizaria,Rhizaria,Endomyxa
+Diaphoretickes,Sar,Rhizaria,Rhizaria,Incertae
+Diaphoretickes,Sar,Rhizaria,Rhizaria,Retaria
+Diaphoretickes,Sar,Rhizaria,Rhizaria,Tremula
+Diaphoretickes,Sar,Stramenopiles,Stramenopiles,Bigyra
+Diaphoretickes,Sar,Stramenopiles,Stramenopiles,Gyrista
+Diaphoretickes,Sar,Stramenopiles,Stramenopiles,Incertae
+Incertae sedis Eukarya,Excavates,Discoba,Discoba,Euglenozoa
+Incertae sedis Eukarya,Excavates,Discoba,Discoba,Heterolobosea
+Incertae sedis Eukarya,Excavates,Discoba,Discoba,Jakobida
+Incertae sedis Eukarya,Excavates,Discoba,Discoba,Tsukubamonadida
+Incertae sedis Eukarya,Excavates,Metamonada,Metamonada,Fornicata
+Incertae sedis Eukarya,Excavates,Metamonada,Metamonada,Incertae
+Incertae sedis Eukarya,Excavates,Metamonada,Metamonada,Parabasalia
+Incertae sedis Eukarya,Excavates,Metamonada,Metamonada,Preaxostyla
+Incertae sedis Eukarya,Others,CRuMs,CRuMs,Collodictyonidae
+Incertae sedis Eukarya,Others,CRuMs,CRuMs,Incertae
+Incertae sedis Eukarya,Others,CRuMs,CRuMs,Mantamonas
+Incertae sedis Eukarya,Others,CRuMs,CRuMs,Rigifilida
+Incertae sedis Eukarya,Others,Hemimastigophora,Hemimastigophora,Incertae
+Incertae sedis Eukarya,Others,Hemimastigophora,Hemimastigophora,Spironemidae
