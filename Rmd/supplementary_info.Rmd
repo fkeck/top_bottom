@@ -149,12 +149,12 @@ p <- tax_rich_dat %>%
             REL_RICHNESS_SD = sd(REL_RICHNESS)) %>% 
   left_join(read_csv("../data/Ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
   group_by(GRP2) %>% 
-  mutate(GRP2_REL_RICHNESS_MEAN = mean(REL_RICHNESS_MEAN)) %>% 
+  mutate(GRP2_REL_RICHNESS_SUM = sum(REL_RICHNESS_MEAN, na.rm = TRUE)) %>% 
   ggplot() +
   geom_col(aes(fct_reorder(ADL_RANK_2, REL_RICHNESS_MEAN),
                REL_RICHNESS_MEAN, fill = POSITION),
            position = "dodge2") +
-  facet_wrap(~ fct_reorder(GRP2, GRP2_REL_RICHNESS_MEAN, .desc = TRUE),
+  facet_wrap(~ fct_reorder(GRP2, GRP2_REL_RICHNESS_SUM, .desc = TRUE),
              scales = "free_y", ncol = 1, strip.position = "left") +
   geom_linerange(aes(x = fct_reorder(ADL_RANK_2, REL_RICHNESS_MEAN),
                          ymin = REL_RICHNESS_MEAN + REL_RICHNESS_SD,
