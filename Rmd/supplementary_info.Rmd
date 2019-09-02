@@ -147,7 +147,7 @@ p <- tax_rich_dat %>%
   group_by(ADL_RANK_2, POSITION) %>% 
   summarise(REL_RICHNESS_MEAN = mean(REL_RICHNESS),
             REL_RICHNESS_SD = sd(REL_RICHNESS)) %>% 
-  left_join(read_csv("data/Ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
+  left_join(read_csv("../data/Ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
   group_by(GRP2) %>% 
   mutate(GRP2_REL_RICHNESS_MEAN = mean(REL_RICHNESS_MEAN)) %>% 
   ggplot() +
