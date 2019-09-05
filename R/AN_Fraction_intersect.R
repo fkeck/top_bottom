@@ -23,7 +23,7 @@ frac_taxa_temp <- com_merged_raw_list %>%
       coord_flip() +
       scale_y_continuous(labels = scales::percent) +
       theme_minimal() +
-      labs(fill = "Fraction") + ylab("Relative proportion") + xlab("Lac")
+      labs(fill = "Fraction") + ylab("Relative proportion") + xlab("Lake")
   })) %>% 
   mutate(mean_fractions = map(fractions, function(fractions){
     fractions %>% 
