@@ -29,7 +29,7 @@ Number OTUs classified taxonomy: `r general_stats$N_OTU - general_stats$N_OTU_UN
 Number OTUs classified trophic group: `r general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TROPH`, `r (((general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TROPH) / general_stats$N_OTU)*100) %>% round(2)`%
 
 
-# Richness
+# Rarified Richness
 
 ### OTUs
 
