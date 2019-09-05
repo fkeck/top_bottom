@@ -103,7 +103,8 @@ par(mfrow = c(1, 1))
 prow <- plot_grid(frac_taxa_temp$plots[[1]] +
             theme(legend.position = "none"),
           frac_taxa_temp$plots[[2]] +
-            theme(legend.position = "none"),
+            theme(legend.position = "none") +
+            xlab(""),
           labels = "AUTO")
 legend <- get_legend(
   frac_taxa_temp$plots[[1]] +
