@@ -82,19 +82,20 @@ tm_shape(eu_shp, bbox = sf::st_bbox(c(xmin = -5, xmax = 10, ymax = 52, ymin = 41
 \pagebreak
 ```{r, fig.height = 8}
 t <- otu_tbl_replicates %>% 
+  filter(!LAC %in% c("Léman", "Bourget")) %>% 
   mutate(ID_SAMPLE = str_c(LAC_CODE, POSITION, REPLICATE, sep = "_")) %>% 
   spread_cdm(ID_SAMPLE, OTU_ID, OTU_COUNT) %>% 
   vegdist(method = "bray") %>% 
   hclust() %>% 
   ape::as.phylo.hclust()
-t2 <- phytools::splitTree(t, list(node = 192, bp = 0))
+t2 <- phytools::splitTree(t, list(node = 188, bp = 0))
 par(mfrow = c(1, 2))
 ape::plot.phylo(ape::drop.tip(t, t2[[1]]$tip.label), cex = 0.5, no.margin = TRUE)
 ape::plot.phylo(ape::drop.tip(t, t2[[2]]$tip.label), cex = 0.5, no.margin = TRUE)
 par(mfrow = c(1, 1))
 ```
 
-**`r ins_fig()`** Hierarchical clustering of the OTU matrix (Bray Curtis dissimilarity) including the technical replicates. The code of each sample corresponds to the combination of the lake (three-letter code; see Supplementary Table S1), stratum (Top or Bottom) and replicate number (1 or 2 except for Bourget and Léman that have only one replicate). For better readability, the tree has been divided in two parts.
+**`r ins_fig()`** Hierarchical clustering of the OTU matrix (Bray Curtis dissimilarity) including the technical replicates. The code of each sample corresponds to the combination of the lake (three-letter code; see Supplementary Table S1), stratum (Top or Bottom) and replicate number (1 or 2). Lakes Bourget and Léman are not represented as they have only one replicate. For better readability, the tree has been divided in two parts.
 
 
 \pagebreak
