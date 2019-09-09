@@ -14,21 +14,20 @@ frac_taxa_temp <- com_merged_raw_list %>%
     mutate(FRACTION = c("Bottom all", "Top all", "Intersection", "Top only", "Bottom only")) %>% 
     gather(key = "LAC", value = "N", -FRACTION) %>%
     filter(FRACTION %in% c("Intersection", "Top only", "Bottom only")) %>% 
-    group_by(LAC) %>% 
-    mutate(T_TOT = sum(N))
+      group_by(LAC) %>% 
+      mutate(N_TOT = sum(N)) %>% 
+      mutate(LAC_TOT = paste0(LAC, " (", N_TOT, ")"))
   })) %>% 
   mutate(plots = map(fractions, function(fractions){
     fractions %>% 
       ggplot() +
-      geom_col(aes(factor(LAC, levels = rev(levels(factor(LAC)))), N, fill = FRACTION),
+      geom_col(aes(factor(LAC_TOT, levels = rev(levels(factor(LAC_TOT)))), N, fill = FRACTION),
                position = "fill") +
-      geom_text(data = summarise(group_by(fractions, LAC), TOT = sum(N)),
-                aes(factor(LAC, levels = rev(levels(factor(LAC)))), 0, label = TOT, hjust = 1), nudge_y = 0.01) +
+      #geom_text(data = summarise(group_by(fractions, LAC), TOT = sum(N)),
+      #          aes(factor(LAC, levels = rev(levels(factor(LAC)))), 0, label = TOT, hjust = 1), nudge_y = 0.01) +
       coord_flip() +
       scale_y_continuous(labels = scales::percent) +
-      scale_x_continuous()
       theme_minimal() +
-      theme(panel.spacing = grid::unit(130, "points")) +
       labs(fill = "Fraction") + ylab("Relative proportion") + xlab("Lake")
   })) %>% 
   mutate(mean_fractions = map(fractions, function(fractions){
