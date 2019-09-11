@@ -127,9 +127,12 @@ p <- tax_rich_dat %>%
   group_by(ADL_RANK_2, POSITION) %>% 
   summarise(REL_RICHNESS_MEAN = mean(REL_RICHNESS),
             REL_RICHNESS_SD = sd(REL_RICHNESS)) %>% 
-  left_join(read_csv("../data/Ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
+  left_join(read_csv("data/Ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
   group_by(GRP2) %>% 
-  mutate(GRP2_REL_RICHNESS_SUM = sum(REL_RICHNESS_MEAN, na.rm = TRUE)) %>% 
+  mutate(GRP2_REL_RICHNESS_SUM = sum(REL_RICHNESS_MEAN, na.rm = TRUE)) %>%
+  ungroup() %>% 
+  mutate(ADL_RANK_2 = fct_explicit_na(ADL_RANK_2, "Unclassified"),
+         GRP2 = fct_explicit_na(GRP2, "Unclassified")) %>% 
   ggplot() +
   geom_col(aes(fct_reorder(ADL_RANK_2, REL_RICHNESS_MEAN),
                REL_RICHNESS_MEAN, fill = POSITION),
@@ -183,7 +186,7 @@ SUPP_MAT$TAXO
 ```{r, fig.height = 6}
 deseq_TB_AOV1 %>% 
   filter(INVENTORY == "Taxonomie Rank 2") %>% .$results %>% .[[1]] %>%
-  mutate(Taxa = str_replace(Taxa, "<NA>", "Undetermined (NA)")) %>% 
+  mutate(Taxa = str_replace(Taxa, "<NA>", "Unclassified (NA)")) %>% 
   knitr::kable(digits = 3)
 ```
 
@@ -195,7 +198,7 @@ deseq_TB_AOV1 %>%
 ```{r, fig.height = 6}
 deseq_TB_AOV1 %>% 
   filter(INVENTORY == "Trophic Type") %>% .$results %>% .[[1]] %>%
-  mutate(Taxa = str_replace(Taxa, "<NA>", "Undetermined (NA)")) %>% 
+  mutate(Taxa = str_replace(Taxa, "<NA>", "Unclassified (NA)")) %>% 
   knitr::kable(digits = 3)
 ```
 
@@ -230,7 +233,7 @@ deseq_TB_AOV1 %>%
 ```{r, fig.height = 6}
 deseq_TB_AOV1 %>% 
   filter(INVENTORY == "Taxonomie Rank 3") %>% .$results %>% .[[1]] %>%
-  mutate(Taxa = str_replace(Taxa, "<NA>", "Undetermined (NA)")) %>% 
+  mutate(Taxa = str_replace(Taxa, "<NA>", "Unclassified (NA)")) %>% 
   knitr::kable(digits = 3)
 ```
 
