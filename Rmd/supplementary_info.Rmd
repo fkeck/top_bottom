@@ -154,41 +154,8 @@ gp$heights[f_row] <- gp$heights[f_row] * x_var
 grid::grid.draw(gp)
 ```
 
-**`r ins_fig()`**  Mean relative richness (number of distinct OTUs) for each taxa computed for the bottom and the top samples across all lakes. Horizontal lines show the standard error.
+**`r ins_fig()`**  Mean relative richness (number of distinct OTUs) for each taxa computed for the bottom and the top rarefied samples across all lakes. Horizontal lines show the standard error.
 
-
-\pagebreak
-```{r}
-com_merged_raw_list %>% 
-  filter(INVENTORY == "OTU") %>% 
-  .$data %>% .[[1]] %>%
-  spread_cdm(LAC_POS, TAXON, COUNT) %>% 
-  rrarefy(sample = min(rowSums(.))) %>% 
-  tidy_cdm(row.name = "LAC_POS") %>% 
-  left_join(lakes_meta_nr) %>% 
-  left_join(otu_meta, by = c("TAXON" = "OTU_ID")) %>% 
-  group_by(ADL_RANK_2, POSITION) %>% 
-  nest() %>% 
-  mutate(RICH = map_dbl(data, function(data){
-    data %>% 
-      spread_cdm(LAC, TAXON, COUNT) %>% 
-      specnumber() %>% 
-      enframe("LAC", "RICHNESS") %>% 
-      summarise(R = mean(RICHNESS)) %>% 
-      .$R %>% .[[1]]
-  })) %>% 
-  group_by(POSITION) %>% 
-  mutate(RICH_REL = RICH /sum(RICH)) %>% 
-  group_by(ADL_RANK_2) %>% 
-  summarise(DELTA_RICH_REL = (function(x) {x[2] - x[1]})(RICH_REL)) %>% 
-  ggplot() +
-  geom_col(aes(forcats::fct_reorder(ADL_RANK_2, DELTA_RICH_REL), DELTA_RICH_REL)) +
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +
-  scale_y_continuous(labels = scales::percent) +
-  xlab("") + ylab("Difference in mean relative richness")
-```
-
-**`r ins_fig()`** Difference between 'top' and 'bottom' strata in mean relative richness for each taxonomic group. 
 
 
 \pagebreak
