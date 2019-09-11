@@ -4,6 +4,7 @@ deseq_TB_AOV1 <- com_merged_raw_list %>%
   filter(!str_detect(INVENTORY, "OTU")) %>% 
   mutate(results = map(data, function(data){
     tab <- data %>% 
+      mutate(TAXON = fct_explicit_na(TAXON, "Unclassified")) %>% 
       spread_cdm(LAC_POS, TAXON, COUNT) %>% 
       t()
     cdat <- colnames(tab) %>%
