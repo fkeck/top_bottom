@@ -48,28 +48,6 @@ tibble(LAC = kml$Name, LON = coordinates(kml)[, 1], LAT = coordinates(kml)[, 2])
 **`r ins_tab()`** List of the lakes included in the study with their three-letter code, geographic coordinates (decimal degrees; WGS84), altitude (meters) and maximum depth (meters).
 
 
-\pagebreak
-```{r, fig.height = 6}
-data(countriesLow, package = "rworldmap")
-eu_shp <- countriesLow[!is.na(countriesLow$REGION), ]
-eu_shp <- eu_shp[eu_shp$REGION == "Europe", ]
-
-library(tmap)
-
-tm_shape(eu_shp, bbox = sf::st_bbox(c(xmin = -5, xmax = 10, ymax = 52, ymin = 41))) +
-  tm_fill() +
-  tm_borders() +
-  tm_scale_bar(breaks = c(0, 100, 200), text.size = 0.7, position = c(0.6, 0.02)) +
-  tm_layout(bg.color = "lightblue") +
-  tm_graticules(lines = FALSE) +
-  tm_shape(kml) +
-  tm_dots(size = 0.2, shape = 3)
-
-```
-
-
-**`r ins_fig()`** Map of the 48 lakes included in the study.
-
 
 \pagebreak
 
