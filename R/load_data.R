@@ -13,10 +13,17 @@ setwd("/home/francois/Google Drive/Sync work/projects/top_bottom/")
 lakes_meta <- read_csv("data/Lakes_meta.csv") %>% 
   mutate(LAC_POS = paste(LAC, POSITION, sep = "_"))
 
+lakes_troph <- read_csv("data/lakes_trophic_status.csv") %>% 
+  mutate(Trophic_Status = str_to_sentence(Trophic_Status) %>% 
+           fct_explicit_na(na_level = "Unknown"))
+
 lakes_cn <- read_csv("data/synthese_cn.csv") %>% 
   select(-ID_CAROTTE, -CAROTTE_PROF_MIN, -CAROTTE_PROF_MAX)
 
 lakes_bv <- read_csv("data/synthese_bv.csv")
+
+lakes_kml <- rgdal::readOGR("data/TOP-BOTTOM_48_FK.kml", verbose = FALSE)
+lakes_kml$Name <- str_replace(lakes_kml$Name, pattern = "\n", "")
 
 otu_taxo_pr2 <- read_csv("data/OTU_affil_PR2SOUL_MIX_75.csv")
 otu_taxo_adl_conv <- read_csv("data/OTU_affil_PR2SOUL_MIX_75_ADLCONV_EDISA.csv") %>%
