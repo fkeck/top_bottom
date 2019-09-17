@@ -29,24 +29,45 @@ Subhead. Type or paste text here. You may break this section up into subheads as
 
 \pagebreak
 ```{r, message = FALSE}
-library(sp)
-kml <- rgdal::readOGR("../data/TOP-BOTTOM_48_FK.kml", verbose = FALSE)
-kml$Name <- str_replace(kml$Name, pattern = "\n", "")
-kml <- kml[kml$Name %in% otu_merge_tbl$LAC, ]
+lakes_kml <- lakes_kml[lakes_kml$Name %in% otu_merge_tbl$LAC, ]
 
-tibble(LAC = kml$Name, LON = coordinates(kml)[, 1], LAT = coordinates(kml)[, 2]) %>% 
+lakes_tab <-
+  tibble(LAC = lakes_kml$Name,
+         LON = sp::coordinates(lakes_kml)[, 1],
+         LAT = sp::coordinates(lakes_kml)[, 2]) %>% 
   left_join(select(lakes_bv, LAC, ALTITUDE, DEPTH_MAX)) %>% 
   left_join(select(lakes_meta, LAC, LAC_CODE) %>% distinct()) %>% 
+  left_join(lakes_troph) %>% 
   select(LAC_CODE, everything()) %>% 
   arrange(LAC) %>% 
-  set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth (max)")) %>% 
-  knitr::kable(digits = 3)
+  set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth (max)", "Trophic status"))
+
+knitr::kable(lakes_tab, digits = 3)
+
+```
+
+**`r ins_tab()`** List of the lakes included in the study with their three-letter code, geographic coordinates (decimal degrees; WGS84), altitude (meters) and maximum depth (meters). ADD TROPHIC !!!!!!!
+
+
+\pagebreak
+```{r, message = FALSE}
+lakes_tab %>% 
+  ggplot(aes(x = Altitude, fill = `Trophic status`)) +
+    geom_histogram(position = 'stack', binwidth = 500) +
+    scale_fill_manual(values = c("Eutrophic" = "#006D2C",
+                                 "Meso-eutrophic" = "#2CA25F",
+                                 "Mesotrophic" = "#66C2A4",
+                                 "Oligo-mesotrophic" = "#99D8C9",
+                                 "Oligotrophic" = "#CCECE6",
+                                 "Unknown" = "grey70")) +
+  labs(fill = "Trophic status") + xlab("Altitude (m)") + ylab("Count") +
+  theme_bw()
+  
 
 ```
 
 
-**`r ins_tab()`** List of the lakes included in the study with their three-letter code, geographic coordinates (decimal degrees; WGS84), altitude (meters) and maximum depth (meters).
-
+**`r ins_tab()`** Histogram
 
 
 \pagebreak
