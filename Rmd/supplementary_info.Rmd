@@ -67,7 +67,7 @@ lakes_tab %>%
 ```
 
 
-**`r ins_tab()`** Histogram
+**`r ins_tab()`** Distribution of lake elevation and trophic status.
 
 
 \pagebreak
