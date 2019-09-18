@@ -22,6 +22,10 @@ lakes_cn <- read_csv("data/synthese_cn.csv") %>%
 
 lakes_bv <- read_csv("data/synthese_bv.csv")
 
+lakes_dna <- read_csv("data/synthese_dna.csv") %>% 
+  group_by(LAC, POSITION) %>% 
+  summarise_if(is.numeric, mean)
+
 lakes_kml <- rgdal::readOGR("data/TOP-BOTTOM_48_FK.kml", verbose = FALSE)
 lakes_kml$Name <- str_replace(lakes_kml$Name, pattern = "\n", "")
 
