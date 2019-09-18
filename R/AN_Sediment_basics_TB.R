@@ -15,18 +15,19 @@ dat <- nmds_rar_list %>%
   filter(POSITION != "Bottom 2",
          !LAC %in% c("Bourget", "Léman", "Godivelle", "Corbeaux")) %>% 
   semi_join(lakes_meta_nr, by = c("LAC", "POSITION")) %>% 
+  left_join(lakes_dna) %>% 
   mutate(jitter_val = runif(nrow(.), -0.1, 0.1))
 
 sed_basics_plots$DNA <- ggplot(dat) +
-  geom_boxplot(aes(as.numeric(as.factor(POSITION)), MASS_SAMPLE_DNA, group = POSITION, fill = POSITION), outlier.shape = NA)+
-  geom_point(aes(as.numeric(as.factor(POSITION)) + jitter_val, MASS_SAMPLE_DNA), size = 0.4) +
-  geom_line(aes(as.numeric(as.factor(POSITION)) + jitter_val, MASS_SAMPLE_DNA, group = LAC), alpha = 0.2) +
+  geom_boxplot(aes(as.numeric(as.factor(POSITION)), ng_ADN_BY_g_DRY_SED/1000, group = POSITION, fill = POSITION), outlier.shape = NA)+
+  geom_point(aes(as.numeric(as.factor(POSITION)) + jitter_val, ng_ADN_BY_g_DRY_SED/1000), size = 0.4) +
+  geom_line(aes(as.numeric(as.factor(POSITION)) + jitter_val, ng_ADN_BY_g_DRY_SED/1000, group = LAC), alpha = 0.2) +
   scale_x_continuous(breaks = c(1, 2), labels = c("Bottom", "Top")) +
-  xlab("") + ylab("DNA") +
+  xlab("") + ylab(expression(paste("DNA (", µg~g^-1, " dry sediment)"))) +
   theme_boxplot_sed
 
 
-sed_basics_tests$DNA <- wilcox.test(MASS_SAMPLE_DNA ~ POSITION, paired = TRUE, data = dat, exact = FALSE)
+sed_basics_tests$DNA <- wilcox.test(ng_ADN_BY_g_DRY_SED ~ POSITION, paired = TRUE, data = dat, exact = FALSE)
 
 
 dat <- nmds_rar_list %>%
@@ -44,7 +45,7 @@ sed_basics_plots$COT <- ggplot(dat) +
   geom_point(aes(as.numeric(as.factor(POSITION)) + jitter_val, C_tot_perc_MS), size = 0.4) +
   geom_line(aes(as.numeric(as.factor(POSITION)) + jitter_val, C_tot_perc_MS, group = LAC), alpha = 0.2) +
   scale_x_continuous(breaks = c(1, 2), labels = c("Bottom", "Top")) +
-  xlab("") + ylab("Total carbon") +
+  xlab("") + ylab("Total carbon (% of dry mass)") +
   theme_boxplot_sed
 
 sed_basics_tests$COT <- wilcox.test(C_tot_perc_MS ~ POSITION, paired = TRUE, data = dat, exact = FALSE)
@@ -65,7 +66,7 @@ sed_basics_plots$PIG <- ggplot(dat) +
   geom_point(aes(as.numeric(as.factor(POSITION)) + jitter_val, log(CAROTENOIDS)), size = 0.4) +
   geom_line(aes(as.numeric(as.factor(POSITION)) + jitter_val, log(CAROTENOIDS), group = LAC), alpha = 0.2) +
   scale_x_continuous(breaks = c(1, 2), labels = c("Bottom", "Top")) +
-  xlab("") + ylab("Carotenoids (log-transformed)") +
+  xlab("") + ylab(expression(paste("Total carotenoids (", ng~g^-1, " dry sediment, log-transf.)"))) +
   theme_boxplot_sed
 
 sed_basics_tests$PIG <- wilcox.test(CAROTENOIDS ~ POSITION, paired = TRUE, data = dat, exact = FALSE)
