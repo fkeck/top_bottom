@@ -4,7 +4,7 @@
 
 
 
-adonis_blocks <- function(x, condition, permutation = 999, method = "jaccard", blocks, ...){
+adonis_blocks <- function(x, condition, permutation = 999, method = "bray", blocks, ...){
   formula <- as.formula("x ~ condition")
   fit <- adonis(formula = formula, permutations = 1, method = method, ...)
   pop <- rep(NA, permutation + 1)

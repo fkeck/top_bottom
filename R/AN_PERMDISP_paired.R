@@ -4,7 +4,7 @@ beta_div_TB <- com_rar_list %>%
   #filter(INVENTORY == "OTU") %>% 
   mutate(BRAY_DIST = map(data, ~ .x %>% 
                            spread_cdm(LAC_POS, TAXON, COUNT) %>% 
-                           vegdist(method = "jaccard"))) %>%
+                           vegdist(method = "bray"))) %>%
   mutate(BETA_DISP = map(BRAY_DIST, ~ .x %>% 
                            betadisper(group = ifelse(str_detect(attr(., "Labels"), "_Top"),
                                                      "Top", "Bottom")))
