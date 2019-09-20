@@ -110,7 +110,7 @@ legend <- get_legend(
   frac_taxa_temp$plots[[1]] +
     guides(color = guide_legend(nrow = 1)) +
     theme(legend.position = "bottom",
-          legend.title=element_blank())
+          legend.title = element_blank())
 )
 plot_grid(prow, legend, ncol = 1, rel_heights = c(1, .1))
 ```
@@ -166,7 +166,8 @@ p <- tax_rich_dat %>%
            position = position_dodge2(width = 1, padding = 0.5)) +
   coord_flip() +
   scale_y_continuous(labels = scales::percent) +
-  xlab("") + ylab("Relative richness") + labs(fill = "Position") +
+  scale_fill_discrete(name = "Stratum", labels = c("Past (bottom)", "Recent (top)")) +
+  xlab("") + ylab("Relative richness") +
   theme(strip.text.y = element_text(angle = 180),
         strip.placement = "outside")
 

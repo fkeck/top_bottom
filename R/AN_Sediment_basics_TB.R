@@ -4,7 +4,8 @@ sed_basics_plots <- list()
 theme_boxplot_sed <- theme_grey() +
   theme(legend.position = "none",
         axis.text = element_text(size = 8),
-        axis.title = element_text(size = 10))
+        axis.title = element_text(size = 8),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 
 
 dat <- nmds_rar_list %>%
@@ -23,7 +24,7 @@ sed_basics_plots$DNA <- ggplot(dat) +
   geom_boxplot(aes(as.numeric(as.factor(POSITION)), (ng_ADN_BY_g_DRY_SED/1000) , group = POSITION, fill = POSITION), outlier.shape = NA)+
   geom_point(aes(as.numeric(as.factor(POSITION)) + jitter_val, (ng_ADN_BY_g_DRY_SED/1000)), size = 0.4) +
   geom_line(aes(as.numeric(as.factor(POSITION)) + jitter_val, (ng_ADN_BY_g_DRY_SED/1000), group = LAC), alpha = 0.2) +
-  scale_x_continuous(breaks = c(1, 2), labels = c("Bottom", "Top")) +
+  scale_x_continuous(breaks = c(1, 2), labels = c("Past", "Recent")) +
   xlab("") + ylab(expression(paste("DNA (", µg~g^-1, " dry sediment)"))) +
   theme_boxplot_sed
 
@@ -31,7 +32,7 @@ sed_basics_plots$DNA_corrected_Ctot <- ggplot(dat) +
   geom_boxplot(aes(as.numeric(as.factor(POSITION)), mug_ADN_BY_g_C_DRY_SED , group = POSITION, fill = POSITION), outlier.shape = NA)+
   geom_point(aes(as.numeric(as.factor(POSITION)) + jitter_val, mug_ADN_BY_g_C_DRY_SED), size = 0.4) +
   geom_line(aes(as.numeric(as.factor(POSITION)) + jitter_val, mug_ADN_BY_g_C_DRY_SED, group = LAC), alpha = 0.2) +
-  scale_x_continuous(breaks = c(1, 2), labels = c("Bottom", "Top")) +
+  scale_x_continuous(breaks = c(1, 2), labels = c("Past", "Recent")) +
   xlab("") + ylab(expression(paste("DNA (", µg~g^-1, "C dry sediment)"))) +
   theme_boxplot_sed
 
@@ -55,7 +56,7 @@ sed_basics_plots$COT <- ggplot(dat) +
   geom_boxplot(aes(as.numeric(as.factor(POSITION)), C_tot_perc_MS, group = POSITION, fill = POSITION), outlier.shape = NA)+
   geom_point(aes(as.numeric(as.factor(POSITION)) + jitter_val, C_tot_perc_MS), size = 0.4) +
   geom_line(aes(as.numeric(as.factor(POSITION)) + jitter_val, C_tot_perc_MS, group = LAC), alpha = 0.2) +
-  scale_x_continuous(breaks = c(1, 2), labels = c("Bottom", "Top")) +
+  scale_x_continuous(breaks = c(1, 2), labels = c("Past", "Recent")) +
   xlab("") + ylab("Total carbon (% of dry mass)") +
   theme_boxplot_sed
 
@@ -77,7 +78,7 @@ sed_basics_plots$PIG <- ggplot(dat) +
   geom_boxplot(aes(as.numeric(as.factor(POSITION)), log(CAROTENOIDS), group = POSITION, fill = POSITION), outlier.shape = NA)+
   geom_point(aes(as.numeric(as.factor(POSITION)) + jitter_val, log(CAROTENOIDS)), size = 0.4) +
   geom_line(aes(as.numeric(as.factor(POSITION)) + jitter_val, log(CAROTENOIDS), group = LAC), alpha = 0.2) +
-  scale_x_continuous(breaks = c(1, 2), labels = c("Bottom", "Top")) +
+  scale_x_continuous(breaks = c(1, 2), labels = c("Past", "Recent")) +
   xlab("") + ylab(expression(paste("Total carotenoids (", ng~g^-1, " dry sediment, log-transf.)"))) +
   theme_boxplot_sed
 
@@ -85,7 +86,7 @@ sed_basics_plots$PIG_corrected_Ctot <- ggplot(dat) +
   geom_boxplot(aes(as.numeric(as.factor(POSITION)), log(CAROTENOIDS_BY_g_C_DRY_SED), group = POSITION, fill = POSITION), outlier.shape = NA)+
   geom_point(aes(as.numeric(as.factor(POSITION)) + jitter_val, log(CAROTENOIDS_BY_g_C_DRY_SED)), size = 0.4) +
   geom_line(aes(as.numeric(as.factor(POSITION)) + jitter_val, log(CAROTENOIDS_BY_g_C_DRY_SED), group = LAC), alpha = 0.2) +
-  scale_x_continuous(breaks = c(1, 2), labels = c("Bottom", "Top")) +
+  scale_x_continuous(breaks = c(1, 2), labels = c("Past", "Recent")) +
   xlab("") + ylab(expression(paste("Total carotenoids (", ng~g^-1, "C dry sediment, log-transf.)"))) +
   theme_boxplot_sed
 

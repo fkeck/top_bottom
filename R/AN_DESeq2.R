@@ -31,9 +31,8 @@ deseq_TB_AOV1 <- deseq_TB_AOV1 %>%
       geom_linerange(aes(x = fct_reorder(Taxa, log2FoldChange),
                          ymin = log2FoldChange + lfcSE,
                          ymax = log2FoldChange - lfcSE)) +
-      xlab("") + ylab("Log2 Fold Change") + labs(title = INVENTORY) +
-      theme(#axis.text.x = element_text(size = 8, angle = 45, vjust = 1, hjust = 1),
-            legend.position = "none") +
+      xlab("") + ylab("Past-Recent Log2 Fold Change") + labs(title = INVENTORY) +
+      theme(legend.position = "none") +
       scale_fill_manual(values = c("Significant" = "grey30", "Non-significant" = "grey")) +
       coord_flip()
   }))

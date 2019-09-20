@@ -27,8 +27,9 @@ frac_taxa_temp <- com_merged_raw_list %>%
       #          aes(factor(LAC, levels = rev(levels(factor(LAC)))), 0, label = TOT, hjust = 1), nudge_y = 0.01) +
       coord_flip() +
       scale_y_continuous(labels = scales::percent) +
+      scale_fill_discrete(name = "Fraction", labels = c("Past (bottom) only ", "Intersection ", "Recent (top) only ")) +
       theme_minimal() +
-      labs(fill = "Fraction") + ylab("Relative proportion") + xlab("Lake")
+      ylab("Relative proportion") + xlab("Lake")
   })) %>% 
   mutate(mean_fractions = map(fractions, function(fractions){
     fractions %>% 
@@ -71,7 +72,7 @@ frac_taxa_spatial <- com_merged_raw_list %>%
       ggplot() +
       geom_boxplot(aes(as.numeric(as.factor(POSITION)), Freq_Intersection, group = POSITION, fill = POSITION), outlier.shape = NA)+
       geom_point(aes(as.numeric(as.factor(POSITION)) + jitter_val, Freq_Intersection)) +
-      scale_x_continuous(breaks = c(1, 2), labels = c("Bottom", "Top")) +
+      scale_x_continuous(breaks = c(1, 2), labels = c("Past\n(bottom)", "Recent\n(top)")) +
       theme(legend.position = "none") +
       xlab("") + ylab("Taxa intersection (%)")
   }))
