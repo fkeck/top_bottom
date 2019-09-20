@@ -63,13 +63,13 @@ FIG_nmds_main <- nmds_rar_list %>%
   left_join(lakes_meta_nr, by = "LAC_POS") %>% 
   left_join(lakes_bv, by = "LAC") %>% 
   filter(!is.na(LAC)) %>% 
-  mutate(LABS_LAC_BOTTOM = ifelse(POSITION == "Bottom", LAC, "")) %>% 
+  mutate(LABS_LAC_BOTTOM = ifelse(POSITION == "Bottom", LAC_CODE, "")) %>% 
   ggplot() +
   geom_line(aes(x = NMDS1, y = NMDS2, group = LAC), color = "lightgrey") +
   #ggforce::geom_mark_ellipse(aes(x = NMDS1, y = NMDS2, fill = POSITION), ) +
   stat_ellipse(aes(x = NMDS1, y = NMDS2, fill = POSITION), geom = "polygon", level = 0.95, alpha = 0.2) +
   geom_point(aes(x = NMDS1, y = NMDS2, shape = POSITION, color = POSITION), size = 2) +
-  geom_text(aes(x = NMDS1, y = NMDS2, label = LABS_LAC_BOTTOM), size = 2, nudge_y = -0.03) +
+  geom_text(aes(x = NMDS1, y = NMDS2, label = LABS_LAC_BOTTOM), size = 2, nudge_y = -0.04) +
   labs(title = "") +
   theme_bw() +
   theme(axis.text.y.right = element_text(size = 6, angle = 45),
@@ -205,9 +205,15 @@ FIG_deseq_troph
 ```{r, fig.height = 5, fig.width = 5}
 
 sed_basics_plots$combined_plots <-
-  cowplot::plot_grid(sed_basics_plots$DNA,
-                   sed_basics_plots$COT,
+  cowplot::plot_grid(sed_basics_plots$COT,
                    sed_basics_plots$PIG,
+                   sed_basics_plots$DNA,
+                   labels = c("A", "B", "C"), ncol = 3, nrow = 1)
+
+sed_basics_plots$combined_plots_corrected_Ctot <-
+  cowplot::plot_grid(sed_basics_plots$COT,
+                   sed_basics_plots$PIG_corrected_Ctot,
+                   sed_basics_plots$DNA_corrected_Ctot,
                    labels = c("A", "B", "C"), ncol = 3, nrow = 1)
 
 # ggsave("figures/print/FIG_sediments.pdf", sed_basics_plots$combined_plots,
