@@ -4,36 +4,34 @@ SUPP_MAT <- list()
 # TAXONOMY RANK 2
 
 FIG_nmds_main <- nmds_rar_list %>% 
-  filter(INVENTORY == "Taxonomie Rank 3") %>% 
+  filter(INVENTORY == "Taxonomie Rank 2") %>% 
   .$SITE_SCORES %>% 
   .[[1]] %>% 
   left_join(lakes_meta_nr, by = "LAC_POS") %>% 
   left_join(lakes_bv, by = "LAC") %>% 
   filter(!is.na(LAC)) %>% 
-  mutate(LABS_LAC_BOTTOM = ifelse(POSITION == "Bottom", LAC, "")) %>% 
+  mutate(LABS_LAC_BOTTOM = ifelse(POSITION == "Bottom", LAC_CODE, "")) %>% 
   ggplot() +
   geom_line(aes(x = NMDS1, y = NMDS2, group = LAC), color = "lightgrey") +
   stat_ellipse(aes(x = NMDS1, y = NMDS2, fill = POSITION), geom = "polygon", level = 0.95, alpha = 0.2) +
   geom_point(aes(x = NMDS1, y = NMDS2, shape = POSITION, color = POSITION), size = 2) +
-  geom_text(aes(x = NMDS1, y = NMDS2, label = LABS_LAC_BOTTOM), size = 2, nudge_y = -0.03) +
+  geom_text(aes(x = NMDS1, y = NMDS2, label = LABS_LAC_BOTTOM), size = 2, nudge_y = -0.05) +
   theme_bw() +
   theme(axis.text.y.right = element_text(size = 6, angle = 45),
         axis.text.x.top = element_text(size = 6, angle = 45, hjust = 0, vjust = 0),
         legend.position = "none")
 
 FIG_nmds_bray <- TB_pw_BC_plots %>% 
-  filter(INVENTORY == "Taxonomie Rank 3") %>% .$hist_plots %>% .[[1]] + xlab("Bray-Curtis dissimilarity")
+  filter(INVENTORY == "Taxonomie Rank 2") %>% .$hist_plots %>% .[[1]] + xlab("Bray-Curtis dissimilarity")
 
 FIG_nmds_intra <- beta_div_TB %>% 
-  filter(INVENTORY == "Taxonomie Rank 3") %>% .$TB_intra_plots %>% .[[1]]
+  filter(INVENTORY == "Taxonomie Rank 2") %>% .$TB_intra_plots %>% .[[1]]
 
 dat <- com_rar_list %>% 
-  filter(INVENTORY == "Taxonomie Rank 3") %>% .$BRAY_DIST %>%
+  filter(INVENTORY == "Taxonomie Rank 2") %>% .$BRAY_DIST %>%
   .[[1]] %>% 
   filter(LAC_POS_1 != LAC_POS_2, LAC_1 == LAC_2) %>% 
-  left_join(select(lakes_bv, LAC, ALTITUDE, LOG_DEPTH_MAX, LOG_SURFACE, LOG_VOLUME_PYR,
-                   Artificial_surface, Agricultural_surface, Natural_surface,
-                   Anthropised_surface, Natural_Artificial_ratio, Natural_Anthropised_ratio),
+  left_join(select(lakes_bv, LAC, ALTITUDE),
             by = c("LAC_1" = "LAC"))
 
 tr_mod_alt <- rpart(BRAY_DIST ~ ALTITUDE, data = dat, model = TRUE)
@@ -76,12 +74,12 @@ FIG_nmds_main <- nmds_rar_list %>%
   left_join(lakes_meta_nr, by = "LAC_POS") %>% 
   left_join(lakes_bv, by = "LAC") %>% 
   filter(!is.na(LAC)) %>% 
-  mutate(LABS_LAC_BOTTOM = ifelse(POSITION == "Bottom", LAC, "")) %>% 
+  mutate(LABS_LAC_BOTTOM = ifelse(POSITION == "Bottom", LAC_CODE, "")) %>% 
   ggplot() +
   geom_line(aes(x = NMDS1, y = NMDS2, group = LAC), color = "lightgrey") +
   stat_ellipse(aes(x = NMDS1, y = NMDS2, fill = POSITION), geom = "polygon", level = 0.95, alpha = 0.2) +
   geom_point(aes(x = NMDS1, y = NMDS2, shape = POSITION, color = POSITION), size = 2) +
-  geom_text(aes(x = NMDS1, y = NMDS2, label = LABS_LAC_BOTTOM), size = 2, nudge_y = -0.03) +
+  geom_text(aes(x = NMDS1, y = NMDS2, label = LABS_LAC_BOTTOM), size = 2, nudge_y = -0.01) +
   theme_bw() +
   theme(axis.text.y.right = element_text(size = 6, angle = 45),
         axis.text.x.top = element_text(size = 6, angle = 45, hjust = 0, vjust = 0),
@@ -98,9 +96,7 @@ dat <- com_rar_list %>%
   filter(INVENTORY == "OTU") %>% .$BRAY_DIST %>%
   .[[1]] %>% 
   filter(LAC_POS_1 != LAC_POS_2, LAC_1 == LAC_2) %>% 
-  left_join(select(lakes_bv, LAC, ALTITUDE, LOG_DEPTH_MAX, LOG_SURFACE, LOG_VOLUME_PYR,
-                   Artificial_surface, Agricultural_surface, Natural_surface,
-                   Anthropised_surface, Natural_Artificial_ratio, Natural_Anthropised_ratio),
+  left_join(select(lakes_bv, LAC, ALTITUDE),
             by = c("LAC_1" = "LAC"))
 
 tr_mod_alt <- rpart(BRAY_DIST ~ ALTITUDE, data = dat, model = TRUE)
@@ -132,4 +128,4 @@ FIG_alt_tree_regression <- dat %>%
 
 SUPP_MAT$JACC <- plot_grid(FIG_nmds_main, FIG_nmds_bray, FIG_nmds_intra, FIG_alt_tree_regression, labels = "AUTO")
 
-save(SUPP_MAT, file = "Supp_mat.Rdata")
+save(SUPP_MAT, file = "data/Supp_mat.Rdata")
