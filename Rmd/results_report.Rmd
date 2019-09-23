@@ -206,31 +206,15 @@ FIG_deseq_troph
 ```{r, fig.height = 5, fig.width = 5}
 
 sed_basics_plots$combined_plots <-
-  cowplot::plot_grid(sed_basics_plots$Corg,
-                   sed_basics_plots$PIG,
-                   sed_basics_plots$DNA,
+  cowplot::plot_grid(sed_basics_plots$Corg + theme(panel.grid = element_blank()),
+                   sed_basics_plots$PIG + theme(panel.grid = element_blank()),
+                   sed_basics_plots$DNA + theme(panel.grid = element_blank()),
                    labels = c("A", "B", "C"), ncol = 3, nrow = 1)
 
-# sed_basics_plots$combined_plots_corrected_Ctot <-
-#   cowplot::plot_grid(sed_basics_plots$COT,
-#                    sed_basics_plots$PIG_corrected_Ctot,
-#                    sed_basics_plots$DNA_corrected_Ctot,
-#                    labels = c("A", "B", "C"), ncol = 3, nrow = 1)
-# 
-# sed_basics_plots$combined_plots_corrected_Corg <-
-#   cowplot::plot_grid(sed_basics_plots$Corg,
-#                    sed_basics_plots$PIG_corrected_Corg,
-#                    sed_basics_plots$DNA_corrected_Corg,
-#                    labels = c("A", "B", "C"), ncol = 3, nrow = 1)
-# 
-# ggsave("figures/print/FIG_sediments.pdf", sed_basics_plots$combined_plots,
-#        device = "pdf", width = 8.7, height = 7, units = "cm", scale = 1)
-# ggsave("figures/print/FIG_sediments_corrected_Ctot.pdf",
-#        sed_basics_plots$combined_plots_corrected_Ctot,
-#        device = "pdf", width = 8.7, height = 7, units = "cm", scale = 1)
-# ggsave("figures/print/FIG_sediments_corrected_Corg.pdf",
-#        sed_basics_plots$combined_plots_corrected_Corg,
-#        device = "pdf", width = 8.7, height = 7, units = "cm", scale = 1)
+ 
+ggsave("figures/print/FIG_sediments.pdf", sed_basics_plots$combined_plots,
+       device = "pdf", width = 8.7, height = 8.7, units = "cm", scale = 1)
+
 
 sed_basics_plots$combined_plots
 ```
