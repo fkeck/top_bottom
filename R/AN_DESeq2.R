@@ -34,7 +34,8 @@ deseq_TB_AOV1 <- deseq_TB_AOV1 %>%
       xlab("") + ylab("Past-Recent Log2 Fold Change") + labs(title = INVENTORY) +
       theme(legend.position = "none") +
       scale_fill_manual(values = c("Significant" = "grey30", "Non-significant" = "grey")) +
-      coord_flip()
+      coord_flip() +
+      theme_bw()
   }))
 
 

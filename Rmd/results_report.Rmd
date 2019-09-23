@@ -159,7 +159,8 @@ FIG_alt_tree_regression <- dat %>%
                    xend = alt_split, yend = bray_split[2, "mean_BRAY", drop = TRUE]), size = 1) +
   geom_segment(aes(x = alt_split, y = bray_split[1, "mean_BRAY", drop = TRUE],
                    xend = max(dat$ALTITUDE), yend = bray_split[1, "mean_BRAY", drop = TRUE]), size = 1) +
-  xlab("Altitude (m)") + ylab("Past-Recent Bray-Curtis dissimilarity")
+  xlab("Altitude (m)") + ylab("Past-Recent Bray-Curtis dissimilarity") +
+  theme_bw()
 
 # ggsave("figures/print/FIG_alt_tree_regression.pdf", FIG_alt_tree_regression,
 #        device = "pdf", width = 8.7, height = 8.7, units = "cm", scale = 1)
@@ -216,11 +217,20 @@ sed_basics_plots$combined_plots_corrected_Ctot <-
                    sed_basics_plots$DNA_corrected_Ctot,
                    labels = c("A", "B", "C"), ncol = 3, nrow = 1)
 
-ggsave("figures/print/FIG_sediments.pdf", sed_basics_plots$combined_plots,
-       device = "pdf", width = 8.7, height = 7, units = "cm", scale = 1)
-ggsave("figures/print/FIG_sediments_corrected_Ctot.pdf",
-       sed_basics_plots$combined_plots_corrected_Ctot,
-       device = "pdf", width = 8.7, height = 7, units = "cm", scale = 1)
+sed_basics_plots$combined_plots_corrected_Corg <-
+  cowplot::plot_grid(sed_basics_plots$Corg,
+                   sed_basics_plots$PIG_corrected_Corg,
+                   sed_basics_plots$DNA_corrected_Corg,
+                   labels = c("A", "B", "C"), ncol = 3, nrow = 1)
+# 
+# ggsave("figures/print/FIG_sediments.pdf", sed_basics_plots$combined_plots,
+#        device = "pdf", width = 8.7, height = 7, units = "cm", scale = 1)
+# ggsave("figures/print/FIG_sediments_corrected_Ctot.pdf",
+#        sed_basics_plots$combined_plots_corrected_Ctot,
+#        device = "pdf", width = 8.7, height = 7, units = "cm", scale = 1)
+# ggsave("figures/print/FIG_sediments_corrected_Corg.pdf",
+#        sed_basics_plots$combined_plots_corrected_Corg,
+#        device = "pdf", width = 8.7, height = 7, units = "cm", scale = 1)
 
 sed_basics_plots$combined_plots
 ```
