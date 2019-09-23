@@ -76,22 +76,22 @@ info_otu <- otu_tbl %>%
 otu_tbl_replicates <- otu_tbl
 
 # MERGE DATA (SUM and SUBSAMPLE OF REPLICATES)
-samples_depth <- otu_tbl %>% 
-  group_by(LAC, POSITION) %>% 
-  summarize(DEPTH = sum(OTU_COUNT)) %>% 
-  unite(LAC_POS, LAC, POSITION, remove = FALSE) %>% 
+samples_depth <- otu_tbl %>%
+  group_by(LAC, POSITION) %>%
+  summarize(DEPTH = sum(OTU_COUNT)) %>%
+  unite(LAC_POS, LAC, POSITION, remove = FALSE) %>%
   left_join(
     lakes_meta %>% group_by(LAC, POSITION) %>% summarise(n = n())
   ) %>%
   mutate(MEAN_DEPTH = round(DEPTH/n))
-  
-otu_merge_tbl <- otu_tbl %>% 
-  group_by(LAC, POSITION, OTU_ID) %>% 
-  summarize(OTU_COUNT = sum(OTU_COUNT)) %>% 
-  unite(LAC_POS, LAC, POSITION, remove = FALSE) %>% 
-  spread_cdm(LAC_POS, OTU_ID, OTU_COUNT) %>% 
-  rrarefy(sample = samples_depth$MEAN_DEPTH) %>% 
-  tidy_cdm("LAC_POS", "OTU_ID", "OTU_COUNT") %>% 
+
+otu_merge_tbl <- otu_tbl %>%
+  group_by(LAC, POSITION, OTU_ID) %>%
+  summarize(OTU_COUNT = sum(OTU_COUNT)) %>%
+  unite(LAC_POS, LAC, POSITION, remove = FALSE) %>%
+  spread_cdm(LAC_POS, OTU_ID, OTU_COUNT) %>%
+  rrarefy(sample = samples_depth$MEAN_DEPTH) %>%
+  tidy_cdm("LAC_POS", "OTU_ID", "OTU_COUNT") %>%
   separate(LAC_POS, into = c("LAC", "POSITION"), sep = "_", remove = FALSE)
 
 rm(samples_depth)
@@ -99,6 +99,19 @@ rm(samples_depth)
 lakes_meta_nr <- lakes_meta %>% 
   filter(REPLICATE == 1) %>% 
   select(-ID_SAMPLE, -REPLICATE)
+
+
+# otu_merge_tbl <- otu_tbl_replicates %>% 
+#   group_by(LAC, POSITION, OTU_ID) %>% 
+#   mutate(INTERSECT = (function(x){
+#     ifelse(x[1] > 0 & x[2] > 0, TRUE, FALSE)
+#   })(OTU_COUNT)) %>% 
+#   filter(INTERSECT == TRUE) %>% 
+#   summarize(OTU_COUNT = round(mean(OTU_COUNT))) %>% 
+#   unite(LAC_POS, LAC, POSITION, remove = FALSE) %>% 
+#   spread_cdm(LAC_POS, OTU_ID, OTU_COUNT, fill.missing = 0) %>% 
+#   tidy_cdm("LAC_POS", "OTU_ID", "OTU_COUNT") %>% 
+#   separate(LAC_POS, into = c("LAC", "POSITION"), sep = "_", remove = FALSE)
 
 
 # FILTER OTUs WITH < 10 OCCURENCES IN THE DATASET
