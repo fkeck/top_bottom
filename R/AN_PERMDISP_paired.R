@@ -7,7 +7,7 @@ beta_div_TB <- com_rar_list %>%
                            vegdist(method = "bray"))) %>%
   mutate(BETA_DISP = map(BRAY_DIST, ~ .x %>% 
                            betadisper(group = ifelse(str_detect(attr(., "Labels"), "_Top"),
-                                                     "Top", "Bottom")))
+                                                     "Top", "Bottom"), add = TRUE))
   ) %>% 
   mutate(BETA_DISP_TEST = map(BETA_DISP, function(x) {
     wilcox.test(x = x$distances[x$group == "Bottom"],
