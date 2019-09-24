@@ -22,7 +22,7 @@ rar_richness <- com_merged_raw_list %>%
   mutate(TEST_RAR_RICHNESS = map(RAR_RICHNESS, function(RAR_RICHNESS){
     val_top <- RAR_RICHNESS$RAR_RICHNESS[RAR_RICHNESS$POSITION == "Top"]
     val_bot <- RAR_RICHNESS$RAR_RICHNESS[RAR_RICHNESS$POSITION == "Bottom"]
-    wilcox.test(val_top, val_bot, paired = TRUE)
+    wilcox.test(val_top, val_bot, paired = TRUE, exact = FALSE)
   }))
 
 
@@ -51,5 +51,5 @@ es_richness <- com_merged_raw_list %>%
   mutate(TEST_S_CHAO1 = map(ES_RICHNESS, function(ES_RICHNESS){
     val_top <- ES_RICHNESS$S_CHAO1[ES_RICHNESS$POSITION == "Top"]
     val_bot <- ES_RICHNESS$S_CHAO1[ES_RICHNESS$POSITION == "Bottom"]
-    wilcox.test(val_top, val_bot, paired = TRUE)
+    wilcox.test(val_top, val_bot, paired = TRUE, exact = FALSE)
   }))
