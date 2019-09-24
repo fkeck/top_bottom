@@ -3,7 +3,7 @@ SUPP_MAT <- list()
 
 # TAXONOMY RANK 2
 
-FIG_nmds_main <- nmds_rar_list %>% 
+SUPP_MAT$TAXO$FIG_nmds_main <- nmds_rar_list %>% 
   filter(INVENTORY == "Taxonomie Rank 2") %>% 
   .$SITE_SCORES %>% 
   .[[1]] %>% 
@@ -21,10 +21,10 @@ FIG_nmds_main <- nmds_rar_list %>%
         axis.text.x.top = element_text(size = 6, angle = 45, hjust = 0, vjust = 0),
         legend.position = "none")
 
-FIG_nmds_bray <- TB_pw_BC_plots %>% 
+SUPP_MAT$TAXO$FIG_nmds_bray <- TB_pw_BC_plots %>% 
   filter(INVENTORY == "Taxonomie Rank 2") %>% .$hist_plots %>% .[[1]] + xlab("Bray-Curtis dissimilarity")
 
-FIG_nmds_intra <- beta_div_TB %>% 
+SUPP_MAT$TAXO$FIG_nmds_intra <- beta_div_TB %>% 
   filter(INVENTORY == "Taxonomie Rank 2") %>% .$TB_intra_plots %>% .[[1]]
 
 dat <- com_rar_list %>% 
@@ -47,7 +47,7 @@ bray_split <- dat %>%
          CI_BRAY_INF = mean_BRAY - 1.96 * sd_BRAY / sqrt(n_BRAY))
 
 
-FIG_alt_tree_regression <- dat %>%
+SUPP_MAT$TAXO$FIG_alt_tree_regression <- dat %>%
   ggplot() +
   geom_rect(aes(xmin = 0, xmax = alt_split,
                 ymin = bray_split$CI_BRAY_INF[2], ymax = bray_split$CI_BRAY_SUP[2]), fill = "grey") +
@@ -61,14 +61,14 @@ FIG_alt_tree_regression <- dat %>%
   xlab("Altitude (m)") + ylab("Bray-Curtis dissimilarity") +
   theme_bw()
 
-SUPP_MAT$TAXO <- plot_grid(FIG_nmds_main, FIG_nmds_bray, FIG_nmds_intra, FIG_alt_tree_regression, labels = "AUTO")
+
 
 
 
 
 ##### JACCARD (Switch to jaccard first) ####
 
-FIG_nmds_main <- nmds_rar_list %>% 
+SUPP_MAT$JACC$FIG_nmds_main <- nmds_rar_list %>% 
   filter(INVENTORY == "OTU") %>% 
   .$SITE_SCORES %>% 
   .[[1]] %>% 
@@ -86,10 +86,10 @@ FIG_nmds_main <- nmds_rar_list %>%
         axis.text.x.top = element_text(size = 6, angle = 45, hjust = 0, vjust = 0),
         legend.position = "none")
 
-FIG_nmds_bray <- TB_pw_BC_plots %>% 
+SUPP_MAT$JACC$FIG_nmds_bray <- TB_pw_BC_plots %>% 
   filter(INVENTORY == "OTU") %>% .$hist_plots %>% .[[1]] + xlab("Jaccard dissimilarity")
 
-FIG_nmds_intra <- beta_div_TB %>% 
+SUPP_MAT$JACC$FIG_nmds_intra <- beta_div_TB %>% 
   filter(INVENTORY == "OTU") %>% .$TB_intra_plots %>% .[[1]]
 
 
@@ -113,7 +113,7 @@ bray_split <- dat %>%
          CI_BRAY_INF = mean_BRAY - 1.96 * sd_BRAY / sqrt(n_BRAY))
 
 
-FIG_alt_tree_regression <- dat %>%
+SUPP_MAT$JACC$FIG_alt_tree_regression <- dat %>%
   ggplot() +
   geom_rect(aes(xmin = 0, xmax = alt_split,
                 ymin = bray_split$CI_BRAY_INF[2], ymax = bray_split$CI_BRAY_SUP[2]), fill = "grey") +
@@ -128,6 +128,5 @@ FIG_alt_tree_regression <- dat %>%
   theme_bw()
 
 
-SUPP_MAT$JACC <- plot_grid(FIG_nmds_main, FIG_nmds_bray, FIG_nmds_intra, FIG_alt_tree_regression, labels = "AUTO")
 
 save(SUPP_MAT, file = "data/Supp_mat.Rdata")
