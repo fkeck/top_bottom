@@ -151,9 +151,9 @@ var.test(dat$BRAY_DIST[dat$ALTITUDE < alt_split], dat$BRAY_DIST[dat$ALTITUDE > a
 FIG_alt_tree_regression <- dat %>%
   ggplot() +
   geom_rect(aes(xmin = 0, xmax = alt_split,
-                ymin = bray_split$CI_BRAY_INF[2], ymax = bray_split$CI_BRAY_SUP[2]), fill = "grey") +
+                ymin = bray_split$CI_BRAY_INF[2], ymax = bray_split$CI_BRAY_SUP[2]), fill = "grey80") +
   geom_rect(aes(xmin = alt_split, xmax = max(dat$ALTITUDE),
-                ymin = bray_split$CI_BRAY_INF[1], ymax = bray_split$CI_BRAY_SUP[1]), fill = "grey") +
+                ymin = bray_split$CI_BRAY_INF[1], ymax = bray_split$CI_BRAY_SUP[1]), fill = "grey80") +
   geom_point(aes(ALTITUDE, BRAY_DIST)) +
   geom_segment(aes(x = 0, y = bray_split[2, "mean_BRAY", drop = TRUE],
                    xend = alt_split, yend = bray_split[2, "mean_BRAY", drop = TRUE]), size = 1) +
@@ -212,8 +212,8 @@ sed_basics_plots$combined_plots <-
                    labels = c("A", "B", "C"), ncol = 3, nrow = 1)
 
  
-ggsave("figures/print/FIG_sediments.pdf", sed_basics_plots$combined_plots,
-       device = "pdf", width = 8.7, height = 8.7, units = "cm", scale = 1)
+# ggsave("figures/print/FIG_sediments.pdf", sed_basics_plots$combined_plots,
+#        device = "pdf", width = 8.7, height = 8.7, units = "cm", scale = 1)
 
 
 sed_basics_plots$combined_plots

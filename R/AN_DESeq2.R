@@ -26,16 +26,17 @@ deseq_TB_AOV1 <- deseq_TB_AOV1 %>%
   results %>%
       mutate(Wald_test = ifelse(padj < 0.05, "Significant", "Non-significant")) %>% 
       ggplot() +
-      geom_hline(yintercept = 0) +
       geom_col(aes(fct_reorder(Taxa, log2FoldChange), log2FoldChange, fill = Wald_test)) +
       geom_linerange(aes(x = fct_reorder(Taxa, log2FoldChange),
                          ymin = log2FoldChange + lfcSE,
                          ymax = log2FoldChange - lfcSE)) +
+      geom_hline(yintercept = 0) +
       xlab("") + ylab("Past-Recent Log2 Fold Change") + labs(title = INVENTORY) +
-      theme(legend.position = "none") +
       scale_fill_manual(values = c("Significant" = "grey30", "Non-significant" = "grey")) +
       coord_flip() +
-      theme_bw()
+      theme_bw() +
+      theme(legend.position = "none",
+            axis.title = element_text(size = 10))
   }))
 
 
