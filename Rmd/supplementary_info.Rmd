@@ -185,9 +185,9 @@ grid::grid.draw(gp)
 
 \pagebreak
 ```{r, fig.height = 6}
-plot_grid(SUPP_MAT$JACC$FIG_nmds_main, SUPP_MAT$JACC$FIG_nmds_bray,
-          SUPP_MAT$JACC$FIG_nmds_intra,SUPP_MAT$JACC$ FIG_alt_tree_regression,
-          labels = "AUTO")
+
+SUPP_MAT$JACC$FIG_COMB
+
 ```
 
 
@@ -198,9 +198,7 @@ plot_grid(SUPP_MAT$JACC$FIG_nmds_main, SUPP_MAT$JACC$FIG_nmds_bray,
 \pagebreak
 ```{r, fig.height = 6}
 
-plot_grid(SUPP_MAT$TAXO$FIG_nmds_main, SUPP_MAT$TAXO$FIG_nmds_bray,
-          SUPP_MAT$TAXO$FIG_nmds_intra,SUPP_MAT$TAXO$ FIG_alt_tree_regression,
-          labels = "AUTO")
+SUPP_MAT$TAXO$FIG_COMB
 
 ```
 

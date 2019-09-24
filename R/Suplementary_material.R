@@ -62,7 +62,9 @@ SUPP_MAT$TAXO$FIG_alt_tree_regression <- dat %>%
   theme_bw()
 
 
-
+SUPP_MAT$TAXO$FIG_COMB <- plot_grid(SUPP_MAT$TAXO$FIG_nmds_main, SUPP_MAT$TAXO$FIG_nmds_bray,
+                                    SUPP_MAT$TAXO$FIG_nmds_intra,SUPP_MAT$TAXO$FIG_alt_tree_regression,
+                                    labels = "AUTO")
 
 
 
@@ -127,6 +129,8 @@ SUPP_MAT$JACC$FIG_alt_tree_regression <- dat %>%
   xlab("Altitude (m)") + ylab("Jaccard dissimilarity") +
   theme_bw()
 
-
+SUPP_MAT$JACC$FIG_COMB <- plot_grid(SUPP_MAT$JACC$FIG_nmds_main, SUPP_MAT$JACC$FIG_nmds_bray,
+                                    SUPP_MAT$JACC$FIG_nmds_intra,SUPP_MAT$JACC$FIG_alt_tree_regression,
+                                    labels = "AUTO")
 
 save(SUPP_MAT, file = "data/Supp_mat.Rdata")
