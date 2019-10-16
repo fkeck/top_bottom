@@ -8,6 +8,10 @@ library(rpart)
 library(DESeq2)
 library(flexitarian)
 
+# nest API was broken with tibble v 1.0. Run the following if >= 1.0
+nest <- nest_legacy
+unnest <- unnest_legacy
+
 setwd("/home/francois/Google Drive/Sync work/projects/top_bottom/")
 
 lakes_meta <- read_csv("data/Lakes_meta.csv") %>% 
