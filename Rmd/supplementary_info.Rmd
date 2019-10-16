@@ -27,47 +27,27 @@ ins_fig <- function(){
 Heading
 Subhead. Type or paste text here. You may break this section up into subheads as needed (e.g., one section on “Materials” and one on “Methods”).
 
-\pagebreak
-```{r, message = FALSE}
-lakes_kml <- lakes_kml[lakes_kml$Name %in% otu_merge_tbl$LAC, ]
-
-lakes_tab <-
-  tibble(LAC = lakes_kml$Name,
-         LON = sp::coordinates(lakes_kml)[, 1],
-         LAT = sp::coordinates(lakes_kml)[, 2]) %>% 
-  left_join(select(lakes_bv, LAC, ALTITUDE, DEPTH_MAX)) %>% 
-  left_join(select(lakes_meta, LAC, LAC_CODE) %>% distinct()) %>% 
-  left_join(lakes_troph) %>% 
-  select(LAC_CODE, everything()) %>% 
-  arrange(LAC) %>% 
-  set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth (max)", "Trophic status"))
-
-knitr::kable(lakes_tab, digits = 3)
-
-```
-
-**`r ins_tab()`** List of the lakes included in the study with their three-letter code, geographic coordinates (decimal degrees; WGS84), altitude (meters) and maximum depth (meters). ADD TROPHIC !!!!!!!
 
 
-\pagebreak
-```{r, message = FALSE}
-lakes_tab %>% 
-  ggplot(aes(x = Altitude, fill = `Trophic status`)) +
-    geom_histogram(position = 'stack', binwidth = 500) +
-    scale_fill_manual(values = c("Eutrophic" = "#006D2C",
-                                 "Meso-eutrophic" = "#2CA25F",
-                                 "Mesotrophic" = "#66C2A4",
-                                 "Oligo-mesotrophic" = "#99D8C9",
-                                 "Oligotrophic" = "#CCECE6",
-                                 "Unknown" = "grey70")) +
-  labs(fill = "Trophic status") + xlab("Altitude (m)") + ylab("Count") +
-  theme_bw()
-  
-
-```
+<!-- \pagebreak -->
+<!-- ```{r, message = FALSE} -->
+<!-- lakes_tab %>%  -->
+<!--   ggplot(aes(x = Altitude, fill = `Trophic status`)) + -->
+<!--     geom_histogram(position = 'stack', binwidth = 500) + -->
+<!--     scale_fill_manual(values = c("Eutrophic" = "#006D2C", -->
+<!--                                  "Meso-eutrophic" = "#2CA25F", -->
+<!--                                  "Mesotrophic" = "#66C2A4", -->
+<!--                                  "Oligo-mesotrophic" = "#99D8C9", -->
+<!--                                  "Oligotrophic" = "#CCECE6", -->
+<!--                                  "Unknown" = "grey70")) + -->
+<!--   labs(fill = "Trophic status") + xlab("Altitude (m)") + ylab("Count") + -->
+<!--   theme_bw() -->
 
 
-**`r ins_tab()`** Distribution of lake elevation and trophic status.
+<!-- ``` -->
+
+
+<!-- SKIPED NUM Distribution of lake elevation and trophic status. -->
 
 
 \pagebreak
@@ -76,46 +56,6 @@ lakes_tab %>%
 
 **`r ins_fig()`** Tracking of the number of DNA reads and OTUs during the filtering and data pre-processing steps.
 
-
-
-\pagebreak
-```{r, fig.height = 8}
-t <- otu_tbl_replicates %>% 
-  filter(!LAC %in% c("Léman", "Bourget")) %>% 
-  mutate(ID_SAMPLE = str_c(LAC_CODE, POSITION, REPLICATE, sep = "_")) %>% 
-  spread_cdm(ID_SAMPLE, OTU_ID, OTU_COUNT) %>% 
-  vegdist(method = "bray") %>% 
-  hclust() %>% 
-  ape::as.phylo.hclust()
-t2 <- phytools::splitTree(t, list(node = 188, bp = 0))
-par(mfrow = c(1, 2))
-ape::plot.phylo(ape::drop.tip(t, t2[[1]]$tip.label), cex = 0.5, no.margin = TRUE)
-ape::plot.phylo(ape::drop.tip(t, t2[[2]]$tip.label), cex = 0.5, no.margin = TRUE)
-par(mfrow = c(1, 1))
-```
-
-**`r ins_fig()`** Hierarchical clustering of the OTU matrix (Bray Curtis dissimilarity) including the technical replicates. The code of each sample corresponds to the combination of the lake (three-letter code; see Supplementary Table S1), stratum (Top or Bottom) and replicate number (1 or 2). Lakes Bourget and Léman are not represented as they have only one replicate. For better readability, the tree has been divided in two parts.
-
-
-\pagebreak
-```{r, fig.height = 7}
-
-prow <- plot_grid(frac_taxa_temp$plots[[1]] +
-            theme(legend.position = "none"),
-          frac_taxa_temp$plots[[2]] +
-            theme(legend.position = "none") +
-            xlab(""),
-          labels = "AUTO")
-legend <- get_legend(
-  frac_taxa_temp$plots[[1]] +
-    guides(color = guide_legend(nrow = 1)) +
-    theme(legend.position = "bottom",
-          legend.title = element_blank())
-)
-plot_grid(prow, legend, ncol = 1, rel_heights = c(1, .1))
-```
-
-**`r ins_fig()`**  Proportion of OTUs (*A*) and taxonomic groups (*B*) specific to the bottom (Bottom only) and top (Top only) strata, or common to both strata (Intersection). The total number of OTUs or taxa is given for each lake in parenthesis.
 
 \pagebreak
 ```{r, fig.height = 8}
@@ -183,6 +123,29 @@ grid::grid.draw(gp)
 
 
 
+
+\pagebreak
+```{r, fig.height = 7}
+
+prow <- plot_grid(frac_taxa_temp$plots[[1]] +
+            theme(legend.position = "none"),
+          frac_taxa_temp$plots[[2]] +
+            theme(legend.position = "none") +
+            xlab(""),
+          labels = "AUTO")
+legend <- get_legend(
+  frac_taxa_temp$plots[[1]] +
+    guides(color = guide_legend(nrow = 1)) +
+    theme(legend.position = "bottom",
+          legend.title = element_blank())
+)
+plot_grid(prow, legend, ncol = 1, rel_heights = c(1, .1))
+```
+
+**`r ins_fig()`**  Proportion of OTUs (*A*) and taxonomic groups (*B*) specific to the bottom (Bottom only) and top (Top only) strata, or common to both strata (Intersection). The total number of OTUs or taxa is given for each lake in parenthesis.
+
+
+
 \pagebreak
 ```{r, fig.height = 6}
 
@@ -194,17 +157,50 @@ SUPP_MAT$JACC$FIG_COMB
 **`r ins_fig()`** Community analyses reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the ‘top’ (blue triangles) and ‘bottom’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘top’ and ‘bottom’ samples taken within the same lake. (*B*) Distribution of Jaccard index values computed for each lake between ‘top’ and ‘bottom’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘top’ (blue) and ‘bottom’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Jaccard index) between the ‘top’ and ‘bottom’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means.
 
 
+<!-- \pagebreak -->
+<!-- ```{r, fig.height = 6} -->
+
+<!-- SUPP_MAT$TAXO$FIG_COMB -->
+
+<!-- ``` -->
+
+<!-- SKIPED NUM Community analyses reproduced with the taxonomy table. (*A*) NMDS of community compositions of the ‘top’ (blue triangles) and ‘bottom’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘top’ and ‘bottom’ samples taken within the same lake. (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘top’ and ‘bottom’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘top’ (blue) and ‘bottom’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘top’ and ‘bottom’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means. -->
+
+
+
+\pagebreak
+```{r, fig.height = 8}
+t <- otu_tbl_replicates %>% 
+  filter(!LAC %in% c("Léman", "Bourget")) %>% 
+  mutate(ID_SAMPLE = str_c(LAC_CODE, POSITION, REPLICATE, sep = "_")) %>% 
+  spread_cdm(ID_SAMPLE, OTU_ID, OTU_COUNT) %>% 
+  vegdist(method = "bray") %>% 
+  hclust() %>% 
+  ape::as.phylo.hclust()
+t2 <- phytools::splitTree(t, list(node = 188, bp = 0))
+par(mfrow = c(1, 2))
+ape::plot.phylo(ape::drop.tip(t, t2[[1]]$tip.label), cex = 0.5, no.margin = TRUE)
+ape::plot.phylo(ape::drop.tip(t, t2[[2]]$tip.label), cex = 0.5, no.margin = TRUE)
+par(mfrow = c(1, 1))
+```
+
+**`r ins_fig()`** Hierarchical clustering of the OTU matrix (Bray Curtis dissimilarity) including the technical replicates. The code of each sample corresponds to the combination of the lake (three-letter code; see Supplementary Table S1), stratum (Top or Bottom) and replicate number (1 or 2). Lakes Bourget and Léman are not represented as they have only one replicate. For better readability, the tree has been divided in two parts.
+
+
+
+<!-- TABLE SECTION STARTS HERE -->
+
 
 \pagebreak
 ```{r, fig.height = 6}
-
-SUPP_MAT$TAXO$FIG_COMB
-
+deseq_TB_AOV1 %>% 
+  filter(INVENTORY == "Trophic Type") %>% .$results %>% .[[1]] %>%
+  mutate(Taxa = str_replace(Taxa, "<NA>", "Unclassified (NA)")) %>% 
+  knitr::kable(digits = 3)
 ```
 
 
-**`r ins_fig()`** Community analyses reproduced with the taxonomy table. (*A*) NMDS of community compositions of the ‘top’ (blue triangles) and ‘bottom’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘top’ and ‘bottom’ samples taken within the same lake. (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘top’ and ‘bottom’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘top’ (blue) and ‘bottom’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘top’ and ‘bottom’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means.
-
+**`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated by trophic groups. For each group, column *baseMean* indicates the average of the normalized count values, dividing by size factors, *lfcSE* is the standard error of the *log2FoldChange*, column *stat* is the Wald statistic, *pvalue* is the raw p-value and *padj* is the p-value corrected with the Benjamini & Hochberg method.
 
 
 
@@ -221,15 +217,28 @@ deseq_TB_AOV1 %>%
 
 
 \pagebreak
-```{r, fig.height = 6}
-deseq_TB_AOV1 %>% 
-  filter(INVENTORY == "Trophic Type") %>% .$results %>% .[[1]] %>%
-  mutate(Taxa = str_replace(Taxa, "<NA>", "Unclassified (NA)")) %>% 
-  knitr::kable(digits = 3)
+```{r, message = FALSE}
+lakes_kml <- lakes_kml[lakes_kml$Name %in% otu_merge_tbl$LAC, ]
+
+lakes_tab <-
+  tibble(LAC = lakes_kml$Name,
+         LON = sp::coordinates(lakes_kml)[, 1],
+         LAT = sp::coordinates(lakes_kml)[, 2]) %>% 
+  left_join(select(lakes_bv, LAC, ALTITUDE, DEPTH_MAX)) %>% 
+  left_join(select(lakes_meta, LAC, LAC_CODE) %>% distinct()) %>% 
+  left_join(lakes_troph) %>% 
+  select(LAC_CODE, everything()) %>% 
+  arrange(ALTITUDE) %>% 
+  set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth (max)", "Trophic status"))
+
+knitr::kable(lakes_tab, digits = 3)
+
 ```
 
+**`r ins_tab()`** List of the lakes included in the study with their three-letter code, geographic coordinates (decimal degrees; WGS84), altitude (meters) and maximum depth (meters). ADD TROPHIC !!!!!!!
 
-**`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated by trophic groups. For each group, column *baseMean* indicates the average of the normalized count values, dividing by size factors, *lfcSE* is the standard error of the *log2FoldChange*, column *stat* is the Wald statistic, *pvalue* is the raw p-value and *padj* is the p-value corrected with the Benjamini & Hochberg method.
+
+
 
 
 <insert page break here>
@@ -242,27 +251,4 @@ deseq_TB_AOV1 %>%
 
 ## References
 
-\pagebreak
-
-## EXTRA SUPPLEMENT: pour mémoire si besoin
-
-```{r, fig.height = 7.5}
-deseq_TB_AOV1 %>% 
-  filter(INVENTORY == "Taxonomie Rank 3") %>% .$barplots %>% .[[1]]
-```
-
-
-**`r ins_fig()`** Results of the DESeq2 analysis conducted on data aggregated at the third taxonomy rank of Adl et al. (2019).
-
-
-\pagebreak
-```{r, fig.height = 6}
-deseq_TB_AOV1 %>% 
-  filter(INVENTORY == "Taxonomie Rank 3") %>% .$results %>% .[[1]] %>%
-  mutate(Taxa = str_replace(Taxa, "<NA>", "Unclassified (NA)")) %>% 
-  knitr::kable(digits = 3)
-```
-
-
-**`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated at the 3rd taxonomy rank of Adl et al. (2019). For each taxa, column *baseMean* indicates the average of the normalized count values, dividing by size factors, *lfcSE* is the standard error of the *log2FoldChange*, column *stat* is the Wald statistic, *pvalue* is the raw p-value and *padj* is the p-value corrected with the Benjamini & Hochberg method.
 
