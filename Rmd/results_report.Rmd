@@ -217,5 +217,9 @@ sed_basics_plots$combined_plots <-
 
 
 sed_basics_plots$combined_plots
+
+sed_basics_tests$Corg
+sed_basics_tests$PIG
+sed_basics_tests$DNA
 ```
 
