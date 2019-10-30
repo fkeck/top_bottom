@@ -157,14 +157,14 @@ SUPP_MAT$JACC$FIG_COMB
 **`r ins_fig()`** Community analyses reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the ‘top’ (blue triangles) and ‘bottom’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘top’ and ‘bottom’ samples taken within the same lake. (*B*) Distribution of Jaccard index values computed for each lake between ‘top’ and ‘bottom’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘top’ (blue) and ‘bottom’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Jaccard index) between the ‘top’ and ‘bottom’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means.
 
 
-<!-- \pagebreak -->
-<!-- ```{r, fig.height = 6} -->
+\pagebreak
+```{r, fig.height = 6}
 
-<!-- SUPP_MAT$TAXO$FIG_COMB -->
+SUPP_MAT$TAXO$FIG_COMB
 
-<!-- ``` -->
+```
 
-<!-- SKIPED NUM Community analyses reproduced with the taxonomy table. (*A*) NMDS of community compositions of the ‘top’ (blue triangles) and ‘bottom’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘top’ and ‘bottom’ samples taken within the same lake. (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘top’ and ‘bottom’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘top’ (blue) and ‘bottom’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘top’ and ‘bottom’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means. -->
+**`r ins_fig()`** Community analyses reproduced with the taxonomy table. (*A*) NMDS of community compositions of the ‘top’ (blue triangles) and ‘bottom’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘top’ and ‘bottom’ samples taken within the same lake. (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘top’ and ‘bottom’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘top’ (blue) and ‘bottom’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘top’ and ‘bottom’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means.
 
 
 
@@ -189,6 +189,27 @@ par(mfrow = c(1, 1))
 
 
 <!-- TABLE SECTION STARTS HERE -->
+
+\pagebreak
+```{r, message = FALSE}
+lakes_kml <- lakes_kml[lakes_kml$Name %in% otu_merge_tbl$LAC, ]
+
+lakes_tab <-
+  tibble(LAC = lakes_kml$Name,
+         LON = sp::coordinates(lakes_kml)[, 1],
+         LAT = sp::coordinates(lakes_kml)[, 2]) %>% 
+  left_join(select(lakes_bv, LAC, ALTITUDE, DEPTH_MAX)) %>% 
+  left_join(select(lakes_meta, LAC, LAC_CODE) %>% distinct()) %>% 
+  left_join(lakes_troph) %>% 
+  select(LAC_CODE, everything()) %>% 
+  arrange(ALTITUDE) %>% 
+  set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth (max)", "Trophic status"))
+
+knitr::kable(lakes_tab, digits = 3)
+
+```
+
+**`r ins_tab()`** List of the lakes included in the study with their three-letter code, geographic coordinates (decimal degrees; WGS84), altitude (meters) and maximum depth (meters). ADD TROPHIC !!!!!!!
 
 
 \pagebreak
@@ -216,31 +237,10 @@ deseq_TB_AOV1 %>%
 **`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated at the 2nd taxonomy rank of Adl et al. (2019). For each taxa, column *baseMean* indicates the average of the normalized count values, dividing by size factors, *lfcSE* is the standard error of the *log2FoldChange*, column *stat* is the Wald statistic, *pvalue* is the raw p-value and *padj* is the p-value corrected with the Benjamini & Hochberg method.
 
 
+
+
+
 \pagebreak
-```{r, message = FALSE}
-lakes_kml <- lakes_kml[lakes_kml$Name %in% otu_merge_tbl$LAC, ]
-
-lakes_tab <-
-  tibble(LAC = lakes_kml$Name,
-         LON = sp::coordinates(lakes_kml)[, 1],
-         LAT = sp::coordinates(lakes_kml)[, 2]) %>% 
-  left_join(select(lakes_bv, LAC, ALTITUDE, DEPTH_MAX)) %>% 
-  left_join(select(lakes_meta, LAC, LAC_CODE) %>% distinct()) %>% 
-  left_join(lakes_troph) %>% 
-  select(LAC_CODE, everything()) %>% 
-  arrange(ALTITUDE) %>% 
-  set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth (max)", "Trophic status"))
-
-knitr::kable(lakes_tab, digits = 3)
-
-```
-
-**`r ins_tab()`** List of the lakes included in the study with their three-letter code, geographic coordinates (decimal degrees; WGS84), altitude (meters) and maximum depth (meters). ADD TROPHIC !!!!!!!
-
-
-
-
-
 <insert page break here>
 **`r ins_tab()`** Type or paste table title here. Paste table below the title.
 
