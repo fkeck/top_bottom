@@ -6,8 +6,9 @@ This repository provides R code and data to reproduce results and figures from t
 
 ## Analyses
 
-All the analyses can be ran from the master script `RUN_Main.R`.
-A report of the main results and figures can be generated from `results_report.Rmd`. Supplementary materials can be generated from ...
+Scripts can be found in the `/R` directory. They are organized in separated modules but all the analyses can be ran from the master script `RUN_Main.R`.
+Once the analyses are completed, a report of the main results and figures can be generated from `Rmd/results_report.Rmd`.
+Supplementary materials can be generated from `Rmd/supplementary_info.Rmd`.
 
 ## Dependencies
 
