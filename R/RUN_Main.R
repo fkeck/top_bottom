@@ -22,6 +22,13 @@ browseURL("results/results_report.html")
 rmarkdown::render("Rmd/supplementary_info.Rmd", output_dir = "results", output_file = "supplementary_info.pdf")
 browseURL("results/supplementary_info.pdf")
 
+# Supplementary Dataset
+tibble(OTU_ID = com_rar_list$data[[1]]$TAXON %>% unique()) %>% 
+  left_join(otu_meta) %>% 
+  select(OTU_ID, DNA_SEQ, starts_with("ADL_"), TROPHIC_MODE, TROPHIC_TYPE) %>% 
+  write_csv("results/SI_otu_meta.csv")
+
+
 
 # save.image("results/main_results.RData")
 # load("results/main_results.RData")
