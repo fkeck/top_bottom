@@ -3,7 +3,6 @@ title: "Supplementary Information"
 output:
   pdf_document:
     fig_caption: false
-
 ---
 
 ```{r setup, include=FALSE}
@@ -20,6 +19,22 @@ ins_fig <- function(){
   .GlobalEnv$fig_num <- .GlobalEnv$fig_num + 1
   paste0("Figure S", .GlobalEnv$fig_num, ".")
 }
+library(kableExtra)
+usepackage_latex("booktabs")
+usepackage_latex("longtable")
+usepackage_latex("array")
+usepackage_latex("multirow")
+usepackage_latex("xcolor", "table")
+usepackage_latex("wrapfig")
+usepackage_latex("float")
+usepackage_latex("colortbl")
+usepackage_latex("pdflscape")
+usepackage_latex("tabu")
+usepackage_latex("threeparttable")
+usepackage_latex("threeparttablex")
+usepackage_latex("ulem", "normalem")
+usepackage_latex("makecell")
+
 ```
 
 
@@ -166,6 +181,16 @@ SUPP_MAT$TAXO$FIG_COMB
 
 **`r ins_fig()`** Community analyses reproduced with the taxonomy table. (*A*) NMDS of community compositions of the ‘top’ (blue triangles) and ‘bottom’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘top’ and ‘bottom’ samples taken within the same lake. (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘top’ and ‘bottom’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘top’ (blue) and ‘bottom’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘top’ and ‘bottom’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means.
 
+\pagebreak
+```{r, fig.height = 8}
+deseq_TB_AOV1 %>%
+  filter(INVENTORY == "Taxonomie Rank 3") %>%
+  .$barplots %>% .[[1]] +
+  theme(plot.title = element_blank())
+```
+
+**`r ins_fig()`** Magnitude of change (expressed in log2 fold change) in data aggregated at the 3^rd^ taxonomy rank of Adl et al. (2019) between the past and recent strata, as estimated by the DESeq2 analysis (Love et al. 2014). Dark bars represent groups for which the change was found significant (corrected p-value < 0.05). Horizontal lines show the standard error.
+
 
 
 \pagebreak
@@ -201,11 +226,17 @@ lakes_tab <-
   left_join(select(lakes_bv, LAC, ALTITUDE, DEPTH_MAX)) %>% 
   left_join(select(lakes_meta, LAC, LAC_CODE) %>% distinct()) %>% 
   left_join(lakes_troph) %>% 
+  left_join(read_csv("../data/lakes_coring.csv", na = character()), by = c("LAC_CODE" = "Code")) %>% 
+  mutate(Radionucleides = str_replace(Radionucleides, "137Cs", "$^{137}$Cs"),
+         Radionucleides = str_replace(Radionucleides, "210Pb", "$^{210}$Pb")) %>% 
   select(LAC_CODE, everything()) %>% 
   arrange(ALTITUDE) %>% 
-  set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth (max)", "Trophic status"))
+  set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth\n(max)",
+              "Trophic status", "Coring\nyear", "XrF", "$^{14}$C", "Radionuclides"))
 
-knitr::kable(lakes_tab, digits = 3)
+kableExtra::kable(lakes_tab, "latex", digits = 3, booktabs = TRUE, linesep = "", escape = FALSE,
+                  col.names = linebreak(colnames(lakes_tab), align = "c")) %>% 
+  kable_styling(latex_options = c("scale_down"))
 
 ```
 
@@ -216,37 +247,49 @@ knitr::kable(lakes_tab, digits = 3)
 ```{r, fig.height = 6}
 deseq_TB_AOV1 %>% 
   filter(INVENTORY == "Trophic Type") %>% .$results %>% .[[1]] %>%
-  mutate(Taxa = str_replace(Taxa, "<NA>", "Unclassified (NA)")) %>% 
-  knitr::kable(digits = 3)
+  mutate(Taxa = str_replace(Taxa, "<NA>", "Unclassified (NA)")) %>%
+  select(-lfcSE, -pvalue) %>% 
+  knitr::kable("latex", digits = 3, booktabs = TRUE, linesep = "", escape = FALSE,
+               col.names = linebreak(c("Trophic Group", "Base Mean",
+                                       "log2 Fold Change", "Stat", "Padj"), align = "c")) %>% 
+  kable_styling(position = "center")
 ```
 
 
-**`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated by trophic groups. For each group, column *baseMean* indicates the average of the normalized count values, dividing by size factors, *lfcSE* is the standard error of the *log2FoldChange*, column *stat* is the Wald statistic, *pvalue* is the raw p-value and *padj* is the p-value corrected with the Benjamini & Hochberg method.
+**`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated by trophic groups. For each group, column *Base Mean* indicates the average of the normalized count values, dividing by size factors, *log2 Fold Change* is the magnitude of change between the past and recent strata, column *stat* is the Wald statistic and *padj* the p-value of the test corrected with the Benjamini & Hochberg method.
 
 
 
 \pagebreak
 ```{r, fig.height = 6}
 deseq_TB_AOV1 %>% 
-  filter(INVENTORY == "Taxonomie Rank 2") %>% .$results %>% .[[1]] %>%
-  mutate(Taxa = str_replace(Taxa, "<NA>", "Unclassified (NA)")) %>% 
-  knitr::kable(digits = 3)
+  filter(INVENTORY == "Taxonomie Rank 3") %>% .$results %>% .[[1]] %>%
+  left_join(select(otu_taxo_adl_conv, ADL_RANK_1, ADL_RANK_2, ADL_RANK_3), by = c("Taxa" = "ADL_RANK_3")) %>% 
+  filter(!duplicated(Taxa)) %>% 
+  select(Rank_1 = ADL_RANK_1, Rank_2 = ADL_RANK_2, Rank_3 = Taxa, baseMean, log2FoldChange, stat, padj) %>% 
+  arrange(Rank_1, Rank_2, Rank_3) %>% 
+  mutate(Rank_1 = ifelse(is.na(Rank_1), "Unclassified", Rank_1),
+         Rank_2 = ifelse(is.na(Rank_2), "Unclassified", Rank_2)) %>% 
+  mutate(Rank_1 = ifelse(!duplicated(Rank_1), Rank_1, ""),
+         Rank_2 = ifelse(!duplicated(Rank_2), Rank_2, "")) %>% 
+  knitr::kable("latex", digits = 3, booktabs = TRUE, linesep = "", escape = FALSE, longtable = TRUE,
+               col.names = linebreak(c("Rank 1", "Rank 2", "Rank 3", "Base Mean",
+                                       "log2 Fold\nChange", "Stat", "Padj"), align = "c")) %>% 
+  add_header_above(c("Taxonmic rank (Adl et al. 2019)" = 3, " " = 4)) %>% 
+  kable_styling(latex_options =c("repeat_header"))
+
 ```
 
 
-**`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated at the 2nd taxonomy rank of Adl et al. (2019). For each taxa, column *baseMean* indicates the average of the normalized count values, dividing by size factors, *lfcSE* is the standard error of the *log2FoldChange*, column *stat* is the Wald statistic, *pvalue* is the raw p-value and *padj* is the p-value corrected with the Benjamini & Hochberg method.
+**`r ins_tab()`** Detailed results of the DESeq2 analysis conducted on data aggregated at the 3^rd^ taxonomy rank of Adl et al. (2019). Ranks 1 and 2 are given for guidance. For each taxa, column *Base Mean* indicates the average of the normalized count values, dividing by size factors, *log2 Fold Change* is the magnitude of change between the past and recent strata, column *stat* is the Wald statistic and *padj* the p-value of the test corrected with the Benjamini & Hochberg method.
 
 
 
 
 
 \pagebreak
-<insert page break here>
-**`r ins_tab()`** Type or paste table title here. Paste table below the title.
 
-<insert page break here>
-
-**Dataset S1** (separate file).Type or paste legend here.  
+**Dataset S1** Complete list of OTUs used in the analyses with their DNA sequence, their taxonomic classification and their trophic classification.
 
 
 ## References
