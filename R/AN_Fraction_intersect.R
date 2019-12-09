@@ -118,3 +118,34 @@ OTU_Top_only <- OTU_Top %>%
 #   unnest(zz) %>% 
 #   gather(key = "Position", value = "Taxa", -LAC) %>% 
 #   write_csv2("Taxon_TB_only.csv")
+
+section_dat <- bind_rows(
+  tibble(
+    TAXON = intersect(OTU_Top %>% .$TAXON %>% unique(), OTU_Bottom %>% .$TAXON %>% unique()),
+    SECTION = "Intersect"),
+  tibble(
+    TAXON = setdiff(OTU_Top %>% .$TAXON %>% unique(), OTU_Bottom %>% .$TAXON %>% unique()),
+    SECTION = "Top only"),
+  tibble(
+    TAXON = setdiff(OTU_Bottom %>% .$TAXON %>% unique(), OTU_Top %>% .$TAXON %>% unique()),
+    SECTION = "Bottom only")
+)
+
+com_merged_raw_list %>% 
+  filter(INVENTORY == "OTU") %>% 
+  .$data %>% .[[1]] %>% 
+  left_join(section_dat) %>% 
+  left_join(otu_meta, by = c("TAXON" = "OTU_ID")) %>% 
+  group_by(ADL_RANK_2, SECTION) %>% 
+  summarise(sum = sum(COUNT)) %>% 
+  left_join(read_csv("data/Ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
+  ggplot() +
+  geom_col(aes(factor(ADL_RANK_2, levels = rev(levels(factor(ADL_RANK_2)))), sum, fill = SECTION),
+           position = "fill") +
+  #geom_text(data = summarise(group_by(fractions, LAC), TOT = sum(N)),
+  #          aes(factor(LAC, levels = rev(levels(factor(LAC)))), 0, label = TOT, hjust = 1), nudge_y = 0.01) +
+  coord_flip() +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_discrete(name = "Fraction", labels = c("Past (bottom) only ", "Intersection ", "Recent (top) only ")) +
+  theme_minimal() +
+  ylab("Relative proportion (OTUs)") + xlab("Taxa")
