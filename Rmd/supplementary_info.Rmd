@@ -104,16 +104,16 @@ p <- tax_rich_dat %>%
   summarise(REL_RICHNESS_MEAN = mean(REL_RICHNESS),
             REL_RICHNESS_SD = sd(REL_RICHNESS)) %>% 
   left_join(read_csv("../data/Ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
-  group_by(GRP2) %>% 
+  group_by(RANK1) %>% 
   mutate(GRP2_REL_RICHNESS_SUM = sum(REL_RICHNESS_MEAN, na.rm = TRUE)) %>%
   ungroup() %>% 
   mutate(ADL_RANK_2 = fct_explicit_na(ADL_RANK_2, "Unclassified"),
-         GRP2 = fct_explicit_na(GRP2, "Unclassified")) %>% 
+         RANK1 = fct_explicit_na(RANK1, "Unclassified")) %>% 
   ggplot() +
   geom_col(aes(fct_reorder(ADL_RANK_2, REL_RICHNESS_MEAN),
                REL_RICHNESS_MEAN, fill = POSITION),
            position = "dodge2") +
-  facet_wrap(~ fct_reorder(GRP2, GRP2_REL_RICHNESS_SUM, .desc = TRUE),
+  facet_wrap(~ fct_reorder(RANK1, GRP2_REL_RICHNESS_SUM, .desc = TRUE),
              scales = "free_y", ncol = 1, strip.position = "left") +
   geom_linerange(aes(x = fct_reorder(ADL_RANK_2, REL_RICHNESS_MEAN),
                          ymin = REL_RICHNESS_MEAN + REL_RICHNESS_SD,
@@ -134,30 +134,30 @@ gp$heights[f_row] <- gp$heights[f_row] * x_var
 grid::grid.draw(gp)
 ```
 
-**`r ins_fig()`**  Mean relative richness (number of distinct OTUs) for each taxa computed for the bottom and the top rarefied samples across all lakes. Horizontal lines show the standard error.
+**`r ins_fig()`**  Mean relative richness (number of distinct OTUs) for each taxa (2^nd^ rank of the classification of Adl et al. 2019) computed for the bottom and the top rarefied samples across all lakes. Horizontal lines show the standard error. The superior rank of each taxa is given in the grey margin for guidance.
 
 
 
 
-\pagebreak
-```{r, fig.height = 7}
+<!-- \pagebreak -->
+<!-- ```{r, fig.height = 7} -->
 
-prow <- plot_grid(frac_taxa_temp$plots[[1]] +
-            theme(legend.position = "none"),
-          frac_taxa_temp$plots[[2]] +
-            theme(legend.position = "none") +
-            xlab(""),
-          labels = "AUTO")
-legend <- get_legend(
-  frac_taxa_temp$plots[[1]] +
-    guides(color = guide_legend(nrow = 1)) +
-    theme(legend.position = "bottom",
-          legend.title = element_blank())
-)
-plot_grid(prow, legend, ncol = 1, rel_heights = c(1, .1))
-```
+<!-- prow <- plot_grid(frac_taxa_temp$plots[[1]] + -->
+<!--             theme(legend.position = "none"), -->
+<!--           frac_taxa_temp$plots[[2]] + -->
+<!--             theme(legend.position = "none") + -->
+<!--             xlab(""), -->
+<!--           labels = "AUTO") -->
+<!-- legend <- get_legend( -->
+<!--   frac_taxa_temp$plots[[1]] + -->
+<!--     guides(color = guide_legend(nrow = 1)) + -->
+<!--     theme(legend.position = "bottom", -->
+<!--           legend.title = element_blank()) -->
+<!-- ) -->
+<!-- plot_grid(prow, legend, ncol = 1, rel_heights = c(1, .1)) -->
+<!-- ``` -->
 
-**`r ins_fig()`**  Proportion of OTUs (*A*) and taxonomic groups (*B*) specific to the bottom (Bottom only) and top (Top only) strata, or common to both strata (Intersection). The total number of OTUs or taxa is given for each lake in parenthesis.
+<!-- **`r ins_fig()`**  Proportion of OTUs (*A*) and taxonomic groups (*B*) specific to the bottom (Bottom only) and top (Top only) strata, or common to both strata (Intersection). The total number of OTUs or taxa is given for each lake in parenthesis. -->
 
 
 
@@ -219,24 +219,24 @@ par(mfrow = c(1, 1))
 ```{r, message = FALSE}
 lakes_kml <- lakes_kml[lakes_kml$Name %in% otu_merge_tbl$LAC, ]
 
-lakes_tab <-
-  tibble(LAC = lakes_kml$Name,
-         LON = sp::coordinates(lakes_kml)[, 1],
-         LAT = sp::coordinates(lakes_kml)[, 2]) %>% 
-  left_join(select(lakes_bv, LAC, ALTITUDE, DEPTH_MAX)) %>% 
-  left_join(select(lakes_meta, LAC, LAC_CODE) %>% distinct()) %>% 
-  left_join(lakes_troph) %>% 
-  left_join(read_csv("../data/lakes_coring.csv", na = character()), by = c("LAC_CODE" = "Code")) %>% 
-  mutate(Radionucleides = str_replace(Radionucleides, "137Cs", "$^{137}$Cs"),
-         Radionucleides = str_replace(Radionucleides, "210Pb", "$^{210}$Pb")) %>% 
-  select(LAC_CODE, everything()) %>% 
-  arrange(ALTITUDE) %>% 
+lakes_tab <- read_csv("../data/lakes_coring.csv", na = character()) %>% 
   set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth\n(max)",
-              "Trophic status", "Coring\nyear", "XrF", "$^{14}$C", "Radionuclides"))
+              "Trophic status", "Coring\nyear", "XrF", "$^{14}$C", "Radionuclides", "included_DNA")) %>% 
+  mutate(Radionuclides = str_replace(Radionuclides, "137Cs", "$^{137}$Cs"),
+         Radionuclides = str_replace(Radionuclides, "210Pb", "$^{210}$Pb")) %>% 
+  arrange(included_DNA, Altitude)
+
+not_included_min <- min(which(lakes_tab$included_DNA == 2))
+not_included_max <- max(which(lakes_tab$included_DNA == 2))
+
+lakes_tab <- select(lakes_tab, -included_DNA)
 
 kableExtra::kable(lakes_tab, "latex", digits = 3, booktabs = TRUE, linesep = "", escape = FALSE,
                   col.names = linebreak(colnames(lakes_tab), align = "c")) %>% 
-  kable_styling(latex_options = c("scale_down"))
+  kable_styling(latex_options = c("scale_down")) %>% 
+  pack_rows("Not included for DNA analyses", not_included_min, not_included_max, indent = FALSE, latex_gap_space = "0.5em")
+
+rm(not_included_min, not_included_max)
 
 ```
 
