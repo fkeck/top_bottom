@@ -24,7 +24,9 @@ Number of OTUs in Bottom only: `r general_stats$N_OTU_BOT_ONLY`, `r ((general_st
 
 Number of OTUs in Top only: `r general_stats$N_OTU_TOP_ONLY`, `r ((general_stats$N_OTU_TOP_ONLY/general_stats$N_OTU)*100) %>% round(2)`%
 
-Number OTUs classified taxonomy: `r general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TAX`, `r (((general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TAX) / general_stats$N_OTU)*100) %>% round(2)`%
+Number OTUs classified taxonomy (rank 2): `r general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TAX_2`, `r (((general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TAX_2) / general_stats$N_OTU)*100) %>% round(2)`%
+
+Number OTUs classified taxonomy (rank 3): `r general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TAX_3`, `r (((general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TAX_3) / general_stats$N_OTU)*100) %>% round(2)`%
 
 Number OTUs classified trophic group: `r general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TROPH`, `r (((general_stats$N_OTU - general_stats$N_OTU_UNCLASSIF_TROPH) / general_stats$N_OTU)*100) %>% round(2)`%
 
@@ -94,6 +96,15 @@ FIG_nmds_intra
 
 NMDS Stress: `r nmds_rar_list %>% filter(INVENTORY == "OTU") %>% .$NMDS %>% .[[1]] %>% .$stress`
 
+### Bray Curtis
+```{r}
+com_rar_list$BRAY_DIST[[1]] %>% 
+    filter(LAC_POS_1 != LAC_POS_2, LAC_1 == LAC_2) %>% 
+    .$BRAY_DIST %>% 
+    summary()
+
+```
+
 # PERMANOVA (change in location)
 ```{r}
 dat <- com_rar_list %>% 
@@ -104,7 +115,7 @@ dat <- com_rar_list %>%
 cond <- ifelse(str_detect(rownames(dat), "_Bottom$"), "Bottom", "Top")
 blocks <- gsub("_Top|_Bottom", "", rownames(dat))
 
-adonis_blocks(dat, cond, permutation = 1, method = "bray", blocks = blocks)
+adonis_blocks(dat, cond, permutation = 1, method = "bray", blocks = blocks) # CHANGE NPERM TO 1000 FOR FINAL ANALYSIS
 
 ```
 

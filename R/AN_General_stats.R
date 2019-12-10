@@ -9,5 +9,7 @@ general_stats$N_OTU_TOP_INTER_BOT <- intersect(OTU_Top %>% .$TAXON %>% unique(),
 general_stats$N_OTU_BOT_ONLY <- general_stats$N_OTU - general_stats$N_OTU_TOP
 general_stats$N_OTU_TOP_ONLY <- general_stats$N_OTU - general_stats$N_OTU_BOT
 
-general_stats$N_OTU_UNCLASSIF_TAX <- otu_merge_tbl$OTU_ID %>% unique() %>% enframe(value = "OTU_ID") %>% left_join(otu_meta) %>% group_by(ADL_RANK_2) %>% summarise(n = n()) %>% filter(is.na(ADL_RANK_2)) %>% .$n
+general_stats$N_OTU_UNCLASSIF_TAX_2 <- otu_merge_tbl$OTU_ID %>% unique() %>% enframe(value = "OTU_ID") %>% left_join(otu_meta) %>% group_by(ADL_RANK_2) %>% summarise(n = n()) %>% filter(is.na(ADL_RANK_2)) %>% .$n
+general_stats$N_OTU_UNCLASSIF_TAX_3 <- otu_merge_tbl$OTU_ID %>% unique() %>% enframe(value = "OTU_ID") %>% left_join(otu_meta) %>% group_by(ADL_RANK_3) %>% summarise(n = n()) %>% filter(is.na(ADL_RANK_3)) %>% .$n
+
 general_stats$N_OTU_UNCLASSIF_TROPH <- otu_merge_tbl$OTU_ID %>% unique() %>% enframe(value = "OTU_ID") %>% left_join(otu_meta) %>% group_by(TROPHIC_TYPE) %>% summarise(n = n()) %>% filter(is.na(TROPHIC_TYPE)) %>% .$n
