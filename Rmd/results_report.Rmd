@@ -115,7 +115,7 @@ dat <- com_rar_list %>%
 cond <- ifelse(str_detect(rownames(dat), "_Bottom$"), "Bottom", "Top")
 blocks <- gsub("_Top|_Bottom", "", rownames(dat))
 
-adonis_blocks(dat, cond, permutation = 1, method = "bray", blocks = blocks) # CHANGE NPERM TO 1000 FOR FINAL ANALYSIS
+adonis_blocks(dat, cond, permutation = 1000, method = "bray", blocks = blocks) # CHANGE NPERM TO 1000 FOR FINAL ANALYSIS
 
 ```
 
