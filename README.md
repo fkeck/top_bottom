@@ -1,8 +1,6 @@
-# Code and data for the paper
+# Code and data for the paper "Top-Bottom"
 
-This repository provides R code and data to reproduce results and figures from the paper:
-
-> XXX [DOI URL](DOI URL)
+This repository provides R code and data to reproduce results and figures from the paper: Assessing responses of micro-eukaryotes biodiversity to the Great Acceleration: a paleolimnological view based on sedimentary DNA.
 
 ## Analyses
 
@@ -14,8 +12,9 @@ Supplementary materials can be generated from `Rmd/supplementary_info.Rmd`.
 
 Install R packages from CRAN:
 
-    install.packages(c("tidyverse", "cowplot", "magrittr", "broom",
-                       "vegan", "rpart", rmarkdown))
+    install.packages(c("tidyverse", "cowplot", "broom",
+                       "vegan", "rpart", "rmarkdown", "rgdal",
+                       "knitr", "kableExtra", "ape", "phytools"))
 
 Install R packages from GitHub (you need devtools):
 
@@ -25,5 +24,3 @@ Install R packages from Bioconductor (you need BiocManager):
 
     BiocManager::install("DESeq2")
 
-
-## R Session Info
