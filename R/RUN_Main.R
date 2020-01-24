@@ -15,7 +15,6 @@ source("R/AN_General_stats.R")
 
 
 
-
 rmarkdown::render("Rmd/results_report.Rmd", output_dir = "results", output_file = "results_report.html")
 browseURL("results/results_report.html")
 
@@ -31,5 +30,8 @@ tibble(OTU_ID = com_rar_list$data[[1]]$TAXON %>% unique()) %>%
 
 
 
-# save.image("results/main_results.RData")
+save.image("results/session_image.RData")
+writeLines(capture.output(sessionInfo()), "results/session_info.txt")
+
 # load("results/main_results.RData")
+
