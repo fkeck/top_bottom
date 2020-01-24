@@ -139,7 +139,7 @@ otu_rar_tbl <- otu_merge_tbl %>%
   select(-OTU_COUNT) %>% 
   dplyr::rename(TAXON = OTU_ID)
 
-# TAXONOMY RARIFIED
+# TAXONOMY
 tax_rar_rank_1 <- otu_rar_tbl %>% 
   left_join(otu_meta, by = c("TAXON" = "OTU_ID")) %>% 
   group_by(LAC_POS, ADL_RANK_1) %>% 
