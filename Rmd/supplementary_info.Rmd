@@ -157,7 +157,7 @@ grid::grid.draw(gp)
 <!-- plot_grid(prow, legend, ncol = 1, rel_heights = c(1, .1)) -->
 <!-- ``` -->
 
-<!-- **`r ins_fig()`**  Proportion of OTUs (*A*) and taxonomic groups (*B*) specific to the bottom (Bottom only) and top (Top only) strata, or common to both strata (Intersection). The total number of OTUs or taxa is given for each lake in parenthesis. -->
+<!-- **`r `**  Proportion of OTUs (*A*) and taxonomic groups (*B*) specific to the bottom (Bottom only) and top (Top only) strata, or common to both strata (Intersection). The total number of OTUs or taxa is given for each lake in parenthesis. -->
 
 
 
