@@ -275,7 +275,7 @@ deseq_TB_AOV1 %>%
   knitr::kable("latex", digits = 3, booktabs = TRUE, linesep = "", escape = FALSE, longtable = TRUE,
                col.names = linebreak(c("Rank 1", "Rank 2", "Rank 3", "Base Mean",
                                        "log2 Fold\nChange", "Stat", "Padj"), align = "c")) %>% 
-  add_header_above(c("Taxonmic rank (Adl et al. 2019)" = 3, " " = 4)) %>% 
+  add_header_above(c("Taxonomic rank (Adl et al. 2019)" = 3, " " = 4)) %>% 
   kable_styling(latex_options =c("repeat_header"))
 
 ```
