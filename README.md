@@ -1,6 +1,6 @@
-<img src="logo_tb.png" width="220" align="right" />
+<img src="logo_tb.png" width="220" align="right"/>
 
-# Code and data for the paper "Top-Bottom"
+# Code and data for the paper
 
 This repository provides R code and data to reproduce results and figures from the paper:
 
