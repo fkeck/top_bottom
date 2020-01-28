@@ -1,6 +1,10 @@
+<img src="logo_tb.png" width="220" align="right" />
+
 # Code and data for the paper "Top-Bottom"
 
-This repository provides R code and data to reproduce results and figures from the paper: Assessing responses of micro-eukaryotes biodiversity to the Great Acceleration: a paleolimnological view based on sedimentary DNA.
+This repository provides R code and data to reproduce results and figures from the paper:
+
+**Assessing responses of micro-eukaryotes biodiversity to the Great Acceleration: a paleolimnological view based on sedimentary DNA.**
 
 ## Analyses
 
