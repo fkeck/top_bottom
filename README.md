@@ -6,6 +6,9 @@ This repository provides R code and data to reproduce results and figures from t
 
 **Assessing responses of micro-eukaryotes biodiversity to the Great Acceleration: a paleolimnological view based on sedimentary DNA.**
 
+François Keck, Laurent Millet, Didier Debroas, David Etienne, Didier Galop and Isabelle Domaizon
+
+
 ## Analyses
 
 Scripts can be found in the `/R` directory. They are organized in separated modules but all the analyses can be ran from the master script `RUN_Main.R`.
