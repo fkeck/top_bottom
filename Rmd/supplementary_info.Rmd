@@ -39,7 +39,7 @@ usepackage_latex("makecell")
 
 # Assessing responses of micro-eukaryotes biodiversity to the Great Acceleration: a paleolimnological view based on sedimentary DNA
 
-François Keck, Laurent Millet, David Etienne, Didier Debroas, Isabelle Domaizon
+François Keck, Laurent Millet, Didier Debroas, David Etienne, Didier Galop and Isabelle Domaizon
 
 ` `  
 ` `  
@@ -68,7 +68,7 @@ Dataset S1
 
 **Methods S1: General precautions taken for sedimentary DNA analysis**
 
-
+Aprés validation finale COPIER LES METHODES ICI: pour l'instant le texte est dans le Google Drive.
 
 <!-- \pagebreak -->
 <!-- ```{r, message = FALSE} -->
@@ -352,11 +352,11 @@ deseq_TB_AOV1 %>%
 
 15.   E. Capo, D. Debroas, F. Arnaud, I. Domaizon, Is Planktonic Diversity Well Recorded in Sedimentary DNA? Toward the Reconstruction of Past Protistan Diversity. Microb. Ecol. 70, 865–875 (2015).
 
-16.   Renberg, A COMPLETER.
+16.   I. Renberg, R. Bindler, M.-L. Brännvall, Using the historical atmospheric lead-deposition record as a chronological marker in sediment deposits in Europe. The Holocene 11, 511–516 (2001).
 
-17.   Schwikowski, A COMPLETER.
+17.   M. Schwikowski, et al., Post-17th-Century Changes of European Lead Emissions Recorded in High-Altitude Alpine Snow and Ice. Environ. Sci. Technol. 38, 957–964 (2004).
 
-18.   Appleby, A COMPLETER.
+18.   P. G. Appleby, F. Oldfield, The calculation of lead-210 dates assuming a constant rate of supply of unsupported 210Pb to the sediment. CATENA 5, 1–8 (1978).
 
 19.   P. Guilizzoni, A. Marchetto, A. Lami, S. Gerli, S. Musazzi, Use of sedimentary pigments to infer past phosphorus concentration in lakes. J. Paleolimnol. 45, 433–445 (2011).
 
