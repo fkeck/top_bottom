@@ -93,21 +93,21 @@ sed_basics_plots$PIG <- ggplot(dat) +
   geom_boxplot(aes(as.numeric(as.factor(POSITION)), CAROTENOIDS, group = POSITION, fill = POSITION), outlier.size = 0.5)+
   geom_line(aes(as.numeric(as.factor(POSITION)), CAROTENOIDS, group = LAC), alpha = 0.2) +
   scale_x_continuous(breaks = c(1, 2), labels = c("Past (bottom)", "Recent (top)")) +
-  xlab("") + ylab(expression(paste("Total carotenoids (", ng~g^-1, " dry sed.)"))) +
+  xlab("") + ylab(expression(paste("Total carotenoids (", µg~g^-1, " dry sed.)"))) +
   theme_boxplot_sed
 
 sed_basics_plots$PIG_corrected_Ctot <- ggplot(dat) +
   geom_boxplot(aes(as.numeric(as.factor(POSITION)), CAROTENOIDS_BY_g_C_DRY_SED, group = POSITION, fill = POSITION), outlier.size = 0.5)+
   geom_line(aes(as.numeric(as.factor(POSITION)), CAROTENOIDS_BY_g_C_DRY_SED, group = LAC), alpha = 0.2) +
   scale_x_continuous(breaks = c(1, 2), labels = c("Past (bottom)", "Recent (top)")) +
-  xlab("") + ylab(expression(paste("Total carotenoids (", ng~g^-1, "TC dry sed.)"))) +
+  xlab("") + ylab(expression(paste("Total carotenoids (", µg~g^-1, "TC dry sed.)"))) +
   theme_boxplot_sed
 
 sed_basics_plots$PIG_corrected_Corg <- ggplot(dat) +
   geom_boxplot(aes(as.numeric(as.factor(POSITION)), CAROTENOIDS_BY_g_Corg_DRY_SED, group = POSITION, fill = POSITION), outlier.size = 0.5)+
   geom_line(aes(as.numeric(as.factor(POSITION)), CAROTENOIDS_BY_g_Corg_DRY_SED, group = LAC), alpha = 0.2) +
   scale_x_continuous(breaks = c(1, 2), labels = c("Past (bottom)", "Recent (top)")) +
-  xlab("") + ylab(expression(paste("Total carotenoids (", ng~g^-1, "TOC dry sed.)"))) +
+  xlab("") + ylab(expression(paste("Total carotenoids (", µg~g^-1, "TOC dry sed.)"))) +
   theme_boxplot_sed
 
 sed_basics_tests$PIG <- wilcox.test(CAROTENOIDS ~ POSITION, paired = TRUE, data = dat, exact = FALSE)
