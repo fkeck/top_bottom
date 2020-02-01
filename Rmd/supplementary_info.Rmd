@@ -19,12 +19,12 @@ ins_fig <- function(){
   .GlobalEnv$fig_num <- .GlobalEnv$fig_num + 1
   paste0("Figure S", .GlobalEnv$fig_num, ".")
 }
+
 library(kableExtra)
 usepackage_latex("booktabs")
 usepackage_latex("longtable")
 usepackage_latex("array")
 usepackage_latex("multirow")
-usepackage_latex("xcolor", "table")
 usepackage_latex("wrapfig")
 usepackage_latex("float")
 usepackage_latex("colortbl")
