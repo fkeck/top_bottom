@@ -1,4 +1,4 @@
-Code,Name,Longitude,Latitude,Altitude,Depth (max),Trophic status,Coring year,XrF data,14C,Radio-nucleides,included_DNA
+Code,Name,Longitude,Latitude,Altitude,"Depth (max)","Trophic status","Coring year","XrF data",14C,Radio-nucleides,included_DNA
 AUL,Aulnes,4.78972,43.5925,11,<10,Unknown,2015,,,,2
 CAZ,Cazaux,1.163333,44.4875,12,22.3,Meso-eutrophic,2015,,,,2
 PAR,Parentis,-1.1741254,44.3546061,19,20,Eutrophic,2015,x,,,1
@@ -35,20 +35,20 @@ GOD,Godivelle,2.9167206,45.3870975,1239,44,Oligotrophic,2015,x,,"137Cs, 210Pb",1
 GUE,Guéry,2.8218651,45.6157996,1246,20,Unknown,2015,x,,137Cs,1
 VER,Vert,6.7530081,45.9500309,1266,9,Unknown,2015,x,,,1
 ISA,Isaby,0.0227405,42.9512991,1562,6,Oligotrophic,2014,,x,,1
-AYE,Ayes,1.0639089,42.8442865,1694,10,Unknown,2015,x,,,1
-BOR,Bordères,0.4605029,42.8598064,1765,18,Unknown,2016,x,,,1
-BAL,Valcère,2.05341599999997,42.589855,1765,14,Unknown,2013,x,,,1
-ALA,Alate,1.4060976,42.7763977,1868,10,Unknown,2016,x,,"137Cs, 210Pb",1
-ESP,Espingo,0.4954724,42.7285085,1882,8,Unknown,2016,x,,,1
-PEY,Peyrelade,0.1143228,42.9430394,1919,28,Mesotrophic,2016,x,,"137Cs, 210Pb",1
-GEN,Gentau,-0.4877342,42.8483166,1950,20,Unknown,2014,,x,"137Cs, 210Pb",1
+AYE,Ayes,1.0639089,42.8442865,1694,10,Oligotrophic,2015,x,,,1
+BOR,Bordères,0.4605029,42.8598064,1765,18,Oligotrophic,2016,x,,,1
+BAL,Valcère,2.05341599999997,42.589855,1765,14,Mesotrophic,2013,x,,,1
+ALA,Alate,1.4060976,42.7763977,1868,10,Ultra-oligotrophic,2016,x,,"137Cs, 210Pb",1
+ESP,Espingo,0.4954724,42.7285085,1882,8,Oligotrophic,2016,x,,,1
+PEY,Peyrelade,0.1143228,42.9430394,1919,28,Oligotrophic,2016,x,,"137Cs, 210Pb",1
+GEN,Gentau,-0.4877342,42.8483166,1950,20,Mesotrophic,2014,,x,"137Cs, 210Pb",1
 CHE,Chéserys,6.9001556,45.9849913,2135,6,Oligotrophic,2013,x,x,,1
-ROU,Roumazet,1.4352819,42.6337185,2163,10,Unknown,2016,x,,"137Cs, 210Pb",1
-ARA,Arratille,-0.1750923,42.8010075,2247,12,Unknown,2013,,x,,1
-SOU,Soucarrane,1.4344528,42.6263943,2291,10,Unknown,2016,x,,,1
-POR,Port Bielh,0.1872506,42.872665,2313,19,Oligotrophic,2014,,x,"137Cs, 210Pb",1
-BAE,Barroude,0.144196,42.73122,2355,9,Unknown,2013,,x,,1
-LAG,Lagardelle,1.4323539,42.6469549,2387,27,Unknown,2016,x,,,1
+ROU,Roumazet,1.4352819,42.6337185,2163,10,Oligotrophic,2016,x,,"137Cs, 210Pb",1
+ARA,Arratille,-0.1750923,42.8010075,2247,12,Oligotrophic,2013,,x,,1
+SOU,Soucarrane,1.4344528,42.6263943,2291,10,Oligotrophic,2016,x,,,1
+POR,"Port Bielh",0.1872506,42.872665,2313,19,Oligotrophic,2014,,x,"137Cs, 210Pb",1
+BAE,Barroude,0.144196,42.73122,2355,9,Oligotrophic,2013,,x,,1
+LAG,Lagardelle,1.4323539,42.6469549,2387,27,Oligotrophic,2016,x,,,1
 VED,Verdet,6.9546636,45.5764981,2736,12,Oligotrophic,2015,x,,"137Cs, 210Pb",1
-MTC,Mont Coua,6.6386576,45.3178144,2797,10,Oligotrophic,2015,x,,"137Cs, 210Pb",1
+MTC,"Mont Coua",6.6386576,45.3178144,2797,10,Oligotrophic,2015,x,,"137Cs, 210Pb",1
 BLC,Blanc,6.966203,45.580202,2850,40,Oligotrophic,2015,,,,2
