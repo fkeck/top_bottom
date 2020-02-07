@@ -3,6 +3,7 @@ title: "Supplementary Information for:"
 output:
   pdf_document:
     fig_caption: false
+    latex_engine: xelatex
 ---
 
 ```{r setup, include=FALSE}
@@ -66,9 +67,51 @@ Dataset S1
 \pagebreak
 ## Supplementary Information Text
 
-**Methods S1: General precautions taken for sedimentary DNA analysis**
+### Methods S1: General precautions taken for sedimentary DNA analysis
 
-Aprés validation finale COPIER LES METHODES ICI: pour l'instant le texte est dans le Google Drive.
+Various methodological precautions are required to achieve robust results for the analysis of paleo-environmental DNA (1–3). We applied strict laboratory protocols to ensure the validity of our molecular data.
+
+- Sterile disposable materials (labware, gloves, etc.) were used for all lab procedures; during sediment core sub-sampling, sediment slices were taken using sterilised metal plates.
+- Separate stations were organized for sub-sampling, DNA extractions and PCR amplifications. To prevent contamination with modern DNA, the extraction of DNA from sediment is carried out in specific rooms dedicated to rare DNA, and PCR are prepared under designated working stations. These laboratories are physically separated from other molecular biology laboratories. 
+- Negative controls are included at 3 steps of the procedure: during sub-sampling (open tubes containing pure water), extraction (traitement of pure water) and PCR preparation (blank PCR tube). All blanks were found negative for the amplification of 18S rRNA markers; consequently the blanks were not included in the sequencing library.
+- We selected short barcodes adapted to the work on sedimentary DNA. The choice of the barcode region was previously explained in Capo et al (4); based on verifications of the coverage of primers for micro-eukaryotic diversity, the ability to amplify the DNA with these primers, and the quality of taxonomic assignment obtained, the probes 960F and NSR1438 were selected.
+- To evaluate the potential influence of co-extracted inhibitors present in sedimentary DNA extracts (that may reduce the efficiency of downstream PCR), we assessed the inhibition level using quantitative PCR assays. The approach applied is based on the assumption that inhibitors are diluted out when a log-linear relationship is achieved between Cq and the dilution factor (5). No inhibition effect was found. 
+- We performed a duplicate extraction for each strata and verified the similarity of DNA results obtained for the replicates of a given strata (SI *Appendix*, Fig. S2).
+- For one taxonomic group (Chlorophyceae) which was found to increase markedly in recent deposits, we verified the consistency between the percentage of DNA reads found by metabarcoding and the number of gene copies found by qPCR (qPCR assays using specific primers for chlorophyceae 18S rDNA according to Turon et al (6)). The correlation was found to be significant (correlation between sequenced reads of chlorophyceae and qPCR copies of chlorophyceae/g wet sed: r=0.78, n= 90).
+
+The level of DNA preservation in the sediment (from one lake to another or when aging in sediment) is a sensitive point to be taken into account for paleo-reconstruction studies. Given the mechanisms of DNA protection by binding to mineral and organic particles and due to the absence of oxygen and UV radiation, aquatic sediments are, *a priori*, suitable environments for DNA preservation (7, 8). However, several processes can alter DNA sequences in marine (9, 10) and freshwater sediments (11, 12). It was thus important to consider whether the differences observed between ‘top’ and ‘bottom’ strata could be induced by diagenetic processes responsible for the modification of DNA signal over time. The potential distortions to lake sediment DNA records due to taphonomic processes (production, transfer, preservation of DNA) that affect DNA in sediments are not fully known; we know however that:
+
+- In recent sedimentary deposits (max. 120 years), the DNA signal is unlikely to be highly altered by fragmentation (13). 
+- The first few years after deposition are critical for DNA preservation due to the biological activity at the sediment interface and the physical and chemical changes that occur in the uppermost sediment layers (14, 15). Consequently, we chose to avoid the very recent deposits (for the sampling of modern periods) to overcome this issue; the ‘top’ samples were sampled a few centimeters below the sediment surface (~ year 2000).
+- Previous calibration studies on sedimentary DNA (16) have shown that some microbial eukaryotic groups are not well preserved in sediment even when the general conditions are favourable for DNA preservation, particularly for Cryptophyceae. In our study, a low amount of DNA reads were found for this group (<0.02% of DNA reads/sample, 4 OTUs in total); this group had a non significant contribution to micro-eukaryotic community changes(SI *Appendix*, Fig. S6).
+
+Furthermore, using our data, we explored if we could detect preferential degradation/modification of DNA for some groups of micro-eukaryotes; we found no evidence for differential DNA degradation between taxa relative richness (SI *Appendix*, Fig. S2).
+
+From this, we considered that the decay of DNA is probably marginal and a differential preservation of DNA between ‘top’ and ‘bottom’ is unlikely to have a significant effect on our results. Additionally, we considered different levels of taxonomy in order to circumvent the potential risk associated with the use of OTUs (artifactual increase of OTUs number, or loss of OTUs due to degradation/fragmentation).
+
+
+### Methods S2: Dating of sediment cores
+
+For lake cores retrieved in 2015, geochemical analyses were performed by X-ray fluorescence (AVAATECH XrF Core Scanner, Edytem Laboratory) at a 5 mm sampling step. The Lead (Pb) stratigraphic profiles were used to synchronize the lake sediment records with historical lead atmospheric deposition in the study area which was more particularly characterized by the increase in Pb fallout from the mid-1800s to the beginning of the 20th century following the industrial revolution and by the decrease in Pb deposition at the end of the 1970s due to the fall of the use of lead additives in European countries (e.g. (17, 18)). For some of these lakes, this approach is complemented with either age-depth modeling using a combination of 210Pb and 137Cs (19) or 137Cs analysis alone which provides two chronological control points: 1986 (Chernobyl Accident) and 1964 (maximum radio-nuclides fallouts from atmospheric nuclear weapon tests). For most of the Pyrenean and alpine lakes where the sediment accumulation rate is very low, ages of sediment were estimated using linear interpolation model built from radiocarbon dates performed on terrestrial organic remains.
+
+
+### Methods S3: Subsampling for biomarker analyses and precautions for sample handling
+
+Sub-samplings were performed in a room isolated from DNA labs and equipped with a sterile airflow working station, after decontamination of work-surfaces. Sediment cores were split into two halves longitudinally. The material (cutting blades, splitting wires) was previously flamed with alcohol to remove potential DNA contaminants. The top surface of the core was scraped off perpendicular to the core pipe using sterile scalpels. Subsampling was performed from the bottom to the top of the core. To limit extraneous contamination, only the centre of each layer was used for molecular analysis, the sub-samples were collected by transferring a small amount of sediment into a sterile tube using clean disposable spatulas (using a different sampling tool for each strata). These subsamples were stored at -20°C until DNA extraction. For replication purposes we constituted duplicate sub-samples for each strata. Negative controls were included during sub sampling procedures (see supplemental data).
+
+
+### Methods S4: Photosynthetic pigments and organic carbon analyses
+
+Organic carbon contents of sediment samples were analyzed using a vario MAX CNS analyzer (Elementar). Prior to analysis, the sediment samples were heat dried at 60°C during 24 h and carbonates were removed by the addition of 1 M HCl solution until effervescence ceased.
+Samples for photosynthetic pigment analysis were preserved in a cold room (4°C) prior to analysis. A sub-sample of ca. 1 g wet sediment was weighed and extracted overnight with 10 ml of acetone/water (90:10). Mechanical disruption and ultrasound were not used to quantify the total carotenoids via spectrophotometer at the wavelengths of 450, 665 and 750 nm in spectrophotometer following recommendations by Guilizzoni et al (20).
+Water content of sediment (after heating at 60°C) were measured in order to express the Total Carotenoïd (TC) concentrations, calculated following Amann et al. (21), in dry mass (TC in µg.dry g^-1^).
+
+
+\pagebreak
+
+**Methods S5: Preparation of amplicons**
+
+Each PCR was performed in duplicate in a total volume of 25 µl containing 3 µl of 10X NH~4~ reaction buffer, 1.2 µl of 50 mM MgCl~2~, 0.25 µl of BioTaq (Bioline), 0.24 µl of 10 mM dNTP, 0.36 µl of 0.5 µg/µl BSA and 1 µl of each primer. The amplification conditions included initial denaturation at 94°C for 10 min followed by 35 cycles of 1 min at 94°C, 1 min at 55°C and 1 min 30 s at 72°C. The amplicons were then subjected to a final 10 min extension at 72°C. The two PCR products obtained for a given DNA extraction were pooled and purified using Illustra^TM^ GFX^TM^ PCR DNA and Gel Band Purification Kit (GE Healthcare Life Sciences, Velizy Villacoublay, France), and quantified using a Quant-it PicoGreen kit (Invitrogen, Carlsbad, CA, USA) on a Fluoroskan Ascent^TM^ FL (ThermoLabsystems, Beverly, MA, USA).
 
 <!-- \pagebreak -->
 <!-- ```{r, message = FALSE} -->
@@ -195,7 +238,7 @@ SUPP_MAT$JACC$FIG_COMB
 ```
 
 
-**`r ins_fig()`** Community analyses of the OTUs table reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples from the same lake. (*B*) Distribution of Jaccard index values computed for each lake between ‘recent’ and ‘past’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Jaccard index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means.
+**`r ins_fig()`** Community analyses of the OTUs table reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples from the same lake. (*B*) Distribution of Jaccard index values computed for each lake between ‘recent’ and ‘past’ samples . (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Jaccard index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
 
 
 \pagebreak
@@ -205,7 +248,7 @@ SUPP_MAT$TAXO$FIG_COMB
 
 ```
 
-**`r ins_fig()`** Community analyses reproduced with the data aggregated at the 2^nd^ taxonomic rank of Adl et al. (21). (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples taken within the same lake. (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represent the 95% confidence intervals around means.
+**`r ins_fig()`** Community analyses reproduced with the data aggregated at the 2^nd^ taxonomic rank of Adl et al. (21). (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples taken within the same lake. (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
 
 \pagebreak
 ```{r, fig.height = 8}
@@ -322,46 +365,26 @@ deseq_TB_AOV1 %>%
 ## SI References
 
 
-1.   A. C. Boere, W. I. C. Rijpstra, G. J. De Lange, J. S. Sinninghe Damsté, M. J. L. Coolen, Preservation potential of ancient plankton DNA in Pleistocene marine sediments: Sedimentary ancient DNA. Geobiology 9, 377–393 (2011).
-
-2.   E. Rizzi, M. Lari, E. Gigli, G. De Bellis, D. Caramelli, Ancient DNA studies: new perspectives on old samples. Genet. Sel. Evol. 44, 21 (2012).
-
-3.   A. Torti, M. A. Lever, B. B. Jørgensen, Origin, dynamics, and implications of extracellular DNA pools in marine sediments. Mar. Genomics 24, 185–196 (2015).
-
-4.   E. Capo, et al., Tracking a century of changes in microbial eukaryotic diversity in lakes driven by nutrient enrichment and climate warming. Environ. Microbiol. 19, 2873–2892 (2017).
-
-5.   K. G. Lloyd, B. J. MacGregor, A. Teske, Quantitative PCR methods for RNA and DNA in marine sediments: maximizing yield while overcoming inhibition. FEMS Microbiol. Ecol. 72, 143–151 (2010).
-
-6.   V. Turon, E. Trably, A. Fayet, E. Fouilland, J.-P. Steyer, Raw dark fermentation effluent to support heterotrophic microalgae growth: microalgae successfully outcompete bacteria for acetate. Algal Res. 12, 119–125 (2015).
-
-7.   L. Parducci, et al., Shotgun Environmental DNA, Pollen, and Macrofossil Analysis of Lateglacial Lake Sediments From Southern Sweden. Front. Ecol. Evol. 7, 189 (2019).
-
-8.   Andrew. Ogram, G. S. Sayler, Denise. Gustin, R. J. Lewis, DNA adsorption to soils and sediments. Environ. Sci. Technol. 22, 982–984 (1988).
-
-9.   A. Dell’Anno, S. Bompadre, R. Danovaro, Quantification, Base Composition, and Fate of Extracellular DNA in Marine Sediments. Limnol. Oceanogr. 47, 899–905 (2002).
-
-10.   M. W. Pedersen, et al., Ancient and modern environmental DNA. Philos. Trans. R. Soc. B Biol. Sci. 370, 20130383 (2015).
-
-11.   I. Domaizon, A. Winegardner, E. Capo, J. Gauthier, I. Gregory-Eaves, DNA-based methods in paleolimnology: new opportunities for investigating long-term dynamics of lacustrine biodiversity. J. Paleolimnol. 58, 1–21 (2017).
-
-12.   C. Giguet-Covex, et al., New insights on lake sediment DNA from the catchment: importance of taphonomic and analytical issues on the record quality. Sci. Rep. 9, 14676 (2019).
-
-13.   A. Vuillemin, et al., Preservation and Significance of Extracellular DNA in Ferruginous Sediments from Lake Towuti, Indonesia. Front. Microbiol. 8, 1440 (2017).
-
-14.   E. Capo, I. Domaizon, D. Maier, D. Debroas, C. Bigler, To what extent is the DNA of microbial eukaryotes modified during burying into lake sediments? A repeat-coring approach on annually laminated sediments. J. Paleolimnol. 58, 479–495 (2017).
-
-15.   E. Capo, D. Debroas, F. Arnaud, I. Domaizon, Is Planktonic Diversity Well Recorded in Sedimentary DNA? Toward the Reconstruction of Past Protistan Diversity. Microb. Ecol. 70, 865–875 (2015).
-
-16.   I. Renberg, R. Bindler, M.-L. Brännvall, Using the historical atmospheric lead-deposition record as a chronological marker in sediment deposits in Europe. The Holocene 11, 511–516 (2001).
-
-17.   M. Schwikowski, et al., Post-17th-Century Changes of European Lead Emissions Recorded in High-Altitude Alpine Snow and Ice. Environ. Sci. Technol. 38, 957–964 (2004).
-
-18.   P. G. Appleby, F. Oldfield, The calculation of lead-210 dates assuming a constant rate of supply of unsupported 210Pb to the sediment. CATENA 5, 1–8 (1978).
-
-19.   P. Guilizzoni, A. Marchetto, A. Lami, S. Gerli, S. Musazzi, Use of sedimentary pigments to infer past phosphorus concentration in lakes. J. Paleolimnol. 45, 433–445 (2011).
-
-20.   B. Amann, et al., Spring temperature variability and eutrophication history inferred from sedimentary pigments in the varved sediments of Lake Żabińskie, north-eastern Poland, AD 1907–2008. Glob. Planet. Change 123, 86–96 (2014).
-
-21.   S. M. Adl, et al., Revisions to the Classification, Nomenclature, and Diversity of Eukaryotes. J. Eukaryot. Microbiol. 66, 4–119 (2019).
-
-22.   M. I. Love, W. Huber, S. Anders, Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2. Genome Biol. 15, 550 (2014).
+1.  A. C. Boere, W. I. C. Rijpstra, G. J. De Lange, J. S. Sinninghe Damsté, M. J. L. Coolen, Preservation potential of ancient plankton DNA in Pleistocene marine sediments: Sedimentary ancient DNA. Geobiology 9, 377–393 (2011).
+2.  E. Rizzi, M. Lari, E. Gigli, G. De Bellis, D. Caramelli, Ancient DNA studies: new perspectives on old samples. Genet. Sel. Evol. 44, 1–19 (2012).
+3.  A. Torti, M. A. Lever, B. B. Jørgensen, Origin, dynamics, and implications of extracellular DNA pools in marine sediments. Mar. Genomics 24, 185–196 (2015).
+4.  E. Capo, et al., Tracking a century of changes in microbial eukaryotic diversity in lakes driven by nutrient enrichment and climate warming. Environ. Microbiol. 19, 2873–2892 (2017).
+5.  K. G. Lloyd, B. J. MacGregor, A. Teske, Quantitative PCR methods for RNA and DNA in marine sediments: maximizing yield while overcoming inhibition. FEMS Microbiol. Ecol. 72, 143–151 (2010).
+6.  V. Turon, E. Trably, A. Fayet, E. Fouilland, J.-P. Steyer, Raw dark fermentation effluent to support heterotrophic microalgae growth: microalgae successfully outcompete bacteria for acetate. Algal Res. 12, 119–125 (2015).
+7.  L. Parducci, et al., Shotgun Environmental DNA, Pollen, and Macrofossil Analysis of Lateglacial Lake Sediments From Southern Sweden. Front. Ecol. Evol. 7, 189 (2019).
+8.  Andrew. Ogram, G. S. Sayler, Denise. Gustin, R. J. Lewis, DNA adsorption to soils and sediments. Environ. Sci. Technol. 22, 982–984 (1988).
+9.  A. Dell’Anno, S. Bompadre, R. Danovaro, Quantification, Base Composition, and Fate of Extracellular DNA in Marine Sediments. Limnol. Oceanogr. 47, 899–905 (2002).
+10.  M. W. Pedersen, et al., Ancient and modern environmental DNA. Philos. Trans. R. Soc. B Biol. Sci. 370, 20130383 (2015).
+11.  I. Domaizon, A. Winegardner, E. Capo, J. Gauthier, I. Gregory-Eaves, DNA-based methods in paleolimnology: new opportunities for investigating long-term dynamics of lacustrine biodiversity. J. Paleolimnol. 58, 1–21 (2017).
+12.  C. Giguet-Covex, et al., New insights on lake sediment DNA from the catchment: importance of taphonomic and analytical issues on the record quality. Sci. Rep. 9, 14676 (2019).
+13.  L. S. Epp, A global perspective for biodiversity history with ancient environmental DNA. Mol. Ecol. 28, 2456–2458 (2019).
+14.  A. Vuillemin, et al., Preservation and Significance of Extracellular DNA in Ferruginous Sediments from Lake Towuti, Indonesia. Front. Microbiol. 8, 1440 (2017).
+15.  E. Capo, I. Domaizon, D. Maier, D. Debroas, C. Bigler, To what extent is the DNA of microbial eukaryotes modified during burying into lake sediments? A repeat-coring approach on annually laminated sediments. J. Paleolimnol. 58, 479–495 (2017).
+16.  E. Capo, D. Debroas, F. Arnaud, I. Domaizon, Is Planktonic Diversity Well Recorded in Sedimentary DNA? Toward the Reconstruction of Past Protistan Diversity. Microb. Ecol. 70, 865–875 (2015).
+17.  I. Renberg, R. Bindler, M.-L. Brännvall, Using the historical atmospheric lead-deposition record as a chronological marker in sediment deposits in Europe. The Holocene 11, 511–516 (2001).
+18.  M. Schwikowski, et al., Post-17th-Century Changes of European Lead Emissions Recorded in High-Altitude Alpine Snow and Ice. Environ. Sci. Technol. 38, 957–964 (2004).
+19.  P. G. Appleby, “Chronostratigraphic Techniques in Recent Sediments” in Tracking Environmental Change Using Lake Sediments: Basin Analysis, Coring, and Chronological Techniques, Developments in Paleoenvironmental Research., W. M. Last, J. P. Smol, Eds. (Springer Netherlands, 2001), pp. 171–203.
+20.  P. Guilizzoni, A. Marchetto, A. Lami, S. Gerli, S. Musazzi, Use of sedimentary pigments to infer past phosphorus concentration in lakes. J. Paleolimnol. 45, 433–445 (2011).
+21.  B. Amann, et al., Spring temperature variability and eutrophication history inferred from sedimentary pigments in the varved sediments of Lake Żabińskie, north-eastern Poland, AD 1907–2008. Glob. Planet. Change 123, 86–96 (2014).
+22.  S. M. Adl, et al., Revisions to the Classification, Nomenclature, and Diversity of Eukaryotes. J. Eukaryot. Microbiol. 66, 4–119 (2019).
+23.  M. I. Love, W. Huber, S. Anders, Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2. Genome Biol. 15, 550 (2014).
