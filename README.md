@@ -19,7 +19,7 @@ Supplementary materials can be generated from `Rmd/supplementary_info.Rmd`.
 
 Install R packages from CRAN:
 
-    install.packages(c("tidyverse", "cowplot", "broom",
+    install.packages(c("tidyverse", "cowplot", "broom", "ggpol",
                        "vegan", "rpart", "rmarkdown", "rgdal",
                        "knitr", "kableExtra", "ape", "phytools"))
 
