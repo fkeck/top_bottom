@@ -31,8 +31,8 @@ tibble(OTU_ID = com_rar_list$data[[1]]$TAXON %>% unique()) %>%
 
 
 
-save.image("results/session_image.RData")
-writeLines(capture.output(sessionInfo()), "results/session_info.txt")
+# save.image("results/session_image.RData")
+# writeLines(capture.output(sessionInfo()), "results/session_info.txt")
 
 # load("results/session_image.RData")
 
