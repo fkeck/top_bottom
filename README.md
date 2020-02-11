@@ -2,6 +2,8 @@
 
 # Code and data for the paper
 
+[![DOI](https://zenodo.org/badge/236010392.svg)](https://zenodo.org/badge/latestdoi/236010392)
+
 This repository provides R code and data to reproduce results and figures from the paper:
 
 **Assessing responses of micro-eukaryotes biodiversity to the Great Acceleration: a paleolimnological view based on sedimentary DNA.**
