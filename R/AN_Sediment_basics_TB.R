@@ -16,7 +16,7 @@ dat <- nmds_rar_list %>%
   semi_join(lakes_meta_nr, by = c("LAC", "POSITION")) %>% 
   left_join(lakes_dna) %>% 
     filter(POSITION != "Bottom 2",
-           !LAC %in% c("Bourget", "Léman", "Marion", "Chalain", "Vert")) %>% 
+           !LAC %in% c("Chalain")) %>% 
   mutate(mug_ADN_BY_g_C_DRY_SED = (ng_ADN_BY_g_DRY_SED/1000) * (1/(C_tot_perc_MS/100)),
          mug_ADN_BY_g_Corg_DRY_SED = (ng_ADN_BY_g_DRY_SED/1000) * (1/(C_org_perc_MS/100))) %>%
   mutate(jitter_val = runif(nrow(.), -0.1, 0.1))
