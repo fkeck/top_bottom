@@ -121,6 +121,17 @@ tm_shape(eu_shp, bbox = sf::st_bbox(c(xmin = -5, xmax = 10, ymax = 52, ymin = 41
 
 
 \pagebreak
+```{r, fig.height = 6.5}
+lakes_lc <- read_csv("../data/synthese_landcover.csv")
+lakes_pop <- read_csv("../data/synthese_pop.csv")
+source("../R/AN_landcover.R")
+print(lc_plots)
+```
+
+**`r ins_fig()`** Proportion of (*A*) natural, (*B*) agricultural and (*C*) artificial surfaces in watersheds of high- ($> 1400$ m) and low-altitude ($\leq 1400$ m) lakes. The landcover analysis was conducted on a subset of 39 lakes for which data were available (10 high altitude lakes and 29 low altitude lakes). (*D*) Total human population living within a radius of 20 km of high-altitude lakes (N = 17) and low-altitude lakes (N = 31).
+
+
+\pagebreak
 
 ![](../figures/supplementary_info/SI_FIG_bioinfo.pdf)
 
