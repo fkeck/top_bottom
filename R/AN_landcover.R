@@ -69,6 +69,9 @@ lakes_pop <- lakes_pop %>%
 
 pop_plot <- ggplot(lakes_pop) +
   geom_boxplot(aes(fct_shift(Altitude_category), POP20km)) +
+  scale_y_continuous(trans = scales::log10_trans(),
+                     breaks = c(1000, 10000, 100000),
+                     labels = scales::math_format(expr = 10^.x, format = force)(3:5)) +
   xlab("Altitude") + ylab("Population") +
   theme_classic()
 
