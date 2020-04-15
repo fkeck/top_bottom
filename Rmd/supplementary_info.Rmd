@@ -205,26 +205,32 @@ grid::grid.draw(gp)
 
 
 
+<!-- \pagebreak -->
+<!-- ```{r, fig.height = 7} -->
+
+<!-- prow <- plot_grid(frac_taxa_temp$plots[[1]] + -->
+<!--             theme(legend.position = "none"), -->
+<!--           frac_taxa_temp$plots[[2]] + -->
+<!--             theme(legend.position = "none") + -->
+<!--             xlab(""), -->
+<!--           labels = "AUTO") -->
+<!-- legend <- get_legend( -->
+<!--   frac_taxa_temp$plots[[1]] + -->
+<!--     guides(color = guide_legend(nrow = 1)) + -->
+<!--     theme(legend.position = "bottom", -->
+<!--           legend.title = element_blank()) -->
+<!-- ) -->
+<!-- plot_grid(prow, legend, ncol = 1, rel_heights = c(1, .1)) -->
+<!-- ``` -->
+
+<!-- **`r ins_fig()`**  Proportion of OTUs (*A*) and 3^rd^ rank taxonomic groups (*B*) specific to the bottom and top strata, or common to both strata (intersection). The total number of OTUs or taxa is given for each lake in parenthesis. -->
+
+
 \pagebreak
-```{r, fig.height = 7}
 
-prow <- plot_grid(frac_taxa_temp$plots[[1]] +
-            theme(legend.position = "none"),
-          frac_taxa_temp$plots[[2]] +
-            theme(legend.position = "none") +
-            xlab(""),
-          labels = "AUTO")
-legend <- get_legend(
-  frac_taxa_temp$plots[[1]] +
-    guides(color = guide_legend(nrow = 1)) +
-    theme(legend.position = "bottom",
-          legend.title = element_blank())
-)
-plot_grid(prow, legend, ncol = 1, rel_heights = c(1, .1))
-```
+![](../figures/supplementary_info/SI_FIG_venn.pdf)
 
-**`r ins_fig()`**  Proportion of OTUs (*A*) and 3^rd^ rank taxonomic groups (*B*) specific to the bottom and top strata, or common to both strata (intersection). The total number of OTUs or taxa is given for each lake in parenthesis.
-
+**`r ins_fig()`**  Venn diagram showing the number and proportion of OTUs specific to the bottom and top strata, or common to both strata (intersection).
 
 
 \pagebreak
