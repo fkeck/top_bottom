@@ -140,7 +140,7 @@ dat <- com_rar_list %>%
   left_join(select(lakes_bv, LAC, ALTITUDE),
             by = c("LAC_1" = "LAC"))
 
-tr_mod_alt <- rpart(BRAY_DIST ~ ALTITUDE, data = dat, model = TRUE)
+tr_mod_alt <- rpart(BRAY_DIST ~ ALTITUDE, data = dat, model = TRUE, cp = 0.05)
 
 tr_mod_alt
 

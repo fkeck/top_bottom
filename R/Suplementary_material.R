@@ -1,3 +1,6 @@
+# Script for supplementary material
+# Must be run separately and results saved in data/Supp_mat.Rdata
+
 SUPP_MAT <- list()
 
 
@@ -34,7 +37,7 @@ dat <- com_rar_list %>%
   left_join(select(lakes_bv, LAC, ALTITUDE),
             by = c("LAC_1" = "LAC"))
 
-tr_mod_alt <- rpart(BRAY_DIST ~ ALTITUDE, data = dat, model = TRUE)
+tr_mod_alt <- rpart(BRAY_DIST ~ ALTITUDE, data = dat, model = TRUE, cp = 0.05)
 alt_split <- tr_mod_alt$splits[1, "index"]
 
 bray_split <- dat %>%
@@ -102,7 +105,7 @@ dat <- com_rar_list %>%
   left_join(select(lakes_bv, LAC, ALTITUDE),
             by = c("LAC_1" = "LAC"))
 
-tr_mod_alt <- rpart(BRAY_DIST ~ ALTITUDE, data = dat, model = TRUE)
+tr_mod_alt <- rpart(BRAY_DIST ~ ALTITUDE, data = dat, model = TRUE, cp = 0.05)
 alt_split <- tr_mod_alt$splits[1, "index"]
 
 bray_split <- dat %>%
