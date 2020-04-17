@@ -14,7 +14,7 @@ unnest <- unnest_legacy
 
 setwd("/home/francois/Google Drive/Sync work/projects/top_bottom/")
 
-lakes_meta <- read_csv("data/Lakes_meta.csv") %>% 
+lakes_meta <- read_csv("data/lakes_meta.csv") %>% 
   mutate(LAC_POS = paste(LAC, POSITION, sep = "_"))
 
 lakes_troph <- read_csv("data/lakes_trophic_status.csv") %>% 
@@ -30,8 +30,10 @@ lakes_dna <- read_csv("data/synthese_dna.csv") %>%
   group_by(LAC, POSITION) %>% 
   summarise_if(is.numeric, mean)
 
-lakes_kml <- rgdal::readOGR("data/TOP-BOTTOM_48_FK.kml", verbose = FALSE)
-lakes_kml$Name <- str_replace(lakes_kml$Name, pattern = "\n", "")
+lakes_coords <- read_csv("data/lakes_coords.csv")
+lakes_coords <- sp::SpatialPointsDataFrame(lakes_coords[, c("X", "Y")],
+                                           lakes_coords,
+                                           proj4string = sp::CRS("+init=epsg:4326"))
 
 otu_taxo_pr2 <- read_csv("data/OTU_affil_PR2SOUL_MIX_75.csv")
 otu_taxo_adl_conv <- read_csv("data/OTU_affil_PR2SOUL_MIX_75_ADLCONV_EDISA.csv") %>%
@@ -68,7 +70,7 @@ otu_tbl <- select(lakes_otu,
   magrittr::set_colnames(lakes_otu$OTU_ID) %>%
   tidy_cdm("ID_SAMPLE", "OTU_ID", "OTU_COUNT") %>% 
   left_join(lakes_meta) %>% 
-  filter(POSITION != "Deep")
+  filter(POSITION != "Middle")
 
 info_otu <- otu_tbl %>% 
   group_by(OTU_ID) %>% 

@@ -201,12 +201,12 @@ VER_T1,Verdet,15P2a,Top,1,0,2,VED
 VER_T2,Verdet,15P2a,Top,2,0,2,VED
 VER_B1,Verdet,15P2a,Bottom,1,8,10,VED
 VER_B2,Verdet,15P2a,Bottom,2,8,10,VED
-VER_D1,Verdet,15P2a,Deep,1,19,21,VED
-VER_D2,Verdet,15P2a,Deep,2,19,21,VED
+VERT_B1,Vert,15P1a,Bottom,1,19,21,VER
+VERT_B2,Vert,15P1a,Bottom,2,19,21,VER
 VERT_T1,Vert,15P1a,Top,1,0,2,VER
 VERT_T2,Vert,15P1a,Top,2,0,2,VER
-VERT_B1,Vert,15P1a,Bottom,1,6,8,VER
-VERT_B2,Vert,15P1a,Bottom,2,6,8,VER
+VERT_M1,Vert,15P1a,Middle,1,6,8,VER
+VERT_M2,Vert,15P1a,Middle,2,6,8,VER
 BOUR_B,Bourget,NA,Bottom,1,NA,NA,BOU
 BOUR_T,Bourget,NA,Top,1,NA,NA,BOU
 LEM_B,Léman,NA,Bottom,1,NA,NA,LEM

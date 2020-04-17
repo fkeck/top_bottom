@@ -111,7 +111,7 @@ tm_shape(eu_shp, bbox = sf::st_bbox(c(xmin = -5, xmax = 10, ymax = 52, ymin = 41
   tm_scale_bar(breaks = c(0, 100, 200), text.size = 0.7, position = c(0.6, 0.02)) +
   tm_layout(bg.color = "lightblue") +
   tm_graticules(lines = FALSE) +
-  tm_shape(lakes_kml) +
+  tm_shape(lakes_coords) +
   tm_dots(size = 0.2, shape = 3, col = "red")
 
 ```
@@ -169,7 +169,7 @@ p <- tax_rich_dat %>%
   group_by(ADL_RANK_2, POSITION) %>% 
   summarise(REL_RICHNESS_MEAN = mean(REL_RICHNESS),
             REL_RICHNESS_SD = sd(REL_RICHNESS)) %>% 
-  left_join(read_csv("../data/Ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
+  left_join(read_csv("../data/ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
   group_by(RANK1) %>% 
   mutate(GRP2_REL_RICHNESS_SUM = sum(REL_RICHNESS_MEAN, na.rm = TRUE)) %>%
   ungroup() %>% 
@@ -289,7 +289,7 @@ par(mfrow = c(1, 1))
 
 \pagebreak
 ```{r, message = FALSE}
-lakes_kml <- lakes_kml[lakes_kml$Name %in% otu_merge_tbl$LAC, ]
+#lakes_coords <- lakes_coords[lakes_coords$LAC %in% otu_merge_tbl$LAC, ]
 
 lakes_tab <- read_csv("../data/lakes_coring.csv", na = character()) %>% 
   set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth\n(max)",

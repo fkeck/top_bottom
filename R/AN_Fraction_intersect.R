@@ -138,7 +138,7 @@ com_merged_raw_list %>%
   left_join(otu_meta, by = c("TAXON" = "OTU_ID")) %>% 
   group_by(ADL_RANK_2, SECTION) %>% 
   summarise(sum = sum(COUNT)) %>% 
-  left_join(read_csv("data/Ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
+  left_join(read_csv("data/ranks_Adl.csv"), by = c("ADL_RANK_2" = "RANK2")) %>% 
   ggplot() +
   geom_col(aes(factor(ADL_RANK_2, levels = rev(levels(factor(ADL_RANK_2)))), sum, fill = SECTION),
            position = "fill") +
