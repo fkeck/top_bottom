@@ -137,10 +137,10 @@ MAI_B1,Maix,15P1b,Bottom,1,50,55,MAI
 MAI_B2,Maix,15P1b,Bottom,2,50,55,MAI
 MAR_T1,Marion,15P1a,Top,1,0,14,MAR
 MAR_T2,Marion,15P1a,Top,2,0,14,MAR
-MAR_B1,Marion,15P1a,Bottom,1,45,50,MAR
-MAR_B2,Marion,15P1a,Bottom,2,45,50,MAR
-MAR_D1,Marion,15P1a,Deep,1,80,85,MAR
-MAR_D2,Marion,15P1a,Deep,2,80,85,MAR
+MAR_M1,Marion,15P1a,Middle,1,45,50,MAR
+MAR_M2,Marion,15P1a,Middle,2,45,50,MAR
+MAR_B1,Marion,15P1a,Bottom,1,80,85,MAR
+MAR_B2,Marion,15P1a,Bottom,2,80,85,MAR
 MTC_T1,Mont Coua,15P1b,Top,1,0,1,MTC
 MTC_T2,Mont Coua,15P1b,Top,2,0,1,MTC
 MTC_B1,Mont Coua,15P1b,Bottom,1,8,9,MTC
