@@ -1,54 +1,54 @@
-Code,Name,Longitude,Latitude,Altitude,"Depth (max)","Trophic status","Coring year","XrF data",14C,Radio-nucleides,included_DNA
-AUL,Aulnes,4.78972,43.5925,11,<10,Unknown,2015,,,,2
-CAZ,Cazaux,1.163333,44.4875,12,22.3,Meso-eutrophic,2015,,,,2
-PAR,Parentis,-1.1741254,44.3546061,19,20,Eutrophic,2015,x,,,1
-MOU,Mouriscot,-1.5584623,43.456008,21,10,Eutrophic,2015,x,,,1
-ENT,Entressens,4.906666,43.6036111,36,8,Eutrophic,2015,,,,2
-MAR,Marion,-1.5484904,43.4675652,50,23,Unknown,2015,x,,,1
-BOU,Bourget,5.8694679,45.7423213,231,147,Oligo-mesotrophic,2010,,x,"137Cs, 210Pb",1
-BES,Besse,2.3586236,44.1919076,245,10,Unknown,2015,x,,,1
-BAR,Barterand,5.7441344,45.7897112,295,15,Mesotrophic,2015,x,,,1
-LEM,Léman,6.4920919,46.4442584,372,309,Mesotrophic,2010,,,"137Cs, 210Pb",1
-AIG,Aiguebelette,5.7999602,45.5526875,374,71,Oligo-mesotrophic,2015,x,,,1
-NAN,Nantua,5.5865618,46.162347,475,43,Mesotrophic,2015,x,,"137Cs, 210Pb",1
-CHA,Chalain,5.790402,46.6705376,490,32,Mesotrophic,2015,x,,"137Cs, 210Pb",1
-VAL,Val,5.8146593,46.6269625,520,25,Mesotrophic,2015,x,,,1
-GOU,Tazenat,2.9898208,45.9802702,630,66,Oligo-mesotrophic,2015,x,,,1
-GER,Gérardmer,6.8521804,48.0697435,660,38,Mesotrophic,2015,x,x,"137Cs, 210Pb",1
-MAI,Maix,7.0749268,48.4757113,678,15,Unknown,2015,x,,,1
-LON,Longemer,6.951197,48.0699151,736,34,Mesotrophic,2015,x,x,"137Cs, 210Pb",1
-ILA,Ilay,5.8979971,46.6272323,778,32,Meso-eutrophic,2015,x,,,1
-ETI,Etival,5.8039476,46.5035369,795,10,Mesotrophic,2015,x,,,1
-BON,Bonlieu,5.8728321,46.5866384,803,14,Mesotrophic,2013,x,x,137Cs,1
-AYD,Aydat,2.9858563,45.6642487,825,15,Eutrophic,2015,x,x,,1
-SAI,Saint-Point,6.3176818,46.8201287,850,42,Meso-eutrophic,2015,x,,,1
-COR,Corbeaux,6.9041119,47.9908534,887,27,Unknown,2015,x,x,137Cs,1
-CRE,Crégut,2.67744500000003,45.409235,900,26,Eutrophic,2015,x,,,1
-ABB,Abbaye,5.9117801,46.5307023,910,19.5,Mesotrophic,2015,x,,137Cs,1
-BLA,Blanchemer,6.9765605,48.0176557,984,15,Unknown,2015,x,,137Cs,1
-LAN,Landie,2.7660362,45.4222174,1000,21,Meso-eutrophic,2015,x,,"137Cs, 210Pb",1
-ROS,Rousses,6.0894283,46.504627,1059,18,Oligo-mesotrophic,2015,x,,,1
-LAM,Lamoura,5.9814784,46.3951639,1156,9,Unknown,2015,x,,,1
-MON,Montcineyre,2.8963888,45.4597222,1180,22,Oligo-mesotrophic,2015,,,,2
-SEV,Serviere,2.8587604,45.6462063,1200,29,Mesotrophic,2015,x,,,1
-GOD,Godivelle,2.9167206,45.3870975,1239,44,Oligotrophic,2015,x,,"137Cs, 210Pb",1
-GUE,Guéry,2.8218651,45.6157996,1246,20,Unknown,2015,x,,137Cs,1
-VER,Vert,6.7530081,45.9500309,1266,9,Unknown,2015,x,,,1
-ISA,Isaby,0.0227405,42.9512991,1562,6,Oligotrophic,2014,,x,,1
-AYE,Ayes,1.0639089,42.8442865,1694,10,Oligotrophic,2015,x,,,1
-BOR,Bordères,0.4605029,42.8598064,1765,18,Oligotrophic,2016,x,,,1
-BAL,Valcère,2.05341599999997,42.589855,1765,14,Mesotrophic,2013,x,,,1
-ALA,Alate,1.4060976,42.7763977,1868,10,Ultra-oligotrophic,2016,x,,"137Cs, 210Pb",1
-ESP,Espingo,0.4954724,42.7285085,1882,8,Oligotrophic,2016,x,,,1
-PEY,Peyrelade,0.1143228,42.9430394,1919,28,Oligotrophic,2016,x,,"137Cs, 210Pb",1
-GEN,Gentau,-0.4877342,42.8483166,1950,20,Mesotrophic,2014,,x,"137Cs, 210Pb",1
-CHE,Chéserys,6.9001556,45.9849913,2135,6,Oligotrophic,2013,x,x,,1
-ROU,Roumazet,1.4352819,42.6337185,2163,10,Oligotrophic,2016,x,,"137Cs, 210Pb",1
-ARA,Arratille,-0.1750923,42.8010075,2247,12,Oligotrophic,2013,,x,,1
-SOU,Soucarrane,1.4344528,42.6263943,2291,10,Oligotrophic,2016,x,,,1
-POR,"Port Bielh",0.1872506,42.872665,2313,19,Oligotrophic,2014,,x,"137Cs, 210Pb",1
-BAE,Barroude,0.144196,42.73122,2355,9,Oligotrophic,2013,,x,,1
-LAG,Lagardelle,1.4323539,42.6469549,2387,27,Oligotrophic,2016,x,,,1
-VED,Verdet,6.9546636,45.5764981,2736,12,Oligotrophic,2015,x,,"137Cs, 210Pb",1
-MTC,"Mont Coua",6.6386576,45.3178144,2797,10,Oligotrophic,2015,x,,"137Cs, 210Pb",1
-BLC,Blanc,6.966203,45.580202,2850,40,Oligotrophic,2015,,,,2
+Code,Name,Longitude,Latitude,Altitude,Depth (max),Trophic status,included_DNA
+AUL,Aulnes,4.78972,43.5925,11,<10,Unknown,2
+CAZ,Cazaux,1.163333,44.4875,12,22.3,Meso-eutrophic,2
+PAR,Parentis,-1.1741254,44.3546061,19,20,Eutrophic,1
+MOU,Mouriscot,-1.5584623,43.456008,21,10,Eutrophic,1
+ENT,Entressens,4.906666,43.6036111,36,8,Eutrophic,2
+MAR,Marion,-1.5484904,43.4675652,50,23,Unknown,1
+BOU,Bourget,5.8694679,45.7423213,231,147,Oligo-mesotrophic,1
+BES,Besse,2.3586236,44.1919076,245,10,Unknown,1
+BAR,Barterand,5.7441344,45.7897112,295,15,Mesotrophic,1
+LEM,Léman,6.4920919,46.4442584,372,309,Mesotrophic,1
+AIG,Aiguebelette,5.7999602,45.5526875,374,71,Oligo-mesotrophic,1
+NAN,Nantua,5.5865618,46.162347,475,43,Mesotrophic,1
+CHA,Chalain,5.790402,46.6705376,490,32,Mesotrophic,1
+VAL,Val,5.8146593,46.6269625,520,25,Mesotrophic,1
+GOU,Tazenat,2.9898208,45.9802702,630,66,Oligo-mesotrophic,1
+GER,Gérardmer,6.8521804,48.0697435,660,38,Mesotrophic,1
+MAI,Maix,7.0749268,48.4757113,678,15,Unknown,1
+LON,Longemer,6.951197,48.0699151,736,34,Mesotrophic,1
+ILA,Ilay,5.8979971,46.6272323,778,32,Meso-eutrophic,1
+ETI,Etival,5.8039476,46.5035369,795,10,Mesotrophic,1
+BON,Bonlieu,5.8728321,46.5866384,803,14,Mesotrophic,1
+AYD,Aydat,2.9858563,45.6642487,825,15,Eutrophic,1
+SAI,Saint-Point,6.3176818,46.8201287,850,42,Meso-eutrophic,1
+COR,Corbeaux,6.9041119,47.9908534,887,27,Unknown,1
+CRE,Crégut,2.67744500000003,45.409235,900,26,Eutrophic,1
+ABB,Abbaye,5.9117801,46.5307023,910,19.5,Mesotrophic,1
+BLA,Blanchemer,6.9765605,48.0176557,984,15,Unknown,1
+LAN,Landie,2.7660362,45.4222174,1000,21,Meso-eutrophic,1
+ROS,Rousses,6.0894283,46.504627,1059,18,Oligo-mesotrophic,1
+LAM,Lamoura,5.9814784,46.3951639,1156,9,Unknown,1
+MON,Montcineyre,2.8963888,45.4597222,1180,22,Oligo-mesotrophic,2
+SEV,Serviere,2.8587604,45.6462063,1200,29,Mesotrophic,1
+GOD,Godivelle,2.9167206,45.3870975,1239,44,Oligotrophic,1
+GUE,Guéry,2.8218651,45.6157996,1246,20,Unknown,1
+VER,Vert,6.7530081,45.9500309,1266,9,Unknown,1
+ISA,Isaby,0.0227405,42.9512991,1562,6,Oligotrophic,1
+AYE,Ayes,1.0639089,42.8442865,1694,10,Oligotrophic,1
+BOR,Bordères,0.4605029,42.8598064,1765,18,Oligotrophic,1
+BAL,Valcère,2.05341599999997,42.589855,1765,14,Mesotrophic,1
+ALA,Alate,1.4060976,42.7763977,1868,10,Ultra-oligotrophic,1
+ESP,Espingo,0.4954724,42.7285085,1882,8,Oligotrophic,1
+PEY,Peyrelade,0.1143228,42.9430394,1919,28,Oligotrophic,1
+GEN,Gentau,-0.4877342,42.8483166,1950,20,Mesotrophic,1
+CHE,Chéserys,6.9001556,45.9849913,2135,6,Oligotrophic,1
+ROU,Roumazet,1.4352819,42.6337185,2163,10,Oligotrophic,1
+ARA,Arratille,-0.1750923,42.8010075,2247,12,Oligotrophic,1
+SOU,Soucarrane,1.4344528,42.6263943,2291,10,Oligotrophic,1
+POR,Port Bielh,0.1872506,42.872665,2313,19,Oligotrophic,1
+BAE,Barroude,0.144196,42.73122,2355,9,Oligotrophic,1
+LAG,Lagardelle,1.4323539,42.6469549,2387,27,Oligotrophic,1
+VED,Verdet,6.9546636,45.5764981,2736,12,Oligotrophic,1
+MTC,Mont Coua,6.6386576,45.3178144,2797,10,Oligotrophic,1
+BLC,Blanc,6.966203,45.580202,2850,40,Oligotrophic,2
