@@ -380,19 +380,18 @@ lakes_datation <- read_csv("../data/lakes_datation.csv", na = character()) %>%
   lakes_datation$Name[lakes_datation$Name == "Crégut"] <- paste0("Crégut", footnote_marker_alphabet(6))
 
 kableExtra::kable(lakes_datation, "latex", digits = 2, booktabs = TRUE, linesep = "",
-                  escape = FALSE, align = "rlccrrrrrrrc",
+                  escape = FALSE, align = "llccrrrrrrrc",
                   col.names = linebreak(colnames(lakes_datation), align = "c")) %>% 
   kable_styling(latex_options = c("scale_down"))
 ```
-\begin{footnotesize}
-\textsuperscript{a}Additional source: Giguet-Covex et al. ;\\
-\textsuperscript{b}Additional source: Alric et al.;\\
-\textsuperscript{c}Additional source: Belle et al.;\\
-\textsuperscript{d}Previous studies of Sarazin et al. and Lavrieux et al. indicated a mean sedimentation rate of 0.46 and 0.52 over the last century. Furthermore, two floods events dated at 1907 and 1846 by Lavrieux et al. has been identified along the 2015 core from XrF logging  at 57.5 and 75.5 cm, respectively.\\
-\textsuperscript{e}Nedjai et al. indicated a mean sedimentation rate of 0.21 cm/yr over the last century.\\
+\footnotesize
+\textsuperscript{a}Additional source: Giguet-Covex et al [@giguet-covex_sedimentological_2010] ;  
+\textsuperscript{b}Additional source: Alric et al [@alric_local_2013] ;  
+\textsuperscript{c}Additional source: Belle et al [@belle_impact_2017] ;  
+\textsuperscript{d}Previous studies of Sarazin et al [@sarazin_sedimentation_1992] and Lavrieux et al [@lavrieux_6700_2013] indicated a mean sedimentation rate of 0.46 and 0.52 over the last century. Furthermore, two floods events dated at 1907 and 1846 by Lavrieux et al [@lavrieux_6700_2013] has been identified along the 2015 core from XrF logging  at 57.5 and 75.5 cm, respectively.  
+\textsuperscript{e}Nedjai et al [@nedjai_multi-secular_2011] indicated a mean sedimentation rate of 0.21 cm/yr over the last century.  
 \textsuperscript{f}A strong change in terrigenous elements (e.g. Ti) that occured at 31 cm along the 2015 core corresponds to the year 1970 when the watershed surface was artificially increased from 1.5 to 86 km².\par
-\end{footnotesize}
-
+\normalsize
 
 
 ```{r, results="asis"}
