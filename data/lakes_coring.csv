@@ -4,7 +4,7 @@ CAZ,Cazaux,1.163333,44.4875,12,22.3,Meso-eutrophic,2
 PAR,Parentis,-1.1741254,44.3546061,19,20,Eutrophic,1
 MOU,Mouriscot,-1.5584623,43.456008,21,10,Eutrophic,1
 ENT,Entressens,4.906666,43.6036111,36,8,Eutrophic,2
-MAR,Marion,-1.5484904,43.4675652,50,23,Unknown,1
+MAR,Marion,-1.5484904,43.4675652,50,23,Eutrophic,1
 BOU,Bourget,5.8694679,45.7423213,231,147,Oligo-mesotrophic,1
 BES,Besse,2.3586236,44.1919076,245,10,Unknown,1
 BAR,Barterand,5.7441344,45.7897112,295,15,Mesotrophic,1
@@ -37,7 +37,7 @@ VER,Vert,6.7530081,45.9500309,1266,9,Unknown,1
 ISA,Isaby,0.0227405,42.9512991,1562,6,Oligotrophic,1
 AYE,Ayes,1.0639089,42.8442865,1694,10,Oligotrophic,1
 BOR,Bordères,0.4605029,42.8598064,1765,18,Oligotrophic,1
-BAL,Valcère,2.05341599999997,42.589855,1765,14,Mesotrophic,1
+BAL,Balcère,2.05341599999997,42.589855,1765,14,Mesotrophic,1
 ALA,Alate,1.4060976,42.7763977,1868,10,Ultra-oligotrophic,1
 ESP,Espingo,0.4954724,42.7285085,1882,8,Oligotrophic,1
 PEY,Peyrelade,0.1143228,42.9430394,1919,28,Oligotrophic,1
@@ -48,7 +48,7 @@ ARA,Arratille,-0.1750923,42.8010075,2247,12,Oligotrophic,1
 SOU,Soucarrane,1.4344528,42.6263943,2291,10,Oligotrophic,1
 POR,Port Bielh,0.1872506,42.872665,2313,19,Oligotrophic,1
 BAE,Barroude,0.144196,42.73122,2355,9,Oligotrophic,1
-LAG,Lagardelle,1.4323539,42.6469549,2387,27,Oligotrophic,1
+LAG,Gardelle,1.4323539,42.6469549,2387,27,Oligotrophic,1
 VED,Verdet,6.9546636,45.5764981,2736,12,Oligotrophic,1
 MTC,Mont Coua,6.6386576,45.3178144,2797,10,Oligotrophic,1
 BLC,Blanc,6.966203,45.580202,2850,40,Oligotrophic,2
