@@ -10,6 +10,7 @@ header-includes:
   - \usepackage{setspace}
 bibliography: top_bottom_SI.bib
 csl: nature-communications.csl
+link-citations: true
 ---
 
 ```{r setup, include=FALSE}
@@ -112,41 +113,40 @@ Email: isabelle.domaizon@inrae.fr
 
 \pagebreak
 \addcontentsline{toc}{subsection}{Supplementary Information Figures}
+\color{isared}
+```{r Map, fig.height=8}
 
-```{r, fig.height = 6}
 data(countriesLow, package = "rworldmap")
 eu_shp <- countriesLow[!is.na(countriesLow$REGION), ]
 eu_shp <- eu_shp[eu_shp$REGION == "Europe", ]
 
+lakes_tab <- read_csv("../data/lakes_coring.csv", na = character())
+lakes_coords <- read_csv("../data/lakes_coords.csv")
+lakes_coords <- left_join(lakes_coords, lakes_tab, by = c("LAC" = "Name")) %>%
+  select(Code, LAC, X, Y) %>%
+  sp::SpatialPointsDataFrame(.[, c("X", "Y")], .,
+                             proj4string = sp::CRS("+init=epsg:4326"))
+
+lakes_coords <- lakes_coords[lakes_coords$LAC %in% otu_merge_tbl$LAC, ]
+
 tm_shape(eu_shp, bbox = sf::st_bbox(c(xmin = -5, xmax = 10, ymax = 52, ymin = 41))) +
-  tm_fill() +
-  tm_borders() +
+  tm_fill(col = "grey80") +
+  tm_borders(col = "grey60") +
   tm_scale_bar(breaks = c(0, 100, 200), text.size = 0.7, position = c(0.6, 0.02)) +
   tm_layout(bg.color = "lightblue") +
   tm_graticules(lines = FALSE) +
   tm_shape(lakes_coords) +
-  tm_dots(size = 0.2, shape = 3, col = "red")
+  tm_dots(size = 0.01, shape = 20, col = "red") +
+  tm_text(text = "Code", auto.placement = T, size = 0.4)
+
 
 ```
 
 ```{r, results="asis"}
 ins_fig()
 ```
-Map of the 48 lakes included in the study.
-
-
-\pagebreak
-```{r, fig.height = 6.5}
-lakes_lc <- read_csv("../data/synthese_landcover.csv")
-lakes_pop <- read_csv("../data/synthese_pop.csv")
-source("../R/AN_landcover.R")
-print(lc_plots)
-```
-
-```{r, results="asis"}
-ins_fig()
-```
-Proportion of (*A*) natural, (*B*) agricultural and (*C*) artificial surfaces in watersheds of high- ($> 1400$ m) and low-altitude ($\leq 1400$ m) lakes. The landcover analysis was conducted on a subset of 39 lakes for which data were available (10 high altitude lakes and 29 low altitude lakes). (*D*) Total human population living within a radius of 20 km of high-altitude lakes (N = 17) and low-altitude lakes (N = 31).
+Map of the 48 lakes included in the study. Lake names corresponding to three-letter codes can be found in Supplementary Table 1.
+\color{black}
 
 
 \pagebreak
@@ -160,7 +160,7 @@ Tracking of the number of DNA reads and OTUs during the filtering and data pre-p
 
 
 \pagebreak
-```{r, fig.height = 8}
+```{r TB relative richness, fig.height = 8}
 tax_rich_dat <-
   com_merged_raw_list %>% 
   filter(INVENTORY == "OTU") %>% 
@@ -251,17 +251,17 @@ Mean relative richness (number of distinct OTUs) for each taxa computed for the 
 
 
 \pagebreak
-
+\color{isared}
 ![](../figures/supplementary_info/SI_FIG_venn.pdf)
 
-```{r, results="asis"}
+```{r Venn diagram, results="asis"}
 ins_fig()
 ```
 Venn diagram showing the number and proportion of OTUs specific to the bottom and top strata, or common to both strata (intersection).
-
+\color{black}
 
 \pagebreak
-```{r, fig.height = 6}
+```{r NMDS OTU Jaccard, fig.height = 6}
 
 SUPP_MAT$JACC$FIG_COMB
 
@@ -270,11 +270,11 @@ SUPP_MAT$JACC$FIG_COMB
 ```{r, results="asis"}
 ins_fig()
 ```
-Community analyses of the OTUs table reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples from the same lake. Stress = 0.24. (*B*) Distribution of Jaccard index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Jaccard index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
+Community analyses of the OTUs table reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples from the same lake. \color{isared}Stress = 0.24. \color{black} (*B*) Distribution of Jaccard index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Jaccard index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
 
 
 \pagebreak
-```{r, fig.height = 6}
+```{r NMDS Taxo2 Bray, fig.height = 6}
 
 SUPP_MAT$TAXO$FIG_COMB
 
@@ -283,10 +283,10 @@ SUPP_MAT$TAXO$FIG_COMB
 ```{r, results="asis"}
 ins_fig()
 ```
-Community analyses reproduced with the data aggregated at the 2^nd^ taxonomic rank of Adl et al. [@adl_revisions_2019]. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples taken within the same lake. Stress = 0.19. (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
+Community analyses reproduced with the data aggregated at the 2^nd^ taxonomic rank of Adl et al [@adl_revisions_2019]. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples taken within the same lake. \color{isared}Stress = 0.19. \color{black} (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
 
 \pagebreak
-```{r, fig.height = 8}
+```{r DESeq2 barplot Taxo3, fig.height = 8}
 deseq_TB_AOV1 %>%
   filter(INVENTORY == "Taxonomie Rank 3") %>%
   .$barplots %>% .[[1]] +
@@ -296,12 +296,27 @@ deseq_TB_AOV1 %>%
 ```{r, results="asis"}
 ins_fig()
 ```
-Magnitude of change (expressed in log2 fold change) in data aggregated at the 3^rd^ taxonomy rank of Adl et al. [@adl_revisions_2019] between the past and recent strata, as estimated by the DESeq2 analysis [@adl_revisions_2019]. Dark bars represent groups for which the change was found significant (corrected p-value < 0.05). Horizontal lines show the standard error. The detailed results of the analysis are given in Supplementary Table 3.
-
+Magnitude of change (expressed in log2 fold change) in data aggregated at the 3^rd^ taxonomy rank of Adl et al [@adl_revisions_2019] between the past and recent strata, as estimated by the DESeq2 analysis [@adl_revisions_2019]. Dark bars represent groups for which the change was found significant (corrected p-value < 0.05). Horizontal lines show the standard error. The detailed results of the analysis are given in Supplementary Table 3.
 
 
 \pagebreak
-```{r, fig.height = 8}
+\color{isared}
+```{r Human footprint altitude, fig.height = 6.5}
+lakes_lc <- read_csv("../data/synthese_landcover.csv")
+lakes_pop <- read_csv("../data/synthese_pop.csv")
+source("../R/AN_landcover.R")
+print(lc_plots)
+```
+
+```{r, results="asis"}
+ins_fig()
+```
+Proportion of (*A*) natural, (*B*) agricultural and (*C*) artificial surfaces in watersheds of high- ($> 1400$ m) and low-altitude ($\leq 1400$ m) lakes. The landcover analysis was conducted on a subset of 39 lakes for which data were available (10 high altitude lakes and 29 low altitude lakes). (*D*) Total human population living within a radius of 20 km of high-altitude lakes (N = 17) and low-altitude lakes (N = 31).
+\color{black}
+
+
+\pagebreak
+```{r Replicate hclust, fig.height = 8}
 t <- otu_tbl_replicates %>% 
   filter(!LAC %in% c("Léman", "Bourget")) %>% 
   mutate(ID_SAMPLE = str_c(LAC_CODE, POSITION, REPLICATE, sep = "_")) %>% 
@@ -327,8 +342,8 @@ Hierarchical clustering of the OTU matrix (Bray Curtis dissimilarity) including 
 
 \pagebreak
 \addcontentsline{toc}{subsection}{Supplementary Information Tables}
-```{r, message = FALSE}
-#lakes_coords <- lakes_coords[lakes_coords$LAC %in% otu_merge_tbl$LAC, ]
+```{r Table Lakes, message = FALSE}
+
 
 lakes_tab <- read_csv("../data/lakes_coring.csv", na = character()) %>% 
   set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth (max)",
@@ -339,6 +354,7 @@ not_included_min <- min(which(lakes_tab$included_DNA == 2))
 not_included_max <- max(which(lakes_tab$included_DNA == 2))
 
 lakes_tab <- select(lakes_tab, -included_DNA)
+lakes_tab$Name[lakes_tab$Name == "Valcère"] <- "Balcère"
 
 kableExtra::kable(lakes_tab, "latex", digits = 3, booktabs = TRUE, linesep = "", escape = FALSE,
                   col.names = linebreak(colnames(lakes_tab), align = "c")) %>% 
@@ -356,7 +372,8 @@ List of the lakes included in the study with their three-letter code, geographic
 
 
 \pagebreak
-```{r, message = FALSE}
+\color{isared}
+```{r Table Coring, message = FALSE}
 #lakes_coords <- lakes_coords[lakes_coords$LAC %in% otu_merge_tbl$LAC, ]
 
 lakes_datation <- read_csv("../data/lakes_datation.csv", na = character()) %>% 
@@ -378,6 +395,7 @@ lakes_datation <- read_csv("../data/lakes_datation.csv", na = character()) %>%
   lakes_datation$Name[lakes_datation$Name == "Aydat"] <- paste0("Aydat", footnote_marker_alphabet(4))
   lakes_datation$Name[lakes_datation$Name == "Saint-Point"] <- paste0("Saint-Point", footnote_marker_alphabet(5))
   lakes_datation$Name[lakes_datation$Name == "Crégut"] <- paste0("Crégut", footnote_marker_alphabet(6))
+  lakes_datation$Name[lakes_datation$Name == "Valcère"] <- "Balcère"
 
 kableExtra::kable(lakes_datation, "latex", digits = 2, booktabs = TRUE, linesep = "",
                   escape = FALSE, align = "llccrrrrrrrc",
@@ -398,11 +416,12 @@ kableExtra::kable(lakes_datation, "latex", digits = 2, booktabs = TRUE, linesep 
 ins_tab()
 ```
 Data supporting the dating and sampling of sediment cores. For each lakes is reported: the year of coring, the availability of Xrf, ^14^C and radionuclides data, the depth (cm) for 1986 and 1963 ^137^Cs fallouts and lead increase/decrease, the depth (cm) for top and bottom samples. NC stands for "not clear". Methods used to determine the depth of top and bottom samples are indicated in the last column where numbers refer to methods described in Supplementary Information Methods 2.
-
+\color{black}
 
 
 \pagebreak
-```{r, fig.height = 6}
+\color{isared}
+```{r Table Permanova, fig.height = 6}
 options(knitr.kable.NA = '')
 structure(list(X = c("Top-Bottom", "Residuals", "Total"),
                Degrees.of.freedom = c(1L, 94L, 95L),
@@ -422,10 +441,10 @@ options(knitr.kable.NA = NULL)
 ins_tab()
 ```
 Detailed table of the PERMANOVA.
-
+\color{black}
 
 \pagebreak
-```{r, fig.height = 6}
+```{r Table DESeq2 Trophic, fig.height = 6}
 deseq_TB_AOV1 %>% 
   filter(INVENTORY == "Trophic Type") %>% .$results %>% .[[1]] %>%
   mutate(Taxa = str_replace(Taxa, "<NA>", "Unclassified (NA)")) %>%
@@ -444,7 +463,7 @@ Detailed results of the DESeq2 analysis conducted on data aggregated by trophic 
 
 
 \pagebreak
-```{r, fig.height = 6}
+```{r Table DESeq2 Taxo3, fig.height = 6}
 deseq_TB_AOV1 %>% 
   filter(INVENTORY == "Taxonomie Rank 3") %>% .$results %>% .[[1]] %>%
   left_join(select(otu_taxo_adl_conv, ADL_RANK_1, ADL_RANK_2, ADL_RANK_3), by = c("Taxa" = "ADL_RANK_3")) %>% 
@@ -466,7 +485,7 @@ deseq_TB_AOV1 %>%
 ```{r, results="asis"}
 ins_tab()
 ```
-Detailed results of the DESeq2 analysis conducted on data aggregated at the 3^rd^ taxonomy rank of Adl et al. [@adl_revisions_2019]. Ranks 1 and 2 are given for guidance. For each taxa, column *Base Mean* indicates the average of the normalized count values, dividing by size factors, *log2 Fold Change* is the magnitude of change between the past and recent strata, column *Stat* is the Wald statistic and *Padj* the p-value of the test corrected with the Benjamini & Hochberg method.
+Detailed results of the DESeq2 analysis conducted on data aggregated at the 3^rd^ taxonomy rank of Adl et al [@adl_revisions_2019]. Ranks 1 and 2 are given for guidance. For each taxa, column *Base Mean* indicates the average of the normalized count values, dividing by size factors, *log2 Fold Change* is the magnitude of change between the past and recent strata, column *Stat* is the Wald statistic and *Padj* the p-value of the test corrected with the Benjamini & Hochberg method.
 
 
 
