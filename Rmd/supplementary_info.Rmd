@@ -54,14 +54,12 @@ Assessing the response of micro-eukaryotic diversity to the Great Acceleration: 
 \end{huge} 
 
 
-François Keck, Laurent Millet, Didier Debroas, David Etienne, Didier Galop, Damien Rius and Isabelle Domaizon
+Keck et al.
 
 ` `  
 ` `  
 
-Corresponding author: Isabelle Domaizon
-
-Email: isabelle.domaizon@inrae.fr
+Corresponding author: Isabelle Domaizon (isabelle.domaizon@inrae.fr)
 
 ` `  
 ` `  
@@ -112,8 +110,8 @@ Email: isabelle.domaizon@inrae.fr
 
 
 \pagebreak
-\addcontentsline{toc}{subsection}{Supplementary Information Figures}
-\color{isared}
+\addcontentsline{toc}{subsection}{Supplementary Figures}
+
 ```{r Map, fig.height=8}
 
 data(countriesLow, package = "rworldmap")
@@ -146,7 +144,7 @@ tm_shape(eu_shp, bbox = sf::st_bbox(c(xmin = -5, xmax = 10, ymax = 52, ymin = 41
 ins_fig()
 ```
 Map of the 48 lakes included in the study. Lake names corresponding to three-letter codes can be found in Supplementary Table 1.
-\color{black}
+
 
 
 \pagebreak
@@ -251,14 +249,14 @@ Mean relative richness (number of distinct OTUs) for each taxa computed for the 
 
 
 \pagebreak
-\color{isared}
+
 ![](../figures/supplementary_info/SI_FIG_venn.pdf)
 
 ```{r Venn diagram, results="asis"}
 ins_fig()
 ```
 Venn diagram showing the number and proportion of OTUs specific to the bottom and top strata, or common to both strata (intersection).
-\color{black}
+
 
 \pagebreak
 ```{r NMDS OTU Jaccard, fig.height = 6}
@@ -270,7 +268,7 @@ SUPP_MAT$JACC$FIG_COMB
 ```{r, results="asis"}
 ins_fig()
 ```
-Community analyses of the OTUs table reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples from the same lake. \color{isared}Stress = 0.24. \color{black} (*B*) Distribution of Jaccard index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Jaccard index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
+Community analyses of the OTUs table reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples from the same lake. Stress = 0.24. (*B*) Distribution of Jaccard index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Jaccard index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
 
 
 \pagebreak
@@ -283,7 +281,7 @@ SUPP_MAT$TAXO$FIG_COMB
 ```{r, results="asis"}
 ins_fig()
 ```
-Community analyses reproduced with the data aggregated at the 2^nd^ taxonomic rank of Adl et al [@adl_revisions_2019]. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples taken within the same lake. \color{isared}Stress = 0.19. \color{black} (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
+Community analyses reproduced with the data aggregated at the 2^nd^ taxonomic rank of Adl et al [@adl_revisions_2019]. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples taken within the same lake. Stress = 0.19.  (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘recent’ and ‘past’ strata. Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
 
 \pagebreak
 ```{r DESeq2 barplot Taxo3, fig.height = 8}
@@ -300,7 +298,7 @@ Magnitude of change (expressed in log2 fold change) in data aggregated at the 3^
 
 
 \pagebreak
-\color{isared}
+
 ```{r Human footprint altitude, fig.height = 6.5}
 lakes_lc <- read_csv("../data/synthese_landcover.csv")
 lakes_pop <- read_csv("../data/synthese_pop.csv")
@@ -312,7 +310,7 @@ print(lc_plots)
 ins_fig()
 ```
 Proportion of (*A*) natural, (*B*) agricultural and (*C*) artificial surfaces in watersheds of high- ($> 1400$ m) and low-altitude ($\leq 1400$ m) lakes. The landcover analysis was conducted on a subset of 39 lakes for which data were available (10 high altitude lakes and 29 low altitude lakes). (*D*) Total human population living within a radius of 20 km of high-altitude lakes (N = 17) and low-altitude lakes (N = 31).
-\color{black}
+
 
 
 \pagebreak
@@ -341,7 +339,7 @@ Hierarchical clustering of the OTU matrix (Bray Curtis dissimilarity) including 
 <!-- TABLE SECTION STARTS HERE -->
 
 \pagebreak
-\addcontentsline{toc}{subsection}{Supplementary Information Tables}
+\addcontentsline{toc}{subsection}{Supplementary Tables}
 ```{r Table Lakes, message = FALSE}
 
 
@@ -372,7 +370,7 @@ List of the lakes included in the study with their three-letter code, geographic
 
 
 \pagebreak
-\color{isared}
+
 ```{r Table Coring, message = FALSE}
 #lakes_coords <- lakes_coords[lakes_coords$LAC %in% otu_merge_tbl$LAC, ]
 
@@ -406,7 +404,7 @@ kableExtra::kable(lakes_datation, "latex", digits = 2, booktabs = TRUE, linesep 
 \textsuperscript{a}Additional source: Giguet-Covex et al [@giguet-covex_sedimentological_2010] ;  
 \textsuperscript{b}Additional source: Alric et al [@alric_local_2013] ;  
 \textsuperscript{c}Additional source: Belle et al [@belle_impact_2017] ;  
-\textsuperscript{d}Previous studies of Sarazin et al [@sarazin_sedimentation_1992] and Lavrieux et al [@lavrieux_6700_2013] indicated a mean sedimentation rate of 0.46 and 0.52 over the last century. Furthermore, two floods events dated at 1907 and 1846 by Lavrieux et al [@lavrieux_6700_2013] has been identified along the 2015 core from XrF logging  at 57.5 and 75.5 cm, respectively.  
+\textsuperscript{d}Previous studies of Sarazin et al [@sarazin_sedimentation_1992] and Lavrieux et al [@lavrieux_6700_2013] indicated a mean sedimentation rate of 0.46 and 0.52 over the last century. Furthermore, two floods events dated at 1907 and 1846 by Lavrieux et al [@lavrieux_6700_2013] has been identified along the 2015 core from XrF logging at 57.5 and 75.5 cm, respectively.  
 \textsuperscript{e}Nedjai et al [@nedjai_multi-secular_2011] indicated a mean sedimentation rate of 0.21 cm/yr over the last century.  
 \textsuperscript{f}A strong change in terrigenous elements (e.g. Ti) that occured at 31 cm along the 2015 core corresponds to the year 1970 when the watershed surface was artificially increased from 1.5 to 86 km².\par
 \normalsize
@@ -415,12 +413,12 @@ kableExtra::kable(lakes_datation, "latex", digits = 2, booktabs = TRUE, linesep 
 ```{r, results="asis"}
 ins_tab()
 ```
-Data supporting the dating and sampling of sediment cores. For each lakes is reported: the year of coring, the availability of Xrf, ^14^C and radionuclides data, the depth (cm) for 1986 and 1963 ^137^Cs fallouts and lead increase/decrease, the depth (cm) for top and bottom samples. NC stands for "not clear". Methods used to determine the depth of top and bottom samples are indicated in the last column where numbers refer to methods described in Supplementary Information Methods 2.
-\color{black}
+Data supporting the dating and sampling of sediment cores. For each lakes is reported: the year of coring, the availability of Xrf, ^14^C and radionuclides data, the depth (cm) for 1986 and 1963 ^137^Cs fallouts and lead increase/decrease, the depth (cm) for top and bottom samples. NC stands for "not clear". Methods used to determine the depth of top and bottom samples are indicated in the last column where numbers refer to methods described in Supplementary Methods 2.
+
 
 
 \pagebreak
-\color{isared}
+
 ```{r Table Permanova, fig.height = 6}
 options(knitr.kable.NA = '')
 structure(list(X = c("Top-Bottom", "Residuals", "Total"),
@@ -441,7 +439,7 @@ options(knitr.kable.NA = NULL)
 ins_tab()
 ```
 Detailed table of the PERMANOVA.
-\color{black}
+
 
 \pagebreak
 ```{r Table DESeq2 Trophic, fig.height = 6}
@@ -488,13 +486,6 @@ ins_tab()
 Detailed results of the DESeq2 analysis conducted on data aggregated at the 3^rd^ taxonomy rank of Adl et al [@adl_revisions_2019]. Ranks 1 and 2 are given for guidance. For each taxa, column *Base Mean* indicates the average of the normalized count values, dividing by size factors, *log2 Fold Change* is the magnitude of change between the past and recent strata, column *Stat* is the Wald statistic and *Padj* the p-value of the test corrected with the Benjamini & Hochberg method.
 
 
-
-
-
-\pagebreak
-\addcontentsline{toc}{subsection}{Supplementary Information Data}
-##### Dataset 1 (separate CSV file)
-Complete list of OTUs used in the analyses with their representative DNA sequence, their taxonomic classification and their trophic classification. 
 
 \pagebreak
 
