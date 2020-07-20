@@ -61,7 +61,7 @@ SUPP_MAT$TAXO$FIG_alt_tree_regression <- dat %>%
                    xend = alt_split, yend = bray_split[2, "mean_BRAY", drop = TRUE]), size = 1) +
   geom_segment(aes(x = alt_split, y = bray_split[1, "mean_BRAY", drop = TRUE],
                    xend = max(dat$ALTITUDE), yend = bray_split[1, "mean_BRAY", drop = TRUE]), size = 1) +
-  xlab("Altitude (m)") + ylab("Bray-Curtis dissimilarity") +
+  xlab("Elevation (m)") + ylab("Bray-Curtis dissimilarity") +
   theme_bw()
 
 
@@ -129,7 +129,7 @@ SUPP_MAT$JACC$FIG_alt_tree_regression <- dat %>%
                    xend = alt_split, yend = bray_split[2, "mean_BRAY", drop = TRUE]), size = 1) +
   geom_segment(aes(x = alt_split, y = bray_split[1, "mean_BRAY", drop = TRUE],
                    xend = max(dat$ALTITUDE), yend = bray_split[1, "mean_BRAY", drop = TRUE]), size = 1) +
-  xlab("Altitude (m)") + ylab("Jaccard dissimilarity") +
+  xlab("Elevation (m)") + ylab("Jaccard dissimilarity") +
   theme_bw()
 
 SUPP_MAT$JACC$FIG_COMB <- plot_grid(SUPP_MAT$JACC$FIG_nmds_main, SUPP_MAT$JACC$FIG_nmds_bray,

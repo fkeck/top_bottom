@@ -49,10 +49,12 @@ usepackage_latex("makecell")
 ```
 \leading{20pt}
 
+\begin{center}
 \begin{huge}  
-Assessing the response of micro-eukaryotic diversity to the Great Acceleration: a paleolimnological view based on sedimentary DNA
+Assessing the response of micro-eukaryotic diversity to the Great Acceleration using lake sedimentary DNA
 \end{huge} 
-
+\end{center}
+` `  
 
 Keck et al.
 
@@ -259,29 +261,23 @@ Venn diagram showing the number and proportion of OTUs specific to the bottom an
 
 
 \pagebreak
-```{r NMDS OTU Jaccard, fig.height = 6}
 
-SUPP_MAT$JACC$FIG_COMB
-
-```
+![](../figures/supplementary_info/SI_JACC_QUADRI.pdf)
 
 ```{r, results="asis"}
 ins_fig()
 ```
-Community analyses of the OTUs table reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples from the same lake. Stress = 0.24. (*B*) Distribution of Jaccard index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Jaccard index) between the ‘recent’ and ‘past’ strata (n = 48 lakes). Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
+Community analyses of the OTUs table reproduced with the Jaccard dissimilarity index. (*A*) NMDS of community compositions of the recent (blue triangles) and past (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect recent and past samples from the same lake. Stress = 0.24. (*B*) Distribution of Jaccard index values computed for each lake between recent and past samples. (*C*) Distribution of the distances between samples and group geometric median for recent (blue) and past (red) samples. (*D*) Relationship between lake elevation and community dissimilarity (Jaccard index) between the recent and past strata (n = 48 lakes). Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
 
 
 \pagebreak
-```{r NMDS Taxo2 Bray, fig.height = 6}
 
-SUPP_MAT$TAXO$FIG_COMB
-
-```
+![](../figures/supplementary_info/SI_TAXO_QUADRI.pdf)
 
 ```{r, results="asis"}
 ins_fig()
 ```
-Community analyses reproduced with the data aggregated at the 2^nd^ taxonomic rank of Adl et al [@adl_revisions_2019]. (*A*) NMDS of community compositions of the ‘recent’ (blue triangles) and ‘past’ (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect ‘recent’ and ‘past’ samples taken within the same lake. Stress = 0.19.  (*B*) Distribution of Bray-Curtis index values computed for each lake between ‘recent’ and ‘past’ samples. (*C*) Distribution of the distances between samples and group geometric median for ‘recent’ (blue) and ‘past’ (red) samples. (*D*) Relationship between lake altitude and community dissimilarity (Bray-Curtis index) between the ‘recent’ and ‘past’ strata (n = 48 lakes). Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
+Community analyses reproduced with the data aggregated at the 2^nd^ taxonomic rank of Adl et al [@adl_revisions_2019]. (*A*) NMDS of community compositions of the recent (blue triangles) and past (red circles) samples with 95% confidence ellipses represented for each group. Grey lines connect recent and past samples taken within the same lake. Stress = 0.19.  (*B*) Distribution of Bray-Curtis index values computed for each lake between recent and past samples. (*C*) Distribution of the distances between samples and group geometric median for recent (blue) and past (red) samples. (*D*) Relationship between lake elevation and community dissimilarity (Bray-Curtis index) between the recent and past strata (n = 48 lakes). Fitted regression tree model is represented by black lines (mean values). Grey shading represents the 95% confidence intervals around means.
 
 \pagebreak
 ```{r DESeq2 barplot Taxo3, fig.height = 8}
@@ -294,7 +290,7 @@ deseq_TB_AOV1 %>%
 ```{r, results="asis"}
 ins_fig()
 ```
-Magnitude of change (expressed in log2 fold change) in data aggregated at the 3^rd^ taxonomy rank of Adl et al [@adl_revisions_2019] between the past and recent strata (n = 48 lakes), as estimated by the DESeq2 analysis [@adl_revisions_2019]. Dark bars represent groups for which the change was found significant (two-sided Wald test corrected with the Benjamini & Hochberg method p-value < 0.05). Horizontal lines show the standard error. The detailed results of the analysis are given in Supplementary Table 3.
+Magnitude of change (expressed in log2 fold change) in data aggregated at the 3^rd^ taxonomy rank of Adl et al [@adl_revisions_2019] between the past and recent strata (n = 48 lakes), as estimated by the DESeq2 analysis [@adl_revisions_2019]. Dark bars represent groups for which the change was found significant (two-sided Wald test corrected with the Benjamini & Hochberg method p-value < 0.05). Horizontal lines show the standard error. The detailed results of the analysis are given in Supplementary Table 5.
 
 
 \pagebreak
@@ -309,7 +305,7 @@ print(lc_plots)
 ```{r, results="asis"}
 ins_fig()
 ```
-Proportion of (*A*) natural, (*B*) agricultural and (*C*) artificial surfaces in watersheds of high- ($> 1400$ m) and low-altitude ($\leq 1400$ m) lakes. The landcover analysis was conducted on a subset of 39 lakes for which data were available (10 high altitude lakes and 29 low altitude lakes). (*D*) Total human population living within a radius of 20 km of high-altitude lakes (n = 17) and low-altitude lakes (n = 31). Boxplots depict medians, first and third quartiles, and full ranges (bounded at 1.5 × interquartile range). 
+Proportion of (*A*) natural, (*B*) agricultural and (*C*) artificial surfaces in watersheds of high- ($> 1400$ m) and low-elevation ($\leq 1400$ m) lakes. The landcover analysis was conducted on a subset of 39 lakes for which data were available (10 high-elevation lakes and 29 low-elevation lakes). (*D*) Total human population living within a radius of 20 km of high-elevation lakes (n = 17) and low-elevation lakes (n = 31). Boxplots depict medians, first and third quartiles, and full ranges (bounded at 1.5 × interquartile range). 
 
 
 
@@ -344,9 +340,9 @@ Hierarchical clustering of the OTU matrix (Bray Curtis dissimilarity) including 
 
 
 lakes_tab <- read_csv("../data/lakes_coring.csv", na = character()) %>% 
-  set_names(c("Code", "Name", "Longitude", "Latitude", "Altitude", "Depth (max)",
+  set_names(c("Code", "Name", "Longitude", "Latitude", "Elevation", "Depth (max)",
               "Trophic status", "included_DNA")) %>% 
-  arrange(included_DNA, Altitude)
+  arrange(included_DNA, Elevation)
 
 not_included_min <- min(which(lakes_tab$included_DNA == 2))
 not_included_max <- max(which(lakes_tab$included_DNA == 2))
@@ -366,7 +362,7 @@ rm(not_included_min, not_included_max)
 ```{r, results="asis"}
 ins_tab()
 ```
-List of the lakes included in the study with their three-letter code, geographic coordinates (decimal degrees; WGS84), altitude (m) and maximum depth (m). The trophic status, when referenced, is based on 3 parameters used in the Water Framework Directive, i.e. Secchi disk value, phosphorus concentration in the water and chlorophyll *a* concentration in the euphotic zone.
+List of the lakes included in the study with their three-letter code, geographic coordinates (decimal degrees; WGS84), elevation (m) and maximum depth (m). The trophic status, when referenced, is based on 3 parameters used in the Water Framework Directive, i.e. Secchi disk value, phosphorus concentration in the water and chlorophyll *a* concentration in the euphotic zone.
 
 
 \pagebreak
@@ -405,7 +401,7 @@ kableExtra::kable(lakes_datation, "latex", digits = 2, booktabs = TRUE, linesep 
 \textsuperscript{b}Additional source: Alric et al [@alric_local_2013] ;  
 \textsuperscript{c}Additional source: Belle et al [@belle_impact_2017] ;  
 \textsuperscript{d}Previous studies of Sarazin et al [@sarazin_sedimentation_1992] and Lavrieux et al [@lavrieux_6700_2013] indicated a mean sedimentation rate of 0.46 and 0.52 over the last century. Furthermore, two floods events dated at 1907 and 1846 by Lavrieux et al [@lavrieux_6700_2013] has been identified along the 2015 core from XrF logging at 57.5 and 75.5 cm, respectively.  
-\textsuperscript{e}Nedjai et al [@nedjai_multi-secular_2011] indicated a mean sedimentation rate of 0.21 cm/yr over the last century.  
+\textsuperscript{e}Nedjai et al [@nedjai_multi-secular_2011] indicated a mean sedimentation rate of 0.21 cm.yr^-1^ over the last century.  
 \textsuperscript{f}A strong change in terrigenous elements (e.g. Ti) that occured at 31 cm along the 2015 core corresponds to the year 1970 when the watershed surface was artificially increased from 1.5 to 86 km².\par
 \normalsize
 
@@ -413,7 +409,7 @@ kableExtra::kable(lakes_datation, "latex", digits = 2, booktabs = TRUE, linesep 
 ```{r, results="asis"}
 ins_tab()
 ```
-Data supporting the dating and sampling of sediment cores. For each lakes is reported: the year of coring, the availability of Xrf, ^14^C and radionuclides data, the depth (cm) for 1986 and 1963 ^137^Cs fallouts and lead increase/decrease, the depth (cm) for top and bottom samples. NC stands for "not clear". Methods used to determine the depth of top and bottom samples are indicated in the last column where numbers refer to methods described in Supplementary Methods 2.
+Data supporting the dating and sampling of sediment cores. For each lakes is reported: the year of coring, the availability of Xrf, ^14^C and radionuclides data, the depth (cm) for 1986 and 1963 ^137^Cs fallouts and lead increase/decrease, the depth (cm) for top and bottom samples. NC stands for "not clear". Methods used to determine the depth of top and bottom samples are indicated in the last column where numbers refer to methods described in Supplementary Methods.
 
 
 

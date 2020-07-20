@@ -46,19 +46,19 @@ lakes_lc <- lakes_lc %>%
 
 lc_plot1 <- ggplot(lakes_lc) +
   geom_boxplot(aes(fct_shift(Altitude_category), Natural_surface)) +
-  xlab("Altitude") + ylab("Natural surface") +
+  xlab("Elevation") + ylab("Natural surface") +
   scale_y_continuous(labels=scales::percent) +
   theme_classic()
 
 lc_plot2 <- ggplot(lakes_lc) +
   geom_boxplot(aes(fct_shift(Altitude_category), Agricultural_surface)) +
-  xlab("Altitude") + ylab("Agricultural surface") +
+  xlab("Elevation") + ylab("Agricultural surface") +
   scale_y_continuous(labels=scales::percent) +
   theme_classic()
 
 lc_plot3 <- ggplot(lakes_lc) +
   geom_boxplot(aes(fct_shift(Altitude_category), Artificial_surface)) +
-  xlab("Altitude") + ylab("Artificial surface") +
+  xlab("Elevation") + ylab("Artificial surface") +
   scale_y_continuous(labels=scales::percent) +
   theme_classic()
 
@@ -72,7 +72,7 @@ pop_plot <- ggplot(lakes_pop) +
   scale_y_continuous(trans = scales::log10_trans(),
                      breaks = c(1000, 10000, 100000),
                      labels = scales::math_format(expr = 10^.x, format = force)(3:5)) +
-  xlab("Altitude") + ylab("Population") +
+  xlab("Elevation") + ylab("Population") +
   theme_classic()
 
 lc_plots <- cowplot::plot_grid(lc_plot1, lc_plot2, lc_plot3, pop_plot,
