@@ -6,9 +6,7 @@
 
 This repository provides R code and data to reproduce results and figures from the paper:
 
-**Assessing responses of micro-eukaryotes biodiversity to the Great Acceleration: a paleolimnological view based on sedimentary DNA.**
-
-François Keck, Laurent Millet, Didier Debroas, David Etienne, Didier Galop and Isabelle Domaizon
+Keck, F. et al. Assessing the response of micro-eukaryotic diversity to the Great Acceleration using lake sedimentary DNA. Nature Communications 11, 3831 (2020).
 
 
 ## Analyses
